@@ -8,7 +8,7 @@
 <script src="{{asset('dashboard/dist/js/adminlte.js')}}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="../../public/dashboard/dist/js/demo.js"></script>
+<script src="{{asset('dashboard/dist/js/demo.js')}}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->

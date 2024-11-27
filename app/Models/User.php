@@ -11,9 +11,16 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name',
+        'full_name',
+        'username',
         'email',
         'password',
+        'phone',
+        'type',
+        'business_name',
+        'business_license',
+        'address',
+        'status'
     ];
 
     protected $hidden = [
@@ -21,25 +28,25 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function profiles()
-    {
-        return $this->hasMany(Profile::class);
-    }
+//    public function profiles()
+//    {
+//        return $this->hasMany(Profile::class);
+//    }
 
-    public function renterProfile()
-    {
-        return $this->hasOne(Profile::class)->where('type', 'renter');
-    }
+//    public function renterProfile()
+//    {
+//        return $this->hasOne(Profile::class)->where('type', 'renter');
+//    }
 
-    public function ownerProfile()
-    {
-        return $this->hasOne(Profile::class)->where('type', 'owner');
-    }
+//    public function ownerProfile()
+//    {
+//        return $this->hasOne(Profile::class)->where('type', 'owner');
+//    }
 
-    public function profile()
-    {
-        // Get the current profile based on requested type
-        $type = request()->type ?? request()->route('type') ?? 'renter';
-        return $this->hasOne(Profile::class)->where('type', $type);
-    }
+//    public function profile()
+//    {
+//        // Get the current profile based on requested type
+//        $type = request()->type ?? request()->route('type') ?? 'renter';
+//        return $this->hasOne(Profile::class)->where('type', $type);
+//    }
 }

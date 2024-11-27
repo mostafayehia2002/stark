@@ -10,7 +10,8 @@
         "laravel/framework": "^11.32",
         "laravel/sanctum": "^4.0.3",
         "laravel/tinker": "^2.10",
-        "twilio/sdk": "^8.3"
+        "twilio/sdk": "^8.3",
+        "yoeunes/toastr": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.2",

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="{{asset('build/assets/logo-nav-9xhMEncz.jpg')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{--include  css style   --}}
     @include('dashboard.layouts.styles')
-    <title>{{$title??'404 not found'}}</title>
+    <title>{{$title??'Admin Stark | 404 not found'}}</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

@@ -2,10 +2,14 @@
 
 namespace App\Enums;
 
-enum ProfileTypesEnum: string
+enum UserType: string
 {
-    case OWNER = 'owner';
-    case RENTER = 'renter';
+    case OWNER ='owner';
+    case RENTER ='renter';
+
+    case ADMIN ='admin';
+
+
 
     public static function values(): array
     {

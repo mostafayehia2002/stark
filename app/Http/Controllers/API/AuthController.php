@@ -169,7 +169,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'phone' => ['required', 'string', 'regex:/^\+966\d{9}$/'],
+                'phone' => ['required', 'string', 'regex:/^\+20\d{9}$/'],
                 'otp' => 'required|string',
                 'full_name' => 'required|string',
                 'email' => 'required|email',
