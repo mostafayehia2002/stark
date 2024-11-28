@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
+                        <h4 class="m-0 text-dark">Add New Admin</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -24,11 +24,8 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                     <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Add New Admin</h3>
-                        </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form role="form" action="{{route('admin.store-admin')}}" method="POST">
