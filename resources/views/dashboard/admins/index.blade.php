@@ -50,39 +50,68 @@
                                         <td>{{$admin->username}}</td>
                                         <td>{{$admin->email}}</td>
                                         <td>{{$admin->phone}}</td>
-                                        <td>admin</td>
-                                        <td>{{$admin->status}}</td>
                                         <td>
-
-                                            <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"class="btn btn-danger btn-sm"
-                                               onclick="return confirm('Are you sure you want to delete this admin?');">
-                                                <i class="fa-solid fa-trash"></i>
-                                                Delete
-                                            </a>
-
-                                                <a class="btn btn-primary btn-sm" href="{{route('admin.edit-admin',['id'=>$admin->id])}}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            @if(!empty($admin->getRoleNames()))
+                                                @foreach($admin->getRoleNames() as $v)
+                                                    <label class="badge bg-success">{{ $v }}</label>
+                                                @endforeach
+                                            @endif
                                         </td>
-                                    </tr>
+                                        <td>
+                                            @if($admin->status===\App\Enums\UserStatus::ACTIVE->value)
+                                                <label class="badge bg-success"> {{$admin->status}}</label>
+                                            @else
+                                                <label class="badge bg-danger"> {{$admin->status}}</label>
+                            @endif
 
-                                @empty
-                                    <th>No Data</th>
-                                @endforelse
-                                </tbody>
+                        </div>
+                        <td>
+
+                            <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this admin?');">
+                                <i class="fa-solid fa-trash"></i>
+                                Delete
+                            </a>
+                            <a class="btn btn-primary btn-sm"
+                               href="{{route('admin.edit-admin',['id'=>$admin->id])}}"><i
+                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
+
+                            <a href="{{ route('admin.block-admin', ['id' => $admin->id]) }}"
+                               class="btn btn-warning btn-sm"
+                               onclick="return confirm('Are you sure you want do it');">
+                                @if($admin->status===\App\Enums\UserStatus::ACTIVE->value)
+                                    <i class="fas fa-ban"></i>
+                                    Block
+                                @else
+                                    <i class="fas fa-unlock"></i>
+                                   Un Block
+                                @endif
+
+                            </a>
+                        </td>
+
+                        </tr>
+
+                        @empty
+                            <th>No Data</th>
+                            @endforelse
+                            </tbody>
 
                             </table>
 
                             {{ $admins->links() }}
 
-                        </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.col -->
+                <!-- /.card -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
+            <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    </section>
+    <!-- /.content -->
     </div>
 @endsection
 

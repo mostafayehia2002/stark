@@ -21,8 +21,10 @@ Route::prefix('management')->controller(AdminController::class)->group(function 
     Route::get('/create-admin','create')->name('create-admin');
     Route::post('/store-admin','store')->name('store-admin');
     Route::get('/edit-admin/{id}','edit')->name('edit-admin');
-    Route::post('/update-admin','update')->name('update-admin');
+    Route::any('/update-admin/{id}','update')->name('update-admin');
     Route::get('/delete-admin/{id}','destroy')->name('delete-admin');
+    Route::get('/block-admin/{id}','blockAdmin')->name('block-admin');
+
 });
 
 Route::resource('roles', RoleController::class);

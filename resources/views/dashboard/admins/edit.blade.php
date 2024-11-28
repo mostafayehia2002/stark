@@ -31,7 +31,9 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="{{route('admin.update-admin',$user->id)}}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="full_name">Full Name</label>
@@ -52,6 +54,16 @@
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <strong>Role:</strong>
+                                    <select name="roles[]" class="form-control" multiple="multiple">
+                                        @foreach ($roles as $value => $label)
+                                            <option value="{{ $value }}" @selected(isset($userRole[$value]))>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <!-- /.card-body -->

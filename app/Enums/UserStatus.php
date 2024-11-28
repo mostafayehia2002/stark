@@ -6,6 +6,6 @@ enum UserStatus :string
 {
     //
 
-    case ACTIVE= 'active';
-    case INACTIVE = 'inactive';
+    case ACTIVE="active";
+    case INACTIVE ="inactive";
 }

@@ -1,4 +1,5 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Create Permission'])
+@extends('dashboard.layouts.master', ['title' => 'Admin Stark | Create Permission'])
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -11,8 +12,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">Create Permission</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Permission</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.show-admins') }}">Create Permission</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Permission</a></li>
                             <li class="breadcrumb-item active">Management</li>
                         </ol>
                     </div><!-- /.col -->
@@ -20,17 +21,19 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <!-- Main content -->
+
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
-                        <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin.roles.index') }}"><i
-                                class="fa fa-arrow-left"></i> Back</a>
+                        <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin.roles.index') }}">
+                            <i class="fa fa-arrow-left"></i> Back
+                        </a>
                     </div>
                 </div>
             </div>
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -40,29 +43,38 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Name:</strong>
-                                        <input type="text" name="name" placeholder="Name" class="form-control">
+                                        <input type="text" name="name" placeholder="Name" class="form-control" required>
                                     </div>
                                 </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Permission:</strong>
-                                        <br/>
-                                        @foreach($permission as $value)
-                                            <label><input type="checkbox" name="permission[{{$value->id}}]"
-                                                          value="{{$value->id}}" class="name">
-                                                {{ $value->name }}</label>
-                                            <br/>
-                                        @endforeach
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" id="checkAll"> Select All
+                                            </label>
+                                        </div>
+                                        <div class="permissions-list mt-3">
+                                            @foreach($permission as $value)
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="form-check-input permission-checkbox">
+                                                        {{ $value->name }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                            class="fa-solid fa-floppy-disk"></i> Submit
+                                    <button type="submit" class="btn btn-primary btn-sm mb-3">
+                                        <i class="fa-solid fa-floppy-disk"></i> Submit
                                     </button>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -70,3 +82,22 @@
         <!-- /.content -->
     </div>
 @endsection
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the "Select All" checkbox
+            const checkAll = document.getElementById('checkAll');
+
+            // Get all the permission checkboxes
+            const permissionCheckboxes = document.querySelectorAll('.permission-checkbox');
+
+            // Add event listener to "Select All" checkbox
+            checkAll.addEventListener('change', function () {
+                // When "Select All" is checked, check all permission checkboxes
+                permissionCheckboxes.forEach(checkbox => {
+                    checkbox.checked = checkAll.checked;
+                });
+            });
+        });
+    </script>
+@endpush

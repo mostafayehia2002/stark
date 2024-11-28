@@ -106,7 +106,7 @@
             <form action="{{route('admin.logout')}}" method="POST" class="nav-link" >
                 @csrf
                 <button type="submit" class="btn-danger" title="logout">
-                    <i class="fas fa-th-large"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
             </form>
         </li>
