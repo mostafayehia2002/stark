@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\UserStatus;
 use App\Enums\UserType;
 use App\Http\Requests\LoginAdminRequest;
 use App\Models\User;
@@ -19,7 +20,7 @@ class AdminAuthService
     {
         $credentials =$request->validated();
         $remember = $request->has('remember');
-        $user = User::where('type', UserType::ADMIN)
+        $user = User::where('type', UserType::ADMIN)->where('status', UserStatus::ACTIVE)
             ->where(function($query) use ($credentials) {
                 $query->where('email', $credentials['login'])
                     ->orWhere('phone', $credentials['login']);
