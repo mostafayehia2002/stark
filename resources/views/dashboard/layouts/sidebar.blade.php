@@ -28,9 +28,9 @@
                 <li class="nav-header">Management</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="fa-solid fa-user-secret"></i>
+                        Admins
                         <p>
-                            Admins
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -38,7 +38,7 @@
 
                         <li class="nav-item">
                             <a href="{{route('admin.show-admins')}}" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <i class="fa-solid fa-users"></i>
                                 <p>
                                     Show Admins
                                 </p>
@@ -46,7 +46,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.create-admin')}}" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <i class="fa-solid fa-user-plus"></i>
                                 <p>
                                     Create Admins
                                 </p>
@@ -55,8 +55,8 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                    <a href="{{route('admin.roles.index')}}" class="nav-link">
+                        <i class="fas fa-lock"></i>
                         <p>
                             Permissions
                             <i class="right fas fa-angle-left"></i>
@@ -64,10 +64,18 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
+                            <a href="{{route('admin.roles.index')}}" class="nav-link">
+                                <i class="fas fa-eye"></i>
                                 <p>
-                                  role
+                                  Show Roles
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.roles.create')}}" class="nav-link">
+                                <i class="fas fa-plus-circle"></i>
+                                <p>
+                                   Create Role
                                 </p>
                             </a>
                         </li>

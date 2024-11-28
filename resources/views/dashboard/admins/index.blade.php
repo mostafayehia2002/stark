@@ -1,5 +1,4 @@
 @extends('dashboard.layouts.master',['title'=>'Admin Stark | Show Admins'])
-
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -54,12 +53,14 @@
                                         <td>admin</td>
                                         <td>{{$admin->status}}</td>
                                         <td>
-                                            <a href="{{route('admin.edit-admin',['id'=>$admin->id])}}">edit</a>
-                                            <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"
+
+                                            <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"class="btn btn-danger btn-sm"
                                                onclick="return confirm('Are you sure you want to delete this admin?');">
-                                                delete
+                                                <i class="fa-solid fa-trash"></i>
+                                                Delete
                                             </a>
 
+                                                <a class="btn btn-primary btn-sm" href="{{route('admin.edit-admin',['id'=>$admin->id])}}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         </td>
                                     </tr>
 

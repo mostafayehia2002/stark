@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -24,21 +25,21 @@ class AdminController extends Controller
 
     //done ✅
     public function create(){
-
-        return view('dashboard.admins.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('dashboard.admins.create',compact('roles'));
     }
 
 
     public function store(Request $request){
         $response=$this->adminService->store($request);
-
+        //$user->assignRole($request->input('roles'));
         return  $response;
     }
     //done ✅
     public function edit($id){
         $response=$this->adminService->edit($id);
         if($response['success']){
-            return view('dashboard.admins.edit',['user'=>$response['user']]);
+            return view('dashboard.admins.edit',['user'=>$response['user'],'roles'=>$response['roles']]);
         }
         toastr()->error($response['message']);
         return redirect()->back();

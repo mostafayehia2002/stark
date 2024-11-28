@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class AdminService
 {
@@ -16,10 +18,12 @@ class AdminService
     public function edit($id): array
     {
         $user=User::find($id);
+        $roles = Role::pluck('name','name')->all();
         if($user){
             return [
                 'success'=>true,
-                'user'=>$user
+                'user'=>$user,
+                'roles'=>$roles
             ];
         }
         return[
@@ -30,6 +34,9 @@ class AdminService
     }
     public function update(Request $request ,$id): array{
 
+        //DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+       // $user->assignRole($request->input('roles'));
         return [
 
         ];
