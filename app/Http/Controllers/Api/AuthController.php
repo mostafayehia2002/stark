@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
@@ -169,7 +169,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'phone' => ['required', 'string', 'regex:/^\+20\d{9}$/'],
+                'phone' => ['required', 'string', 'regex:/^\+966\d{9}$/'],
                 'otp' => 'required|string',
                 'full_name' => 'required|string',
                 'email' => 'required|email',
@@ -192,7 +192,7 @@ class AuthController extends Controller
             }
 
             // Verify OTP first
-            try {
+            try{
                 $verification = $this->twilio->verify->v2
                     ->services($this->verificationSid)
                     ->verificationChecks
@@ -201,7 +201,7 @@ class AuthController extends Controller
                         'code' => $request->otp
                     ]);
 
-                if ($verification->status !== 'approved') {
+                if($verification->status !== 'approved') {
                     return response()->json([
                         'success' => false,
                         'message' => 'Invalid OTP'

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\UserStatus;
 use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdminRequest;
 use App\Models\User;
-use App\Services\AdminService;
-use Illuminate\Http\Request;
+use App\Services\Admin\AdminService;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller

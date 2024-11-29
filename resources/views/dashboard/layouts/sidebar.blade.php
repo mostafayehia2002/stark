@@ -38,7 +38,7 @@
 
                         <li class="nav-item">
                             <a href="{{route('admin.show-admins')}}" class="nav-link">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fas fa-eye"></i>
                                 <p>
                                     Show Admins
                                 </p>
@@ -81,7 +81,36 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">Members</li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-users"></i>
+                        Users
+                        <p>
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
 
+                        <li class="nav-item">
+                            <a href="{{route('admin.show-users')}}" class="nav-link">
+                                <i class="fas fa-eye"></i>
+                                <p>
+                                    Show Users
+                                </p>
+                            </a>
+                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="" class="nav-link">--}}
+{{--                                <i class="fa-solid fa-user-plus"></i>--}}
+{{--                                <p>--}}
+{{--                                    Create Admins--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+
+                    </ul>
+                </li>
 {{--                <li class="nav-item">--}}
 {{--                    <a href="" class="nav-link">--}}
 {{--                        <i class="nav-icon far fa-image"></i>--}}

@@ -1,10 +1,9 @@
 <?php
-
-
-return [
-    'account_sid' => env('TWILIO_ACCOUNT_SID'),
-    'auth_token' => env('TWILIO_AUTH_TOKEN'),
-    'verification_sid' => env('TWILIO_VERIFICATION_SID'),
-    'ssl_verify' => env('APP_ENV') === 'production',
-    'debug' => env('APP_DEBUG', false),
+ return[
+    'base_url' => env('TWILIO_BASE_URL'),
+    'channel' => env('TWILIO_CHANNEL'),
+    'sid' => env('TWILIO_SID'),
+    'token' => env('TWILIO_TOKEN'),
+    'verify_sid' => env('TWILIO_VERIFY_SID'),
+    'from' => env('TWILIO_FROM'),
 ];

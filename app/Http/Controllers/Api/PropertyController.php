@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
@@ -16,11 +16,11 @@ class PropertyController extends Controller
                 ->where('booking_status', 'unbooked');  // Only show unbooked properties
 
             // Apply filters
-            if ($request->has('type') && $request->type !== 'all') {
+            if($request->has('type') && $request->type !== 'all') {
                 $query->where('type', $request->type);
             }
 
-            if ($request->has('priceRange') && $request->priceRange !== 'all') {
+            if($request->has('priceRange') && $request->priceRange !== 'all') {
                 list($min, $max) = explode('-', $request->priceRange);
                 $query->where('price', '>=', $min)
                       ->where('price', '<=', $max);

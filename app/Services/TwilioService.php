@@ -1,52 +1,88 @@
 <?php
-
 namespace App\Services;
-
-use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class TwilioService
 {
-    protected $client;
-    protected $verificationSid;
+    protected  $sid;
+    protected  $token;
+    protected  $verifySid;
+    protected  $from;
+    protected  $base_url;
+    protected $channel;
 
     public function __construct()
     {
-        $this->client = new Client(
-            config('services.twilio.sid'),
-            config('services.twilio.token'),
-            null,
-            null,
-            new TwilioHttpClient()
-        );
-        $this->verificationSid = config('services.twilio.verification_sid');
+        $this->base_url = config('twilio.base_url', 'https://api.twilio.com');
+        $this->sid = config('twilio.sid');
+        $this->token = config('twilio.token');
+        $this->verifySid = config('twilio.verify_sid');
+        $this->from = config('twilio.from');
+        $this->channel = config('twilio.channel', 'sms');
     }
 
-    public function sendVerificationCode($phoneNumber)
+    private function makeRequest($url, $data): \Illuminate\Http\Client\Response
+    {
+        return Http::withBasicAuth($this->sid,$this->token)
+            ->timeout(60)
+            ->asForm()
+            ->post($url, $data);
+    }
+
+    public function sendVerificationCode($phoneNumber): array
     {
         try {
-            return $this->client->verify->v2
-                ->services($this->verificationSid)
-                ->verifications
-                ->create($phoneNumber, 'sms');
+            if (!preg_match('/^\+\d{10,15}$/', $phoneNumber)) {
+                return [
+                    'success' => false,
+                    'status' => 400,
+                    'message' => 'Invalid phone number format. It should include the country code.',
+                ];
+            }
+            $url = "$this->base_url/v2/Services/{$this->verifySid}/Verifications";
+            $response=$this->makeRequest($url, [
+                'To' => $phoneNumber,
+                'Channel' => $this->channel,
+            ]);
+            return[
+                'success' => $response->successful(),
+                'status'=>$response->json('status'),
+                 'message' =>$response->json('status')==='pending'
+                   ?'Verification Sent Successfully'
+                   : 'Failed To Send Verification Code',
+            ];
         } catch (\Exception $e) {
-            \Log::error('Failed to send verification code: ' . $e->getMessage());
-            throw $e;
+            return [
+                'success' => false,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
         }
     }
 
-    public function verifyCode($phoneNumber, $code)
+    public function verifyCode($phoneNumber, $code): array
     {
         try {
-            return $this->client->verify->v2
-                ->services($this->verificationSid)
-                ->verificationChecks
-                ->create([
-                    'to' => $phoneNumber,
-                    'code' => $code
-                ]);
+            $url = "$this->base_url/v2/Services/$this->verifySid/VerificationCheck";
+            $response = $this->makeRequest($url, [
+                'To' => $phoneNumber,
+                'Code' => $code,
+            ]);
+            Storage::put('verification.json',json_encode($response->json()) );
+                return [
+                    'success'=>$response->successful(),
+                    'status'=>$response->json('status'),
+                    'message' =>$response->json('status')==='approved'
+                        ?'Successfully Verify OTP'
+                        : 'Failed to Verify OTP',
+                ];
         } catch (\Exception $e) {
-            \Log::error('Failed to verify code: ' . $e->getMessage());
-            throw $e;
+            return [
+                'success' => false,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
         }
     }
-} 
+}
