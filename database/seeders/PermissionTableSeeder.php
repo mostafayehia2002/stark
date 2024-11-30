@@ -22,6 +22,11 @@ class PermissionTableSeeder extends Seeder
             'admin-edit'=>'admin.admins.edit',
             'admin-delete'=>'admin.delete-admin',
             'admin-block'=>'admin.block-admin',
+
+            'user-list'=>'admin.show-users',
+            'user-delete'=>'admin.delete-user',
+            'user-detail'=>'admin.details-user',
+            'user-block'=>'admin.block-user',
         ];
 
         foreach ($permissions as $permission => $route) {

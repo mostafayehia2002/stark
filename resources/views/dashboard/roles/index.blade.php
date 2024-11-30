@@ -12,7 +12,9 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">Show Roles</a></li>
+                            @can('role-list')
+                            <li class="breadcrumb-item"><a href="{{route('admin.roles.index')}}">Show Roles</a></li>
+                            @endcan
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Permission</a></li>
                             <li class="breadcrumb-item active">Management</li>
                         </ol>
@@ -40,12 +42,14 @@
                     <tr>
                         <th width="100px">No</th>
                         <th>Name</th>
+                        <th>Created At</th>
                         <th width="280px">Action</th>
                     </tr>
                     @foreach ($roles as $key => $role)
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $role->name }}</td>
+                            <td>{{  $role->created_at->diffForHumans()}}</td>
                             <td>
                                 <a class="btn btn-info btn-sm" href="{{ route('admin.roles.show',$role->id) }}"><i class="fa-solid fa-list"></i> Show</a>
                                 @can('role-edit')

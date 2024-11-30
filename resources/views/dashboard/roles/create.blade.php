@@ -50,18 +50,19 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Permission:</strong>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="checkbox" class="form-check-input" id="checkAll"> Select All
-                                            </label>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                <input type="checkbox" class="custom-control-input permission-checkbox" id="checkAll">
+                                                <label class="custom-control-label" for="checkAll">Select All</label>
+                                            </div>
                                         </div>
                                         <div class="permissions-list mt-3">
                                             @foreach($permission as $value)
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="form-check-input permission-checkbox">
-                                                        {{ $value->name }}
-                                                    </label>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                        <input type="checkbox" class="custom-control-input permission-checkbox" id="customSwitch{{$value->id}}" name="permission[{{$value->id}}]" value="{{$value->id}}">
+                                                        <label class="custom-control-label" for="customSwitch{{$value->id}}">{{ $value->name }}</label>
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         </div>

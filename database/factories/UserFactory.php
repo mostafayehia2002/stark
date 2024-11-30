@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatus;
+use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,8 +25,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $types = [UserType::OWNER,UserType::RENTER];
+        $statuses = [UserStatus::ACTIVE,UserStatus::INACTIVE];
         return [
-
+            'full_name' => $this->faker->name(),
+            'username' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => Hash::make('password'),
+            'phone' => $this->faker->phoneNumber(),
+            'type' => $this->faker->randomElement($types),
+            'business_name' => $this->faker->company(),
+            'business_license' => $this->faker->uuid(),
+            'address' => $this->faker->address(),
+            'status' => $this->faker->randomElement($statuses),
         ];
     }
 

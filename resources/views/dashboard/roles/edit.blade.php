@@ -32,23 +32,13 @@
                 </div>
             </div>
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.roles.update', $role->id) }}">
                             @csrf
                             @method('PUT')
-
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -62,11 +52,14 @@
                                         <strong>Permission:</strong>
                                         <br/>
                                         @foreach($permission as $value)
-                                            <label><input type="checkbox" name="permission[{{$value->id}}]"
-                                                          value="{{$value->id}}"
-                                                          class="name" {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
-                                                {{ $value->name }}</label>
-                                            <br/>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                    <input type="checkbox" class="custom-control-input permission-checkbox" id="customSwitch{{$value->id}}" name="permission[{{$value->id}}]" value="{{$value->id}}"
+                                                        {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}
+                                                    >
+                                                    <label class="custom-control-label" for="customSwitch{{$value->id}}" >{{ $value->name }}</label>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>

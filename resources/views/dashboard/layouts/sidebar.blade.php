@@ -11,7 +11,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
+                     alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{auth()->user()->username}}</a>
@@ -22,9 +23,6 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-
-
-
                 <li class="nav-header">Management</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -35,27 +33,30 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="{{route('admin.show-admins')}}" class="nav-link">
-                                <i class="fas fa-eye"></i>
-                                <p>
-                                    Show Admins
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.create-admin')}}" class="nav-link">
-                                <i class="fa-solid fa-user-plus"></i>
-                                <p>
-                                    Create Admins
-                                </p>
-                            </a>
-                        </li>
+                        @can('admin-list')
+                            <li class="nav-item">
+                                <a href="{{route('admin.show-admins')}}" class="nav-link">
+                                    <i class="fas fa-eye"></i>
+                                    <p>
+                                        Show Admins
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('admin-create')
+                            <li class="nav-item">
+                                <a href="{{route('admin.create-admin')}}" class="nav-link">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    <p>
+                                        Create Admins
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="{{route('admin.roles.index')}}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-lock"></i>
                         <p>
                             Permissions
@@ -63,22 +64,26 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.roles.index')}}" class="nav-link">
-                                <i class="fas fa-eye"></i>
-                                <p>
-                                  Show Roles
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.roles.create')}}" class="nav-link">
-                                <i class="fas fa-plus-circle"></i>
-                                <p>
-                                   Create Role
-                                </p>
-                            </a>
-                        </li>
+                        @can('role-list')
+                            <li class="nav-item">
+                                <a href="{{route('admin.roles.index')}}" class="nav-link">
+                                    <i class="fas fa-eye"></i>
+                                    <p>
+                                        Show Roles
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('role-create')
+                            <li class="nav-item">
+                                <a href="{{route('admin.roles.create')}}" class="nav-link">
+                                    <i class="fas fa-plus-circle"></i>
+                                    <p>
+                                        Create Role
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
                 <li class="nav-header">Members</li>
@@ -91,7 +96,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
+                       @can('user-list')
                         <li class="nav-item">
                             <a href="{{route('admin.show-users')}}" class="nav-link">
                                 <i class="fas fa-eye"></i>
@@ -100,25 +105,17 @@
                                 </p>
                             </a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="" class="nav-link">--}}
-{{--                                <i class="fa-solid fa-user-plus"></i>--}}
-{{--                                <p>--}}
-{{--                                    Create Admins--}}
-{{--                                </p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
+                        @endcan
                     </ul>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="" class="nav-link">--}}
-{{--                        <i class="nav-icon far fa-image"></i>--}}
-{{--                        <p>--}}
-{{--                            Gallery--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a href="" class="nav-link">--}}
+                {{--                        <i class="nav-icon far fa-image"></i>--}}
+                {{--                        <p>--}}
+                {{--                            Gallery--}}
+                {{--                        </p>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
 
             </ul>
         </nav>

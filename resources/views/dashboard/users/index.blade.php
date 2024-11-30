@@ -31,19 +31,18 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Full Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Type</th>
                                     <th>Status</th>
+                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($users as $user)
                                     <tr>
-                                        <td>{{$user->full_name}}</td>
                                         <td>{{$user->username}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone}}</td>
@@ -55,50 +54,52 @@
                                                 <label class="badge bg-success"> {{$user->status}}</label>
                                             @else
                                                 <label class="badge bg-danger"> {{$user->status}}</label>
-                            @endif
+                                                 @endif
 
-                        </div>
+                        <td>{{$user->created_at}}</td>
                         <td>
+                            @can('user-delete')
+                                <a href="{{route('admin.delete-user',$user->id)}}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Are you sure you want to delete this user?');">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+                                </a>
+                            @endcan
+                            @can('user-detail')
+                                <a class="btn btn-primary btn-sm"
+                                   href="{{route('admin.details-user',$user->id)}}"> <i class="fas fa-eye"></i> details</a>
+                            @endcan
+                            @can('user-block')
+                                <a href="{{route('admin.block-user',$user->id)}}"
+                                   class="btn btn-warning btn-sm"
+                                   onclick="return confirm('Are you sure you want do it');">
+                                    @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
+                                        <i class="fas fa-ban"></i>
+                                        Block
+                                    @else
+                                        <i class="fas fa-unlock"></i>
+                                        Un Block
+                                    @endif
 
-                            <a href="{{route('admin.delete-user',$user->id)}}"
-                               class="btn btn-danger btn-sm"
-                               onclick="return confirm('Are you sure you want to delete this user?');">
-                                <i class="fa-solid fa-trash"></i>
-                                Delete
-                            </a>
-                            <a class="btn btn-primary btn-sm"
-                               href="{{route('admin.details-user',$user->id)}}"> <i class="fas fa-eye"></i> details</a>
-                            <a href="{{route('admin.block-user',$user->id)}}"
-                               class="btn btn-warning btn-sm"
-                               onclick="return confirm('Are you sure you want do it');">
-                                @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
-                                    <i class="fas fa-ban"></i>
-                                    Block
-                                @else
-                                    <i class="fas fa-unlock"></i>
-                                    Un Block
-                                @endif
-
-                            </a>
+                                </a>
+                            @endcan
                         </td>
-
                         </tr>
 
                         @empty
-                            <th>No Data</th>
+                            <p>No Data</p>
                             @endforelse
                             </tbody>
 
                             </table>
-
                             {{ $users->links() }}
 
-                    </div>
+                            </div>
                     <!-- /.card-body -->
+                    </div>
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
             <!-- /.row -->
         </section>
         <!-- /.content -->

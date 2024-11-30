@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
+        User::factory()->count(50)->create();
+
        $user=User::create([
             'full_name'=>'mostafa yehia',
             'username' => 'admin',
@@ -32,7 +34,6 @@ class UserSeeder extends Seeder
         $permissions = Permission::pluck('id','id')->all();
 
         $role->syncPermissions($permissions);
-
         $user->assignRole([$role->id]);
     }
 }
