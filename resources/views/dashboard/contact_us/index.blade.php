@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.master',['title'=>'Admin Stark | Contact us'])
 @section('content')
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -53,32 +54,36 @@
                                         @endif
                                         </td>
                                         <td>
-                                            @can('message-show')
-                                            <a href="#exampleModal{{$contact->id}}" data-bs-toggle="modal" class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
+                                            <a href="#exampleModal{{$contact->id}}" data-toggle="modal" class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
                                                 <i class="fas fa-eye"></i>
                                                 Show
                                             </a>
-                                            <div class="modal fade" id="exampleModal{{$contact->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Show Message</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                                                    onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
-                                                            ></button>
+                                                <div class="modal fade" id="exampleModal{{$contact->id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Show Message</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                                                        onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
+                                                                >
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>{{$contact->message}}</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                                        onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
+                                                                >Close</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            {{$contact->message}}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                                                    onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
-                                                            >Close</button>
-                                                        </div>
+                                                        <!-- /.modal-content -->
                                                     </div>
+                                                    <!-- /.modal-dialog -->
                                                 </div>
-                                            </div>
-                                            @endcan
+                                                <!-- /.modal -->
+
                                         </td>
                                         <td>{{$contact->created_at}}</td>
                                         <td>
@@ -130,3 +135,4 @@
             });
         </script>
     @endpush
+
