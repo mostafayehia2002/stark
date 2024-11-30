@@ -96,27 +96,28 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                       @can('user-list')
-                        <li class="nav-item">
-                            <a href="{{route('admin.show-users')}}" class="nav-link">
-                                <i class="fas fa-eye"></i>
-                                <p>
-                                    Show Users
-                                </p>
-                            </a>
-                        </li>
+                        @can('user-list')
+                            <li class="nav-item">
+                                <a href="{{route('admin.show-users')}}" class="nav-link">
+                                    <i class="fas fa-eye"></i>
+                                    <p>
+                                        Show Users
+                                    </p>
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="" class="nav-link">--}}
-                {{--                        <i class="nav-icon far fa-image"></i>--}}
-                {{--                        <p>--}}
-                {{--                            Gallery--}}
-                {{--                        </p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-
+                @can('message-list')
+                    <li class="nav-item">
+                        <a href="{{route('admin.show-message')}}" class="nav-link">
+                            <i class="fas fa-envelope"></i>
+                            <p>
+                                Messages
+                            </p>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

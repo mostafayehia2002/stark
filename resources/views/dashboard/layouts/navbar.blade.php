@@ -8,9 +8,11 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('admin.dashboard')}}" class="nav-link">Home</a>
         </li>
+        @can('message-list')
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{route('admin.show-message')}}" class="nav-link">Contact Us</a>
         </li>
+        @endcan
     </ul>
 
     <!-- SEARCH FORM -->

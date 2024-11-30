@@ -27,6 +27,10 @@ class PermissionTableSeeder extends Seeder
             'user-delete'=>'admin.delete-user',
             'user-detail'=>'admin.details-user',
             'user-block'=>'admin.block-user',
+
+            'message-list'=>'admin.show-message',
+            'message-delete'=>'admin.delete-message',
+            'message-read'=>'admin.read-message',
         ];
 
         foreach ($permissions as $permission => $route) {
