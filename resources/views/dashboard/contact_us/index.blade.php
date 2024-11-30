@@ -54,6 +54,7 @@
                                         @endif
                                         </td>
                                         <td>
+                                            @can('message-read')
                                             <a href="#exampleModal{{$contact->id}}" data-toggle="modal" class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
                                                 <i class="fas fa-eye"></i>
                                                 Show
@@ -83,7 +84,7 @@
                                                     <!-- /.modal-dialog -->
                                                 </div>
                                                 <!-- /.modal -->
-
+                                            @endcan
                                         </td>
                                         <td>{{$contact->created_at}}</td>
                                         <td>
