@@ -23,7 +23,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-header">Management</li>
+                <li class="nav-header">Users Management</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fa-solid fa-user-secret"></i>
@@ -48,12 +48,83 @@
                                 <a href="{{route('admin.create-admin')}}" class="nav-link">
                                     <i class="fa-solid fa-user-plus"></i>
                                     <p>
-                                        Create Admins
+                                        Add Admin
                                     </p>
                                 </a>
                             </li>
                         @endcan
                     </ul>
+                </li>
+                @can('user-list')
+                    <li class="nav-item">
+                        <a href="{{route('admin.show-users')}}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Show Users
+                            </p>
+                        </a>
+                    </li>
+                    @endcan
+                <li class="nav-header">Units Management</li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-building"></i>
+                        <p>
+                            Units
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-eye"></i>
+                                <p>
+                                    Add Unit
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-eye"></i>
+                                <p>
+                                    Show Unit
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <p>
+                            Categories
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <p>
+                            Features
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Booking</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-eye"></i>
+                        <p>
+                            Show Booking
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Setting</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-eye"></i>
+                        <p>
+                            View Setting
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -86,39 +157,27 @@
                         @endcan
                     </ul>
                 </li>
-                <li class="nav-header">Members</li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="fa-solid fa-users"></i>
+                <li class="nav-header">Support</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
                         <p>
-                            Users
-                            <i class="right fas fa-angle-left"></i>
+                            FAQ
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        @can('user-list')
-                            <li class="nav-item">
-                                <a href="{{route('admin.show-users')}}" class="nav-link">
-                                    <i class="fas fa-eye"></i>
-                                    <p>
-                                        Show Users
-                                    </p>
-                                </a>
-                            </li>
-                        @endcan
-                    </ul>
                 </li>
                 @can('message-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-message')}}" class="nav-link">
                             <i class="fas fa-envelope"></i>
                             <p>
-                                Messages
+                                Contact Us
                             </p>
                         </a>
                     </li>
                 @endcan
             </ul>
+
         </nav>
         <!-- /.sidebar-menu -->
     </div>

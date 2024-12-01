@@ -13,7 +13,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Show Users</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Users</a></li>
-                            <li class="breadcrumb-item active">Members</li>
+                            <li class="breadcrumb-item active">Users Management</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

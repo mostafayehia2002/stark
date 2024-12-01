@@ -13,8 +13,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.show-admins') }}">Create Permission</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Permission</a></li>
-                            <li class="breadcrumb-item active">Management</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Permissions</a></li>
+                            <li class="breadcrumb-item active">Setting</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

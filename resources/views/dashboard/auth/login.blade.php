@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>Admin</b>Stark</a>
+    <a href=""><b>{{env('app_name')}}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -64,10 +64,9 @@
           <!-- /.col -->
         </div>
       </form>
-
-      <p class="mb-1">
-        <a href="#">I forgot my password</a>
-      </p>
+{{--      <p class="mb-1">--}}
+{{--        <a href="#">I forgot my password</a>--}}
+{{--      </p>--}}
 
     </div>
     <!-- /.login-card-body -->

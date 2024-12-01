@@ -15,8 +15,8 @@
                             @can('role-list')
                             <li class="breadcrumb-item"><a href="{{route('admin.roles.index')}}">Show Roles</a></li>
                             @endcan
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Permission</a></li>
-                            <li class="breadcrumb-item active">Management</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Permissions</a></li>
+                            <li class="breadcrumb-item active">Setting</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

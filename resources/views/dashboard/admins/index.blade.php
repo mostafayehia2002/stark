@@ -16,7 +16,7 @@
                                 </li>
                             @endcan
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admins</a></li>
-                            <li class="breadcrumb-item active">Management</li>
+                            <li class="breadcrumb-item active">Users Management</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

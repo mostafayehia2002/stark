@@ -14,7 +14,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.edit-admin',['id'=>$user->id])}}">Edit Admin</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admins</a></li>
-                            <li class="breadcrumb-item active">Management</li>
+                            <li class="breadcrumb-item active">Users Management</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
