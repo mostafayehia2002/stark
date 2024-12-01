@@ -12,8 +12,6 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-message')}}">Show Message</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.show-message')}}">Messages</a></li>
                             <li class="breadcrumb-item active">Members</li>
                         </ol>

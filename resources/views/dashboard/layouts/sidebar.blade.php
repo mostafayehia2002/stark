@@ -27,9 +27,9 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fa-solid fa-user-secret"></i>
-                        Admins
                         <p>
                             <i class="right fas fa-angle-left"></i>
+                            Admins
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -90,8 +90,8 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fa-solid fa-users"></i>
-                        Users
                         <p>
+                            Users
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

@@ -31,25 +31,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-//    public function profiles()
-//    {
-//        return $this->hasMany(Profile::class);
-//    }
 
-//    public function renterProfile()
-//    {
-//        return $this->hasOne(Profile::class)->where('type', 'renter');
-//    }
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 
-//    public function ownerProfile()
-//    {
-//        return $this->hasOne(Profile::class)->where('type', 'owner');
-//    }
 
-//    public function profile()
-//    {
-//        // Get the current profile based on requested type
-//        $type = request()->type ?? request()->route('type') ?? 'renter';
-//        return $this->hasOne(Profile::class)->where('type', $type);
-//    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
 }
