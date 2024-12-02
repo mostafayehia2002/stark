@@ -1,0 +1,24 @@
+<?php
+
+use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\UserLoginController;
+use App\Http\Controllers\Api\UserLogoutController;
+use App\Http\Controllers\Api\UserProfileController;
+use App\Http\Controllers\Api\UserRegisterController;
+use App\Http\Controllers\Api\VerifyOtpController;
+use Illuminate\Support\Facades\Route;
+
+Route::group(['prefix'=>'v1'], function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [UserLoginController::class, 'login']);
+        Route::post('/register', [UserRegisterController::class, 'register']);
+        Route::post('/verify-otp',[VerifyOTPController::class, 'verifyOTP']);
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/logout', [UserLogoutController::class, 'logout']);
+            Route::post('/profile', [UserProfileController::class, 'profile']);
+            Route::post('/update-profile', [UserProfileController::class, 'updateProfile']);
+        });
+    });
+    Route::post('/contact-us/send',[ContactUsController::class, 'sendContactUsMessage']);
+
+});

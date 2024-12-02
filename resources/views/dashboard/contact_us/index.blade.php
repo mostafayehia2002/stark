@@ -98,7 +98,7 @@
                                     </tr>
 
                                 @empty
-                                    <p>No Data</p>
+                                    <td  colspan="6" class="text-center">No Messages</td>
                                 @endforelse
                                 </tbody>
 

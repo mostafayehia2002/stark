@@ -64,8 +64,28 @@
                             </p>
                         </a>
                     </li>
-                    @endcan
+                @endcan
                 <li class="nav-header">Units Management</li>
+                @can('category-list')
+                    <li class="nav-item">
+                        <a href="{{route('admin.show-category')}}" class="nav-link">
+                            <i class="fas fa-tags"></i>
+                            <p>
+                                Categories
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('feature-list')
+                    <li class="nav-item">
+                        <a href="{{route('admin.show-feature')}}" class="nav-link">
+                            <i class="fas fa-cogs"></i>
+                            <p>
+                                Features
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fas fa-building"></i>
@@ -76,7 +96,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="" class="nav-link">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-plus"></i>
                                 <p>
                                     Add Unit
                                 </p>
@@ -92,22 +112,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="fas fa-tags"></i>
-                        <p>
-                            Categories
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="fas fa-cogs"></i>
-                        <p>
-                            Features
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-header">Booking</li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
@@ -122,7 +126,7 @@
                     <a href="" class="nav-link">
                         <i class="fas fa-eye"></i>
                         <p>
-                            View Setting
+                            Setting
                         </p>
                     </a>
                 </li>

@@ -12,9 +12,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            @can('role-list')
                             <li class="breadcrumb-item"><a href="{{route('admin.roles.index')}}">Show Roles</a></li>
-                            @endcan
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Permissions</a></li>
                             <li class="breadcrumb-item active">Setting</li>
                         </ol>

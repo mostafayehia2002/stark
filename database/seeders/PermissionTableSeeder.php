@@ -31,6 +31,16 @@ class PermissionTableSeeder extends Seeder
             'message-list'=>'admin.show-message',
             'message-delete'=>'admin.delete-message',
             'message-read'=>'admin.read-message',
+
+            'category-list'=>'admin.show-category',
+            'category-create'=>'admin.store-category',
+            'category-update'=>'admin.update-category',
+            'category-delete'=>'admin.delete-category',
+
+            'feature-list'=>'admin.show-feature',
+            'feature-create'=>'admin.store-feature',
+            'feature-update'=>'admin.update-feature',
+            'feature-delete'=>'admin.delete-feature',
         ];
 
         foreach ($permissions as $permission => $route) {

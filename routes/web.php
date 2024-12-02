@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\RedirectIfAuth;
@@ -36,6 +38,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::get('/show-message', 'index')->name('show-message');
         Route::get('/read-message/{id}', 'read')->name('read-message');
         Route::get('/delete-message/{id}', 'delete')->name('delete-message');
+    });
+
+    Route::prefix('category')->controller(CategoryController::class)->group(function () {
+        Route::get('/show-category', 'index')->name('show-category');
+        Route::Post('/store-category', 'store')->name('store-category');
+        Route::post('/update-category', 'update')->name('update-category');
+        Route::get('/delete-category/{id}', 'destroy')->name('delete-category');
+    });
+    Route::prefix('feature')->controller(FeatureController::class)->group(function () {
+        Route::get('/show-feature', 'index')->name('show-feature');
+        Route::Post('/store-feature', 'store')->name('store-feature');
+        Route::post('/update-feature', 'update')->name('update-feature');
+        Route::get('/delete-feature/{id}', 'destroy')->name('delete-feature');
     });
 
 });

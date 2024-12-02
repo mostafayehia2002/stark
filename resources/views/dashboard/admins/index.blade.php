@@ -11,10 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            @can('admin-list')
-                                <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">Show Admins</a>
-                                </li>
-                            @endcan
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">Show Admins</a>
+                            </li>
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admins</a></li>
                             <li class="breadcrumb-item active">Users Management</li>
                         </ol>
@@ -63,56 +61,56 @@
                                                 <label class="badge bg-success"> {{$admin->status}}</label>
                                             @else
                                                 <label class="badge bg-danger"> {{$admin->status}}</label>
-                                             @endif
+                                            @endif
                                         </td>
                                         <td>{{$admin->created_at}}</td>
-                            <td>
-                            @can('admin-delete')
-                                <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Are you sure you want to delete this admin?');">
-                                    <i class="fa-solid fa-trash"></i>
-                                    Delete
-                                </a>
-                            @endcan
-                            @can('admin-edit')
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.edit-admin',['id'=>$admin->id])}}"><i
-                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
-                            @endcan
-                            @can('admin-block')
-                                <a href="{{ route('admin.block-admin', ['id' => $admin->id]) }}"
-                                   class="btn btn-warning btn-sm"
-                                   onclick="return confirm('Are you sure you want do it');">
-                                    @if($admin->status===\App\Enums\UserStatus::ACTIVE->value)
-                                        <i class="fas fa-ban"></i>
-                                        Block
-                                    @else
-                                        <i class="fas fa-unlock"></i>
-                                        Un Block
-                                    @endif
-                                </a>
-                            @endcan
-                        </td>
-                        </tr>
-                               @empty
-                            <th>No Data</th>
-                            @endforelse
+                                        <td>
+                                            @can('admin-delete')
+                                                <a href="{{ route('admin.delete-admin', ['id' => $admin->id]) }}"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Are you sure you want to delete this admin?');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    Delete
+                                                </a>
+                                            @endcan
+                                            @can('admin-edit')
+                                                <a class="btn btn-primary btn-sm"
+                                                   href="{{route('admin.edit-admin',['id'=>$admin->id])}}"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            @endcan
+                                            @can('admin-block')
+                                                <a href="{{ route('admin.block-admin', ['id' => $admin->id]) }}"
+                                                   class="btn btn-warning btn-sm"
+                                                   onclick="return confirm('Are you sure you want do it');">
+                                                    @if($admin->status===\App\Enums\UserStatus::ACTIVE->value)
+                                                        <i class="fas fa-ban"></i>
+                                                        Block
+                                                    @else
+                                                        <i class="fas fa-unlock"></i>
+                                                        Un Block
+                                                    @endif
+                                                </a>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <td colspan="8" class="text-center">No Admins</td>
+                                @endforelse
 
-                            </tbody>
+                                </tbody>
                             </table>
 
                             {{ $admins->links() }}
 
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
+                    <!-- /.card -->
                 </div>
             </div>
-    <!-- /.row -->
-    </section>
-    <!-- /.content -->
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
 @endsection
 
