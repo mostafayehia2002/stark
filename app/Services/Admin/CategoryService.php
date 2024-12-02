@@ -11,17 +11,11 @@ class CategoryService
     public function store(Request $request): array
     {
         try {
-            $category = Category::create($request->only('name'));
-            if ($category) {
-                return [
+             Category::create($request->only('name'));
+             return [
                     'success' => true,
                     'message' => 'Successfully Created'
                 ];
-            }
-            return [
-                'success' => false,
-                'message' => 'Failed to Created'
-            ];
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -34,19 +28,12 @@ class CategoryService
     {
         try {
             $id = $request->input('id');
-            $category = Category::find($id);
-            if ($category) {
-                $category->update($request->only('name'));
-
+            $category =Category::findOrFail($id);
+            $category->update($request->only('name'));
                 return [
                     'success' => true,
                     'message' => 'Successfully Updated'
                 ];
-            }
-            return [
-                'success' => false,
-                'message' => 'Failed to Updated'
-            ];
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -58,17 +45,10 @@ class CategoryService
     public function destroy($id): array
     {
         try {
-            $category = Category::find($id);
-            if ($category) {
-                $category->delete();
-                return [
-                    'success' => true,
-                    'message' => 'Successfully Deleted'
-                ];
-            }
+            Category::findOrFail($id)->delete();
             return [
-                'success' => false,
-                'message' => 'Failed to Deleted'
+                'success' => true,
+                'message' => 'Successfully Deleted'
             ];
         } catch (\Exception $exception) {
             return [

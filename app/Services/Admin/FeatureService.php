@@ -14,19 +14,14 @@ class FeatureService
 
         try {
             $category = Category::find($request->input('category_id'));
-            $feature = $category->features()->create([
+            $category->features()->create([
                 'name' => $request->input('feature_name'),
             ]);
-            if ($category && $feature) {
-                return [
-                    'success' => true,
-                    'message' => 'Feature added successfully',
-                ];
-            }
             return [
-                'success' => false,
-                'message' => 'Feature not added',
+                'success' => true,
+                'message' => 'Feature added successfully',
             ];
+
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -34,24 +29,18 @@ class FeatureService
             ];
         }
     }
+
     public function update(Request $request)
     {
-
-        try{
+        try {
             $feature = Feature::findOrFail($request->input('feature_id'));
-            if ($feature) {
-                $feature->update([
-                    'category_id' => $request->input('category_id'),
-                    'name' => $request->input('feature_name'),
-                ]);
-                return [
-                    'success' => true,
-                    'message' => 'Feature updated successfully',
-                ];
-            }
+            $feature->update([
+                'category_id' => $request->input('category_id'),
+                'name' => $request->input('feature_name'),
+            ]);
             return [
-                'success' => false,
-                'message' =>'Feature not updated',
+                'success' => true,
+                'message' => 'Feature updated successfully',
             ];
         } catch (\Exception $exception) {
             return [
@@ -61,19 +50,13 @@ class FeatureService
         }
     }
 
-    public function destroy($id){
-        try{
-            $feature = Feature::findOrFail($id);
-            if ($feature) {
-                $feature->delete();
-                return [
-                    'success' => true,
-                    'message' => 'Feature deleted successfully',
-                ];
-            }
+    public function destroy($id)
+    {
+        try {
+            Feature::findOrFail($id)->delete();
             return [
-                'success' => false,
-                'message' =>'Feature not deleted',
+                'success' => true,
+                'message' => 'Feature deleted successfully',
             ];
         } catch (\Exception $exception) {
             return [

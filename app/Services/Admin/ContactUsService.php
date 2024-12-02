@@ -9,42 +9,30 @@ class ContactUsService
 
     public function read($id)
     {
-        try {
-          $contact= ContactUs::find($id)->update(['is_read'=>1]);
-          if($contact){
-              return [
-                  'success'=>true,
-                  'message'=>'Successfully Read Message'
-              ];
-          }
+        try{
+            ContactUs::findOrFail($id)->update(['is_read' => 1]);
             return [
-                'success'=>false,
-                'message'=>'Failed Read Message'
+                'success' => true,
+                'message' => 'Successfully Read Message'
             ];
-        }catch (\Exception $exception){
-            return[
+        } catch (\Exception $exception) {
+            return [
                 'success' => false,
                 'message' => $exception->getMessage()
             ];
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         try {
-            $contact= ContactUs::find($id);
-            if($contact){
-                $contact->delete();
+            ContactUs::findOrFail($id)->delete();
                 return [
-                    'success'=>true,
-                    'message'=>'Successfully Delete Message'
+                    'success' => true,
+                    'message' => 'Successfully Delete Message'
                 ];
-            }
+        } catch (\Exception $exception) {
             return [
-                'success'=>false,
-                'message'=>'Failed Delete Message'
-            ];
-        }catch (\Exception $exception){
-            return[
                 'success' => false,
                 'message' => $exception->getMessage()
             ];

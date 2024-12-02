@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('admin.show-unit')}}" class="nav-link">
                                 <i class="fas fa-eye"></i>
                                 <p>
                                     Show Unit
