@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CustomizeDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Unit extends Model
 {
@@ -16,11 +17,13 @@ class Unit extends Model
         'title',
         'type',
         'price',
+        'currency',
         'description',
         'address',
         'area',
         'number_bedroom',
         'number_bathroom',
+        'is_booked',
         'status'
     ];
     protected $with = ['features', 'owner'];
@@ -40,6 +43,11 @@ class Unit extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Media::class, 'mediable');
     }
 
 

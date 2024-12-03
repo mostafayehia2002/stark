@@ -41,6 +41,14 @@ class PermissionTableSeeder extends Seeder
             'feature-create'=>'admin.store-feature',
             'feature-update'=>'admin.update-feature',
             'feature-delete'=>'admin.delete-feature',
+
+            'unit-list'=>'admin.show-unit',
+            'unit-create'=>'admin.create-unit',
+            'unit-edit'=>'admin.edit-unit',
+            'unit-delete'=>'admin.delete-unit',
+            'unit-details'=>'admin.show-details',
+            'unit-change-status'=>'admin.change-status',
+
         ];
 
         foreach ($permissions as $permission => $route) {

@@ -12,7 +12,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Units</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">Units</a></li>
                             <li class="breadcrumb-item active">Units Management</li>
                         </ol>
                     </div><!-- /.col -->
@@ -59,25 +59,34 @@
                                         <td>{{$unit->created_at}}</td>
                                         <td>
 
-                                            <a href="" class="btn btn-secondary btn-sm">
-                                                <i class="fas fa-info-circle"></i>
-                                                Details
-                                            </a>
-                                            <a href="" class="btn btn-primary btn-sm">
-                                                <i class="fa-solid fa-pen-to-square"></i>Edit</a>
-
-                                            <a href="" class="btn btn-danger btn-sm"
-                                               onclick="return confirm('Are you sure you want to it?');">
-                                                <i class="fa-solid fa-trash"></i>
-                                                Delete
-                                            </a>
-
-                                            <a href="{{ route('admin.change-status', ['id' => $unit->id, 'status' => $unit->status]) }}"
-                                               class="btn btn-sm {{ $unit->getButtonClass() }}"
-                                               onclick="return confirm('Are you sure you want to change the status?');">
-                                                <i class="fas {{ $unit->isAcceptable() ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
-                                                {{ $unit->isAcceptable() ? 'Accept' : 'Reject' }}
-                                            </a>
+                                            @can('unit-details')
+                                                <a href="{{route('admin.show-details',$unit->id)}}"
+                                                   class="btn btn-secondary btn-sm">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    Details
+                                                </a>
+                                            @endcan
+                                            @can('unit-edit')
+                                                <a href="{{route('admin.edit-unit',$unit->id)}}"
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                            @endcan
+                                            @can('unit-delete')
+                                                <a href="{{route('admin.delete-unit',$unit->id)}}"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Are you sure you want to it?');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    Delete
+                                                </a>
+                                            @endcan
+                                            @can('unit-change-status')
+                                                <a href="{{ route('admin.change-status', ['id' => $unit->id, 'status' => $unit->status]) }}"
+                                                   class="btn btn-sm {{ $unit->getButtonClass() }}"
+                                                   onclick="return confirm('Are you sure you want to change the status?');">
+                                                    <i class="fas {{ $unit->isAcceptable() ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
+                                                    {{ $unit->isAcceptable() ? 'Accept' : 'Reject' }}
+                                                </a>
+                                            @endcan
 
                                         </td>
                                     </tr>

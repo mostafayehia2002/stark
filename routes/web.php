@@ -54,10 +54,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::get('/delete-feature/{id}', 'destroy')->name('delete-feature');
     });
 
+
     Route::prefix('units')->controller(UnitController::class)->group(function () {
        Route::get('/show-unit', 'index')->name('show-unit');
        Route::get('/change-status/{id}/{status}', 'changeStatus')->name('change-status');
        Route::get('/delete-unit/{id}', 'destroy')->name('delete-unit');
+       Route::get('/show-details/{id}','details')->name('show-details');
+       Route::get('/create-unit', 'create')->name('create-unit');
+       Route::post('/store-unit', 'store')->name('store-unit');
+       Route::get('/edit-unit/{id}','edit')->name('edit-unit');
+       Route::post('/update-unit/{id}', 'update')->name('update-unit');
     });
 
 });

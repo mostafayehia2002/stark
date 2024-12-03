@@ -19,11 +19,13 @@ return new class extends Migration
             $table->string('title');
             $table->string('type')->default(UnitType::APARTMENT);
             $table->decimal('price',10,2)->default(0);
+            $table->string('currency')->default('SAR');
             $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->string('area')->default(0);
             $table->tinyInteger('number_bedroom')->default(0);
             $table->tinyInteger('number_bathroom')->default(0);
+            $table->boolean('is_booked')->default(0);
             $table->string('status')->default(UnitStatus::PENDING);
             $table->timestamps();
         });

@@ -90,18 +90,22 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-building"></i>
                         <p>
+                            <i class="right fas fa-angle-left"></i>
                             Units
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('unit-create')
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('admin.create-unit')}}" class="nav-link">
                                 <i class="fas fa-plus"></i>
                                 <p>
                                     Add Unit
                                 </p>
                             </a>
                         </li>
+                        @endcan
+                        @can('unit-list')
                         <li class="nav-item">
                             <a href="{{route('admin.show-unit')}}" class="nav-link">
                                 <i class="fas fa-eye"></i>
@@ -110,6 +114,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
                 <li class="nav-header">Booking</li>
