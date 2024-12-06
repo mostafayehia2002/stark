@@ -21,6 +21,10 @@ class BookingRequest extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    public function booking()
+    {
+        return $this->hasMany(Booking::class,'booking_request_id');
+    }
     public function owner()
     {
         return $this->hasOneThrough(
