@@ -85,4 +85,38 @@ class TwilioService
             ];
         }
     }
+    public function sendSMS($toPhoneNumber, $message): array
+    {
+        try {
+            if (!preg_match('/^\+\d{10,15}$/', $toPhoneNumber)) {
+                return [
+                    'success' => false,
+                    'status' => 400,
+                    'message' => 'Invalid phone number format. It should include the country code.',
+                ];
+            }
+
+            $url = "$this->base_url/2010-04-01/Accounts/{$this->sid}/Messages.json";
+
+            $response = $this->makeRequest($url, [
+                'To' => $toPhoneNumber,
+                'From' => $this->from, // الرقم الذي سترسل منه الرسالة
+                'Body' => $message, // محتوى الرسالة
+            ]);
+              Storage::put('test.json',json_encode($response->json()));
+            return [
+                'success' => $response->successful(),
+                'status' => $response->json('status'),
+                'message' => $response->json('status') === 'queued'
+                    ? 'Message Sent Successfully'
+                    : 'Failed to Send Message',
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }

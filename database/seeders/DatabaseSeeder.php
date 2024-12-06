@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        ContactUs::factory()->count(50)->create();
+        ContactUs::factory()->count(10)->create();
             $this->call([
                 PermissionTableSeeder::class,
                  UserSeeder::class,

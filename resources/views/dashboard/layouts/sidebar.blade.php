@@ -118,14 +118,16 @@
                     </ul>
                 </li>
                 <li class="nav-header">Booking</li>
+                @can('booking-request-list')
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.show-booking-request')}}" class="nav-link">
                         <i class="fas fa-eye"></i>
                         <p>
-                            Show Booking
+                             Booking Requests
                         </p>
                     </a>
                 </li>
+                @endcan
                 <li class="nav-header">Setting</li>
                 <li class="nav-item">
                     <a href="" class="nav-link">

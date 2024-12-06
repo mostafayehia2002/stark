@@ -26,7 +26,7 @@ class Unit extends Model
         'is_booked',
         'status'
     ];
-    protected $with = ['features', 'owner'];
+    protected $with = ['features', 'owner','images'];
 
     public function owner()
     {
@@ -40,9 +40,9 @@ class Unit extends Model
     }
 
 
-    public function bookings()
+    public function booking_requests()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(BookingRequest::class);
     }
 
     public function images()

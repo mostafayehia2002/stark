@@ -13,10 +13,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
+
             $table->id();
-            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('status')->default(UnitStatus::PENDING);
+            $table->uuid('booking_request_id');
+            $table->foreign('booking_request_id')
+            ->references('booking_id')
+            ->on('booking_requests')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->date('confirmed_date');
             $table->timestamps();
         });
     }
