@@ -15,11 +15,6 @@ class AdminAuthController extends Controller
         $this->adminAuthService = $adminAuthService;
     }
 
-    public function index()
-    {
-        return view('dashboard.home');
-
-    }
     public function login(LoginAdminRequest $request){
 
         $response = $this->adminAuthService->login($request);

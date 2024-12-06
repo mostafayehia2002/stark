@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BookingRequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FeatureController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
@@ -18,7 +19,7 @@ Route::group(['middleware' => RedirectIfAuth::class], function () {
     Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 });
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'checkPermission']], function () {
-    Route::get('/', [AdminAuthController::class, 'index'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::prefix('management')->controller(AdminController::class)->group(function () {
@@ -41,7 +42,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::get('/read-message/{id}', 'read')->name('read-message');
         Route::get('/delete-message/{id}', 'delete')->name('delete-message');
     });
-
     Route::prefix('categories')->controller(CategoryController::class)->group(function () {
         Route::get('/show-category', 'index')->name('show-category');
         Route::Post('/store-category', 'store')->name('store-category');
@@ -54,8 +54,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::post('/update-feature', 'update')->name('update-feature');
         Route::get('/delete-feature/{id}', 'destroy')->name('delete-feature');
     });
-
-
     Route::prefix('units')->controller(UnitController::class)->group(function () {
        Route::get('/show-unit', 'index')->name('show-unit');
        Route::get('/change-status/{id}/{status}', 'changeStatus')->name('change-status');
@@ -66,8 +64,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
        Route::get('/edit-unit/{id}','edit')->name('edit-unit');
        Route::post('/update-unit/{id}', 'update')->name('update-unit');
     });
-
-
     Route::prefix('booking-request')->controller(BookingRequestController::class)->group(function () {
         Route::get('/show-booking-request', 'index')->name('show-booking-request');
         Route::get('/details/{id}', 'details')->name('details-booking-request');
