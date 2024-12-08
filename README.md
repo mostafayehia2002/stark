@@ -24,4 +24,4 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 #Database ERD Diagram 
 
-<img src="Erd.png">
+<img src="ERD.png" alt="Diagrams" height="350">
