@@ -67,10 +67,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
     Route::prefix('booking-request')->controller(BookingRequestController::class)->group(function () {
         Route::get('/show-booking-request', 'index')->name('show-booking-request');
         Route::get('/details/{id}', 'details')->name('details-booking-request');
-        Route::post('/change-status','changeStatus')->name('change-status');
+        Route::post('/change-status','changeStatus')->name('booking-change-status');
         Route::get('/delete/{id}','destroy')->name('delete-booking-request');
     });
-
 });
 
 Route::fallback(fn() => abort(404));

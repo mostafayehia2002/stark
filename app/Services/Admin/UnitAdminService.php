@@ -1,29 +1,33 @@
 <?php
+
 namespace App\Services\Admin;
+
 use App\Enums\UnitStatus;
+use App\Enums\UnitType;
+use App\Enums\UserType;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class UnitService
+class UnitAdminService
 {
 
     public function changeStatus($id, $status): array
     {
         try {
-            $unit=Unit::findOrFail($id);
-                $nextStatus = match ($status) {
-                    UnitStatus::PENDING->value => UnitStatus::ACCEPTED->value,
-                    UnitStatus::ACCEPTED->value => UnitStatus::REJECTED->value,
-                    UnitStatus::REJECTED->value => UnitStatus::ACCEPTED->value,
-                };
-                $unit->update(['status' => $nextStatus]);
-               return [
-                   'success' => true,
-                   'message'=>'Status changed to ' . $nextStatus . ' Successfully!'
-               ];
+            $unit = Unit::findOrFail($id);
+            $nextStatus = match ($status) {
+                UnitStatus::PENDING->value => UnitStatus::ACCEPTED->value,
+                UnitStatus::ACCEPTED->value => UnitStatus::REJECTED->value,
+                UnitStatus::REJECTED->value => UnitStatus::ACCEPTED->value,
+            };
+            $unit->update(['status' => $nextStatus]);
+            return [
+                'success' => true,
+                'message' => 'Status changed to ' . $nextStatus . ' Successfully!'
+            ];
         } catch (\Exception $e) {
             return [
                 'success' => false,
@@ -36,19 +40,19 @@ class UnitService
 
     public function destroy($id): array
     {
-        try{
-       $unit=Unit::findOrFail($id);
+        try {
+            $unit = Unit::findOrFail($id);
             if ($unit->images) {
                 foreach ($unit->images as $image) {
                     Storage::disk('public')->delete($image->url);
                     $image->delete();
                 }
             }
-           $unit->delete();
+            $unit->delete();
             return [
-                    'success' => true,
-                    'message' => 'Unit deleted successfully',
-                ];
+                'success' => true,
+                'message' => 'Unit deleted successfully',
+            ];
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -85,15 +89,15 @@ class UnitService
                 }, $images));
             }
             DB::commit();
-           return [
-               'success'=>true,
-               'message'=>'Unit added successfully'
-           ];
+            return [
+                'success' => true,
+                'message' => 'Unit added successfully'
+            ];
         } catch (\Exception $exception) {
             DB::rollBack();
             return [
-                'success'=>false,
-                'message'=>$exception->getMessage()
+                'success' => false,
+                'message' => $exception->getMessage()
             ];
         }
     }
@@ -115,6 +119,10 @@ class UnitService
                 'address' => $request->input('address'),
                 'description' => $request->input('description'),
             ]);
+            if(auth()->user()->type===UserType::OWNER->value){
+
+                $unit->update(['status' => UnitStatus::PENDING]);
+            }
 
             // Update features
             $unit->features()->sync($request->input('features'));
@@ -145,7 +153,7 @@ class UnitService
 
             // Commit the transaction
             DB::commit();
-            return[
+            return [
                 'success' => true,
                 'message' => 'Unit updated successfully',
             ];
@@ -159,10 +167,6 @@ class UnitService
         }
 
     }
-
-
-
-
 
 
 }

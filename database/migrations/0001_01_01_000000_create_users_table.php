@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('status')->default(UserStatus::ACTIVE);
             $table->rememberToken();
             $table->timestamps();
-            $table->unique(['phone', 'type']);
             $table->unique(['email', 'type']);
         });
 

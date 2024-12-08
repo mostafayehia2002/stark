@@ -8,13 +8,13 @@ use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\Feature;
 use App\Models\Unit;
-use App\Services\Admin\UnitService;
+use App\Services\Admin\UnitAdminService;
 
 class UnitController extends Controller
 {
-    protected UnitService $service;
+    protected UnitAdminService $service;
 
-    public function __construct(UnitService $service)
+    public function __construct(UnitAdminService $service)
     {
 
         $this->service = $service;
@@ -93,7 +93,6 @@ class UnitController extends Controller
 
     public function destroy($id)
     {
-
         $response = $this->service->destroy($id);
         if ($response['success']) {
             toastr()->success($response['message']);

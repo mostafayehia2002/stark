@@ -2,14 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\UnitType;
 use App\Traits\HttpResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\ValidationException;
 
-class UpdateUnitRequest extends FormRequest
+class FavoriteRequest extends FormRequest
 {
     use HttpResponse;
     /**
@@ -27,23 +25,11 @@ class UpdateUnitRequest extends FormRequest
      */
     public function rules(): array
     {
-
-            return [
-                'title' => 'required|string|max:255',
-                'price' => 'required|numeric',
-                'type' => ['required', 'string', 'max:255', new Enum(UnitType::class)],
-                'area' => 'required|numeric',
-                'number_bedroom' => 'required|numeric|min:1 |max:9',
-                'number_bathroom' => 'required|numeric|min:1 |max:9 ',
-                'address' => 'required|string|max:255',
-                'description' => 'required|string',
-                'features' => 'required|array|min:1',
-                'features.*' => 'exists:features,id',
-                'image' => 'nullable|array|min:1|max:10',
-                'image.*' => 'image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            ];
-
+        return [
+            'unit_id' => 'required|integer|exists:units,id',
+        ];
     }
+
     protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {
         $errors = $validator->errors()->getMessages();

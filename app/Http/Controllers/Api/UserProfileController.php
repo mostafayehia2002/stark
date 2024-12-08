@@ -29,7 +29,7 @@ class UserProfileController extends Controller
         try {
             $response = $this->userProfileService->profile();
 
-            return $this->returnData(200, $response['message'], 'data', new UserProfileResource($response['data']));
+            return $this->returnData(200,  new UserProfileResource($response['data']));
 
         } catch (\Exception $exception) {
 
@@ -42,7 +42,7 @@ class UserProfileController extends Controller
         try {
             $response = $this->userProfileService->updateProfile($request);
             if ($response['success']) {
-                return $this->returnData(200, $response['message'], 'data', new UserProfileResource($response['data']));
+                return $this->returnData(200, new UserProfileResource($response['data']));
             }
             return $this->returnErrorMessage(400, error: $response['message']);
         } catch (\Exception $exception) {

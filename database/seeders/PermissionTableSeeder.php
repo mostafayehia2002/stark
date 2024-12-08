@@ -52,7 +52,7 @@ class PermissionTableSeeder extends Seeder
             'booking-request-list'=>'admin.show-booking-request',
             'booking-request-details'=>'admin.details-booking-request',
             'booking-request-delete'=>'admin.delete-booking-request',
-            'booking-request-change-status'=>'admin.change-status',
+            'booking-request-change-status'=>'admin.booking-change-status',
 
         ];
 

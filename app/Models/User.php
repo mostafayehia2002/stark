@@ -43,4 +43,9 @@ class User extends Authenticatable
         return $this->hasMany(BookingRequest::class);
     }
 
+    public function favorites(){
+
+        return $this->hasMany(Favorite::class,'user_id');
+    }
+
 }

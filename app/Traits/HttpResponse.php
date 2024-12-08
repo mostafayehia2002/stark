@@ -45,13 +45,12 @@ trait HttpResponse
      * Return data response.
      */
 
-    public function returnData($statusCode=200,$message="", $key = 'data', $value=[]): JsonResponse
+    public function returnData($statusCode=200, $data=[]): JsonResponse
     {
         return response()->json([
             'success' => true,
             'status' => $statusCode,
-            'message'=>$message,
-            $key => $value
+            'data' => $data
         ], $statusCode)->header('Accept', 'application/json');
     }
 
@@ -63,7 +62,7 @@ trait HttpResponse
         return response()->json([
             'success' => true,
             'status' => 200,
-            'data' => [
+            'data'=>[
                 'items' => $data->items(),
                 'total' => $data->total(),
                 'currentPage' => $data->currentPage(),
