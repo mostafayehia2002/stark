@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\BookingRequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactUsController;
@@ -69,6 +70,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::get('/details/{id}', 'details')->name('details-booking-request');
         Route::post('/change-status','changeStatus')->name('booking-change-status');
         Route::get('/delete/{id}','destroy')->name('delete-booking-request');
+    });
+    Route::prefix('booking')->controller(BookingController::class)->group(function () {
+        Route::get('/show-booking', 'index')->name('show-booking');
+        Route::get('/details/{id}', 'details')->name('details-booking');
     });
 });
 

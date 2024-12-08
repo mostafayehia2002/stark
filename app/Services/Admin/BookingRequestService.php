@@ -32,24 +32,24 @@ class BookingRequestService
             $booking_request = BookingRequest::where('id', $request->input('request_id'))->first();
             $status = $request->input('status');
             $statusActions = [
-                BookingStatus::PENDING->value => function() use ($booking_request) {
+                BookingStatus::PENDING->value => function () use ($booking_request) {
                     $this->handlePending($booking_request);
                 },
-                BookingStatus::ACCEPTED->value=>function() use ($booking_request) {
+                BookingStatus::ACCEPTED->value => function () use ($booking_request) {
                     $this->handleAccepted($booking_request);
                 },
-                BookingStatus::REJECTED->value => function() use ($booking_request) {
+                BookingStatus::REJECTED->value => function () use ($booking_request) {
                     $this->handleRejected($booking_request);
                 },
-                BookingStatus::CONFIRMED->value => function() use ($booking_request) {
+                BookingStatus::CONFIRMED->value => function () use ($booking_request) {
                     $this->handleConfirmed($booking_request);
                 },
-                BookingStatus::CANCELLED->value => function() use ($booking_request) {
+                BookingStatus::CANCELLED->value => function () use ($booking_request) {
                     $this->handleCancelled($booking_request);
                 },
             ];
 
-            if(isset($statusActions[$status])) {
+            if (isset($statusActions[$status])) {
                 $statusActions[$status]();
             }
             $booking_request->update(['status' => $status]);
@@ -64,27 +64,41 @@ class BookingRequestService
             ];
         }
     }
+
     private function handlePending($booking_request)
     {
 
     }
+
     private function handleCancelled($booking_request): void
     {
 
         $booking_request->booking()->delete();
     }
+
     private function handleConfirmed($booking_request)
     {
 
     }
+
     private function handleRejected($booking_request)
     {
 
     }
+
     private function handleAccepted($booking_request): void
     {
-        $booking_request->booking()->create([
-            'confirmed_date'=>now()
-        ]);
+       if(!$booking_request->unit->is_booked){
+
+           $booking_request->booking()->create([
+               'confirmed_date' => now()
+           ]);
+           $booking_request->unit()->update([
+               'is_booked' => true
+           ]);
+       }
+
+
+
     }
 }

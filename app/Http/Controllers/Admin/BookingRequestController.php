@@ -24,7 +24,6 @@ class BookingRequestController extends Controller
         return view('dashboard.bookings.requests.index', compact('booking_requests'));
     }
 
-
     public function details($id)
     {
         $request = BookingRequest::with(['user', 'unit'])->where('id', $id)->first();

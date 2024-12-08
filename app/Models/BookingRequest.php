@@ -23,7 +23,7 @@ class BookingRequest extends Model
 
     public function booking()
     {
-        return $this->hasMany(Booking::class,'booking_request_id');
+        return $this->hasOne(Booking::class,'booking_request_id');
     }
     public function owner()
     {
