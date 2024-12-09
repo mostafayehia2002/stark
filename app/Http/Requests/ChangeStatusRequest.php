@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\BookingStatus;
+use App\Enums\UnitType;
 use App\Traits\HttpResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\ValidationException;
 
-class VerifyRequest extends FormRequest
+class ChangeStatusRequest extends FormRequest
 {
     use HttpResponse;
     /**
@@ -26,21 +29,15 @@ class VerifyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => ['required', 'regex:/^\+\d{1,3}\d{6,14}$/'],
-            'otp' => 'required|string',
-            'type' => 'required|in:owner,renter'
-        ];
-    }
-    public function messages(): array{
-        return [
-            'phone.regex' => 'The phone number must be in the international format starting with + followed by the country code and phone number.',
+            'booking_id'=>'required|exists:booking_requests,booking_id',
+            'status' => ['required', new Enum(BookingStatus::class)],
         ];
     }
 
     protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {
         $errors = $validator->errors()->getMessages();
-        if($this->is('api/*')) {
+        if ($this->is('api/*')) {
 
             throw new ValidationException($validator,
                 $this->returnValidationError(422, formatErrors($errors))

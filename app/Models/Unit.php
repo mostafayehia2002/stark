@@ -26,7 +26,7 @@ class Unit extends Model
         'is_booked',
         'status'
     ];
-    protected $with = ['features', 'owner','images'];
+    protected $with = ['features','images'];
 
     public function owner()
     {

@@ -48,7 +48,6 @@ class BookingRequestService
                     $this->handleCancelled($booking_request);
                 },
             ];
-
             if (isset($statusActions[$status])) {
                 $statusActions[$status]();
             }
@@ -72,8 +71,14 @@ class BookingRequestService
 
     private function handleCancelled($booking_request): void
     {
+        if ($booking_request->unit->is_booked) {
+            $booking_request->booking()->delete();
+            $booking_request->unit()->update([
+                'is_booked' => false
+            ]);
+        }
 
-        $booking_request->booking()->delete();
+
     }
 
     private function handleConfirmed($booking_request)
@@ -88,16 +93,15 @@ class BookingRequestService
 
     private function handleAccepted($booking_request): void
     {
-       if(!$booking_request->unit->is_booked){
+        if (!$booking_request->unit->is_booked) {
 
-           $booking_request->booking()->create([
-               'confirmed_date' => now()
-           ]);
-           $booking_request->unit()->update([
-               'is_booked' => true
-           ]);
-       }
-
+            $booking_request->booking()->create([
+                'confirmed_date' => now()
+            ]);
+            $booking_request->unit()->update([
+                'is_booked' => true
+            ]);
+        }
 
 
     }

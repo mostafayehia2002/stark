@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Traits\HttpResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class UserRegisterRequest extends FormRequest
@@ -28,7 +29,7 @@ class UserRegisterRequest extends FormRequest
         $id=auth()->id();
         return [
             'full_name' =>'required|string',
-            'phone' => ['required','regex:/^\+\d{1,3}\d{6,14}$/','unique:users,phone,'.$id],
+            'phone' => ['required','regex:/^\+\d{1,3}\d{6,14}$/',Rule::unique('users')->where('type', $this->input('type')).$id],
             'email' => 'required|email|unique:users,email,'.$id,
             'type' => 'required|in:owner,renter',
             'business_name' => 'nullable|string',

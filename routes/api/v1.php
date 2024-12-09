@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookingRequestController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FavoriteController;
@@ -28,7 +29,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/', 'getAllUnits');
         Route::get('/type', 'getUnitType');
         Route::get('/details/{id}', 'getUnitDetails');
-        Route::middleware(['auth:sanctum','checkUserType:owner'])->group(function () {
+        Route::middleware(['auth:sanctum', 'checkUserType:owner'])->group(function () {
             Route::get('/owner-units', 'getOwnerUnits');
             Route::post('/store', 'store');
             Route::post('/update/{id}', 'update');
@@ -40,5 +41,15 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/store', 'store');
         Route::get('/delete/{id}', 'destroy');
     });
+
+    Route::prefix('booking-requests')->middleware('auth:sanctum')->controller(BookingRequestController::class)->group(function () {
+        Route::get('/', 'getAllBookingRequests');
+        Route::get('/details/{id}', 'details');
+        Route::get('/status', 'getStatus');
+        Route::post('/change-status', 'changeStatus');
+        Route::get('/delete/{id}', 'destroy');
+        Route::post('/store', 'store')->middleware('checkUserType:renter');
+    });
+
 
 });

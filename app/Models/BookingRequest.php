@@ -11,10 +11,11 @@ use Illuminate\Support\Str;
 
 class BookingRequest extends Model
 {
-    use HasFactory ,CustomizeDate;
+    use HasFactory, CustomizeDate;
+
     protected $table = 'booking_requests';
     protected $primaryKey = 'booking_id';
-    protected $fillable = ['booking_id','user_id','unit_id','booking_date','status'];
+    protected $fillable = ['booking_id', 'user_id', 'unit_id', 'booking_date', 'status'];
 
     public function unit()
     {
@@ -23,17 +24,18 @@ class BookingRequest extends Model
 
     public function booking()
     {
-        return $this->hasOne(Booking::class,'booking_request_id');
+        return $this->hasOne(Booking::class, 'booking_request_id');
     }
+
     public function owner()
     {
         return $this->hasOneThrough(
             User::class,
             Unit::class,
             'id',
-            'user_id',
+            'id',
             'unit_id',
-            'id'
+            'user_id'
         );
     }
 
@@ -49,7 +51,7 @@ class BookingRequest extends Model
 
         static::creating(function ($model) {
             if (!$model->booking_id) {
-                $model->booking_id = (string) Str::uuid();
+                $model->booking_id = (string)Str::uuid();
             }
         });
     }

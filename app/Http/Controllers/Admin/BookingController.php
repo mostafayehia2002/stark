@@ -18,7 +18,7 @@ class BookingController extends Controller
     }
     public function details($id)
     {
-        $request = BookingRequest::with(['user', 'unit','booking'])->where('booking_id', $id)->first();
+        $request = BookingRequest::with(['user', 'unit','owner','booking'])->where('booking_id', $id)->first();
         $featuresByCategory = $request->unit->features->groupBy('category.name');
         return view('dashboard.bookings.details', compact('request',
             'featuresByCategory'));

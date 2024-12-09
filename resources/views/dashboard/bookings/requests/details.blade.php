@@ -73,13 +73,13 @@
                                 <h5><i class="fas fa-user"></i> Owner Information</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Full Name:</strong> {{ $request->unit->owner->full_name }}</p>
-                                <p><strong>UserName:</strong> {{ $request->unit->owner->username }}</p>
-                                <p><strong>Email:</strong> {{ $request->unit->owner->email }}</p>
-                                <p><strong>Phone:</strong> {{ $request->unit->owner->phone }}</p>
-                                <p><strong>Business Name:</strong> {{ $request->unit->owner->business_name }}</p>
-                                <p><strong>Business License:</strong> {{ $request->unit->owner->business_license }}</p>
-                                <p><strong>Address:</strong> {{ $request->unit->owner->address }}</p>
+                                <p><strong>Full Name:</strong> {{ $request->owner->full_name }}</p>
+                                <p><strong>UserName:</strong> {{ $request->owner->username }}</p>
+                                <p><strong>Email:</strong> {{ $request->owner->email }}</p>
+                                <p><strong>Phone:</strong> {{ $request->owner->phone }}</p>
+                                <p><strong>Business Name:</strong> {{ $request->owner->business_name }}</p>
+                                <p><strong>Business License:</strong> {{ $request->owner->business_license }}</p>
+                                <p><strong>Address:</strong> {{ $request->owner->address }}</p>
                             </div>
                         </div>
                         <div class="card">
