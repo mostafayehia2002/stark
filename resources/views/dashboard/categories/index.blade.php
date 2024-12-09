@@ -39,6 +39,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Name</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -47,6 +48,7 @@
                                 <tbody>
                                 @forelse($categories as $category)
                                     <tr>
+                                        <td>{{$category->id}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>{{$category->created_at}}</td>
                                         <td>

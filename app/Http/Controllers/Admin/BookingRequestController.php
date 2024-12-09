@@ -21,6 +21,7 @@ class BookingRequestController extends Controller
     {
         $booking_requests = BookingRequest::with(['unit'])->orderBy('created_at', 'DESC')->paginate(15);
 
+
         return view('dashboard.bookings.requests.index', compact('booking_requests'));
     }
 
@@ -36,8 +37,11 @@ class BookingRequestController extends Controller
     {
         $response = $this->bookingRequestService->changeStatus($request);
         if ($response['success']) {
+
             toastr()->success($response['message']);
         } else {
+
+
             toastr()->error($response['message']);
         }
         return redirect()->back();

@@ -24,8 +24,9 @@ class BookingRequest extends Model
 
     public function booking()
     {
-        return $this->hasOne(Booking::class, 'booking_request_id');
+        return $this->hasOne(Booking::class,'booking_request_id');
     }
+
 
     public function owner()
     {
@@ -51,7 +52,7 @@ class BookingRequest extends Model
 
         static::creating(function ($model) {
             if (!$model->booking_id) {
-                $model->booking_id = (string)Str::uuid();
+                $model->booking_id = uniqid();
             }
         });
     }

@@ -31,6 +31,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Title</th>
                                     <th>Type</th>
                                     <th>Price</th>
@@ -43,6 +44,7 @@
                                 <tbody>
                                 @forelse($units as $unit)
                                     <tr>
+                                        <td>{{$unit->id}}</td>
                                         <td>{{$unit->title}}</td>
                                         <td>{{$unit->type}}</td>
                                         <td>{{$unit->price}}</td>

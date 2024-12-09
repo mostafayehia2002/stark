@@ -30,6 +30,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Booking Request Id</th>
                                     <th>Booking Date</th>
                                     <th>Created At</th>
@@ -39,26 +40,30 @@
                                 <tbody>
                                 @forelse($bookings as $booking)
                                     <tr>
+                                        <td>{{$booking->id}}</td>
                                         <td>{{$booking->booking_request_id}}</td>
                                         <td>{{$booking->confirmed_date}}</td>
                                         <td>{{$booking->created_at}}</td>
                                         <td>
-                                            <a href="{{route('admin.details-booking',$booking->booking_request_id)}}"
-                                               class="btn btn-secondary btn-sm">
-                                                <i class="fas fa-info-circle"></i>
-                                                Details
-                                            </a>
-
-                                            <a href=""
-                                               class="btn btn-danger btn-sm"
-                                               onclick="return confirm('Are you sure you want to it?');">
-                                                <i class="fa-solid fa-trash"></i>
-                                                Delete
-                                            </a>
+                                            @can('booking-details')
+                                                <a href="{{route('admin.details-booking',$booking->booking_request_id)}}"
+                                                   class="btn btn-secondary btn-sm">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    Details
+                                                </a>
+                                            @endcan
+                                            @can('booking-delete')
+                                                <a href="{{route('admin.delete-booking',$booking->id)}}"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Are you sure you want to it?');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    Delete
+                                                </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         No Booking
                                     </td>
                                 @endforelse

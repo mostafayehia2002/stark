@@ -32,6 +32,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Full Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
@@ -45,6 +46,7 @@
                                 <tbody>
                                 @forelse($admins as $admin)
                                     <tr>
+                                        <td>{{$admin->id}}</td>
                                         <td>{{$admin->full_name}}</td>
                                         <td>{{$admin->username}}</td>
                                         <td>{{$admin->email}}</td>

@@ -29,7 +29,7 @@ class BookingRequestService
     public function changeStatus(Request $request): array
     {
         try {
-            $booking_request = BookingRequest::where('id', $request->input('request_id'))->first();
+            $booking_request = BookingRequest::with('unit')->where('id', $request->input('request_id'))->first();
             $status = $request->input('status');
             $statusActions = [
                 BookingStatus::PENDING->value => function () use ($booking_request) {
@@ -91,18 +91,16 @@ class BookingRequestService
 
     }
 
-    private function handleAccepted($booking_request): void
+    private function handleAccepted($booking_request)
     {
         if (!$booking_request->unit->is_booked) {
-
-            $booking_request->booking()->create([
+            $booking_request->booking()->firstOrCreate([
                 'confirmed_date' => now()
             ]);
             $booking_request->unit()->update([
                 'is_booked' => true
             ]);
         }
-
 
     }
 }

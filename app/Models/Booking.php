@@ -18,4 +18,8 @@ class Booking extends Model
         'confirmed_date',
     ];
 
+    public function bookingRequest()
+    {
+        return $this->belongsTo(BookingRequest::class,'booking_id');
+    }
 }

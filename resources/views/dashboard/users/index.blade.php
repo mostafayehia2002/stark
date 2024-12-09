@@ -31,6 +31,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -43,6 +44,7 @@
                                 <tbody>
                                 @forelse($users as $user)
                                     <tr>
+                                        <td>{{$user->id}}</td>
                                         <td>{{$user->username}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone}}</td>
@@ -88,7 +90,7 @@
                         </tr>
 
                         @empty
-                            <p>No Data</p>
+                            <td colspan="8" class="text-center">No Data</td>
                             @endforelse
                             </tbody>
 

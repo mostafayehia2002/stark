@@ -31,6 +31,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Booking Id</th>
                                     <th>Booking Date</th>
                                     <th>Unit Title</th>
@@ -42,6 +43,7 @@
                                 <tbody>
                                 @forelse($booking_requests as $request)
                                     <tr>
+                                        <td>{{$request->id}}</td>
                                         <td>{{$request->booking_id}}</td>
                                         <td>{{$request->booking_date}}</td>
                                         <td>{{$request->unit->title}}</td>
@@ -82,7 +84,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <td colspan="6" class="text-center">
+                                    <td colspan="7" class="text-center">
                                         No Booking Requests
                                     </td>
                                 @endforelse

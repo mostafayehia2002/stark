@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
     Route::prefix('booking')->controller(BookingController::class)->group(function () {
         Route::get('/show-booking', 'index')->name('show-booking');
         Route::get('/details/{id}', 'details')->name('details-booking');
+        Route::get('delete/{id}', 'destroy')->name('delete-booking');
     });
 });
 

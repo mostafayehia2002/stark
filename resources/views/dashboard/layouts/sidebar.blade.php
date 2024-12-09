@@ -128,6 +128,8 @@
                     </a>
                 </li>
                 @endcan
+
+{{--                @can('booking-list')--}}
                 <li class="nav-item">
                     <a href="{{route('admin.show-booking')}}" class="nav-link">
                         <i class="fas fa-eye"></i>
@@ -136,7 +138,10 @@
                         </p>
                     </a>
                 </li>
+{{--                @endcan--}}
+
                 <li class="nav-header">Setting</li>
+
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="fas fa-eye"></i>

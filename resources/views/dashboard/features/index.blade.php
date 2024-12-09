@@ -39,6 +39,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#ID</th>
                                     <th>Name</th>
                                     <th>Category Name</th>
                                     <th>Created At</th>
@@ -48,6 +49,7 @@
                                 <tbody>
                                 @forelse($features as $feature)
                                     <tr>
+                                        <td>{{$feature->id}}</td>
                                         <td>{{$feature->name}}</td>
                                         <td>{{$feature->category->name}}</td>
                                         <td>{{$feature->created_at}}</td>
@@ -74,7 +76,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         No Features
                                     </td>
                                 @endforelse
