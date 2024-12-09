@@ -20,7 +20,7 @@ class UnitController extends Controller
     protected UnitApiService $ApiService;
     protected UnitAdminService $AdminService;
 
-    public function __construct(UnitApiService $ApiService,UnitAdminService $AdminService)
+    public function __construct(UnitApiService $ApiService, UnitAdminService $AdminService)
     {
         $this->ApiService = $ApiService;
         $this->AdminService = $AdminService;
@@ -31,7 +31,7 @@ class UnitController extends Controller
     {
         try {
             $types = $this->ApiService->getUnitType();
-            return $this->returnData(200,   $types);
+            return $this->returnData(200, $types);
         } catch (\Exception $exception) {
 
             return $this->returnErrorMessage(error: $exception->getMessage());
@@ -83,12 +83,13 @@ class UnitController extends Controller
         }
 
     }
-    public function update(UpdateUnitRequest $request,$id)
+
+    public function update(UpdateUnitRequest $request, $id)
     {
         try {
-            $response = $this->AdminService->update($request,$id);
+            $response = $this->AdminService->update($request, $id);
             if ($response['success']) {
-                return $this->returnSuccessMessage(200,$response['message']);
+                return $this->returnSuccessMessage(200, $response['message']);
             }
             return $this->returnErrorMessage(400, $response['message']);
 
@@ -97,12 +98,13 @@ class UnitController extends Controller
         }
 
     }
+
     public function destroy($id)
     {
         try {
             $response = $this->AdminService->destroy($id);
             if ($response['success']) {
-                return $this->returnSuccessMessage(200,$response['message']);
+                return $this->returnSuccessMessage(200, $response['message']);
             }
             return $this->returnErrorMessage(400, $response['message']);
 
@@ -110,5 +112,22 @@ class UnitController extends Controller
             return $this->returnErrorMessage(error: $exception->getMessage());
         }
 
+    }
+
+
+    public function getOwnerUnits()
+    {
+        try {
+            $response = $this->ApiService->getOwnerUnits();
+            if ($response['success']) {
+
+                return $this->returnPaginatedData(UnitResource::collection($response['data']));
+            }
+            return $this->returnErrorMessage(404, error: $response['message']);
+
+
+        } catch (\Exception $exception) {
+            return $this->returnErrorMessage(error: $exception->getMessage());
+        }
     }
 }

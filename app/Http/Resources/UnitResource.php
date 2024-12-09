@@ -23,6 +23,8 @@ class UnitResource extends JsonResource
             'area' => $this->area,
             'number_bedroom' => $this->number_bedroom,
             'number_bathroom' => $this->number_bathroom,
+            'is_booked' => $this->is_booked,
+            'status' => $this->status,
             'images' => ImageResource::collection($this->images),
             'features' => FeatureResource::collection($this->features),
         ];

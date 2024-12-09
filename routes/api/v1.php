@@ -29,6 +29,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/type', 'getUnitType');
         Route::get('/details/{id}', 'getUnitDetails');
         Route::middleware(['auth:sanctum','checkUserType:owner'])->group(function () {
+            Route::get('/owner-units', 'getOwnerUnits');
             Route::post('/store', 'store');
             Route::post('/update/{id}', 'update');
             Route::get('/delete/{id}', 'destroy');

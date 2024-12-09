@@ -87,4 +87,20 @@ class UnitApiService
 
     }
 
+    public function getOwnerUnits()
+    {
+        $units=Unit::where('user_id',auth()->id())->orderBy('created_at', 'DESC')->paginate(15);
+        if(!$units->isEmpty()){
+            return [
+                'success' => true,
+                'data' => $units,
+            ];
+        }
+        return [
+            'success' => false,
+            'message' => 'No data found',
+        ];
+
+    }
+
 }
