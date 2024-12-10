@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\BookingRequestController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserLoginController;
 use App\Http\Controllers\Api\UserLogoutController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Api\VerifyOtpController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1'], function () {
+    Route::get('/setting' ,[SettingController::class,'getSetting'] );
     Route::prefix('auth')->group(function () {
         Route::post('/login', [UserLoginController::class, 'login']);
         Route::post('/register', [UserRegisterController::class, 'register']);
