@@ -12,8 +12,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        ContactUs::factory()->count(10)->create();
+        // ContactUs::factory()->count(10)->create();
             $this->call([
+                SettingSeeder::class,
                 PermissionTableSeeder::class,
                  UserSeeder::class,
             ]);

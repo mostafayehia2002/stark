@@ -81,7 +81,7 @@ class UnitAdminService
                 $images = [];
                 foreach ($request->file('image') as $image) {
 
-                    $path = $image->store('unit_images', 'public');
+                    $path = $image->store('uploads/unit_images', 'public');
                     $images[] = $path;
                 }
                 $unit->images()->createMany(array_map(function ($image) {
@@ -141,7 +141,7 @@ class UnitAdminService
                 // Upload new images and store their paths
                 $images = [];
                 foreach ($request->file('image') as $image) {
-                    $path = $image->store('unit_images', 'public');
+                    $path = $image->store('uploads/unit_images', 'public');
                     $images[] = $path;
                 }
 

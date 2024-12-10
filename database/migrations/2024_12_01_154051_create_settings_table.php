@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('key');
             $table->string('value');
             $table->string('type');
+            $table->string('input_type')->default('text');
             $table->boolean('is_editable')->default(false);
             $table->timestamps();
         });

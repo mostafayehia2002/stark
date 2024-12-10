@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\RedirectIfAuth;
@@ -75,6 +76,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
         Route::get('/show-booking', 'index')->name('show-booking');
         Route::get('/details/{id}', 'details')->name('details-booking');
         Route::get('delete/{id}', 'destroy')->name('delete-booking');
+    });
+
+    Route::prefix('settings')->controller(SettingController::class)->group(function () {
+      Route::get('/show-setting','index')->name('show-setting');
+      Route::post('/update-setting','update')->name('update-setting');
     });
 });
 

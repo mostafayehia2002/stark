@@ -58,6 +58,9 @@ class PermissionTableSeeder extends Seeder
             'booking-details'=>'admin.details-booking',
             'booking-delete'=>'admin.delete-booking',
 
+            'show-setting'=>'admin.show-setting',
+            'update-setting'=>'admin.update-setting',
+
         ];
 
         foreach ($permissions as $permission => $route) {

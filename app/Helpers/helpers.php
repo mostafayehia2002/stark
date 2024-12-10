@@ -13,3 +13,12 @@ if (!function_exists('formatErrors')){
         return $formattedErrors;
     }
 }
+
+use App\Models\Setting;
+
+if (!function_exists('get_setting_value')) {
+    function get_setting_value(string $type, string $key): ?string
+    {
+        return Setting::getValue($type, $key);
+    }
+}

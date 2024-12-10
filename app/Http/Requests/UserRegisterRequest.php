@@ -32,8 +32,8 @@ class UserRegisterRequest extends FormRequest
             'phone' => ['required','regex:/^\+\d{1,3}\d{6,14}$/',Rule::unique('users')->where('type', $this->input('type')).$id],
             'email' => 'required|email|unique:users,email,'.$id,
             'type' => 'required|in:owner,renter',
-            'business_name' => 'nullable|string',
-            'business_license' => 'nullable|string',
+            'business_name' =>'required_if:type,owner|string',
+            'business_license' =>'required_if:type,owner|string',
             'address' => 'nullable|string',
         ];
     }
@@ -41,6 +41,8 @@ class UserRegisterRequest extends FormRequest
     public function messages(): array{
         return [
             'phone.regex' => 'The phone number must be in the international format starting with + followed by the country code and phone number.',
+            'business_name.required_if' => 'The business name is required when type is owner.',
+            'business_license.required_if' => 'The business license is required when type is owner.',
         ];
     }
 

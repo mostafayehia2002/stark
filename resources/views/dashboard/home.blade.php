@@ -112,7 +112,7 @@
                                         <ul class="users-list clearfix">
                                             @foreach($recentUsers as $user)
                                                 <li>
-                                                    <img src="{{asset('dashboard/dist/img/user1-128x128.jpg')}}"
+                                                    <img src="{{asset('storage/uploads/settings/profile.jpg')}}"
                                                          alt="User Image">
                                                     <a class="users-list-name"
                                                        href="{{route('admin.details-user',$user->id)}}">{{$user->full_name}}</a>
