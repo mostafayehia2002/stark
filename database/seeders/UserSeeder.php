@@ -21,9 +21,9 @@ class UserSeeder extends Seeder
        // User::factory()->count(15)->create();
 
        $user=User::create([
-            'full_name'=>'mostafa yehia',
+            'full_name'=>'Admin',
             'username' => 'admin',
-            'phone'=>'01226717838',
+            'phone'=>'+966539313803',
             'email' => 'admin@gmail.com',
             'password'=>Hash::make('12345678'),
             'type'=>UserType::ADMIN

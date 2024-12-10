@@ -27,7 +27,7 @@ class UserLoginRequest extends FormRequest
     {
         return [
             //
-            'phone' => ['required','regex:/^\+966\d{8}$/'],
+            'phone' => ['required','regex:/^\+966\d{9}$/'],
             'type' => 'required|in:owner,renter',
         ];
     }

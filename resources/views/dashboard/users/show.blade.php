@@ -30,7 +30,7 @@
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                         src="{{asset('dashboard/dist/img/user4-128x128.jpg')}}"
+                                         src="{{asset('storage/uploads/settings/profile.jpg')}}"
                                          alt="User profile picture">
                                 </div>
 
@@ -93,48 +93,75 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="active tab-pane" id="activity">
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>#ID</th>
+                                                    <th>Title</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @forelse($user->units as $unit)
+                                                    <tr>
+                                                        <td>{{$unit->id}}</td>
+                                                        <td>{{$unit->title}}</td>
+                                                        <td>{{$unit->type}}</td>
+                                                        <td>
+                                                            @if($unit->status==\App\Enums\UnitStatus::PENDING->value)
+                                                                <label class="badge bg-warning">{{$unit->status}}</label>
+                                                            @elseif($unit->status==\App\Enums\UnitStatus::REJECTED->value)
+                                                                <label class="badge bg-danger">{{$unit->status}}</label>
+                                                            @else
+                                                                <label class="badge bg-success">{{$unit->status}}</label>
+                                                            @endif
+                                                        </td>
+                                                        <td>
 
-                                        <!-- Post -->
-                                        <div class="post">
-                                            <div class="user-block">
-                                                <img class="img-circle img-bordered-sm"
-                                                     src="{{asset('dashboard/dist/img/user6-128x128.jpg')}}" alt="User Image">
-                                                <span class="username">
-                                            <a href="#">{{$user->username}}</a>
-                                            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                                </span>
-                                                <span class="description">Posted 5 photos - 5 days ago</span>
-                                            </div>
-                                            <!-- /.user-block -->
-                                            <div class="row mb-3">
-                                                <div class="col-sm-6">
-                                                    <img class="img-fluid" src="{{asset('dashboard/dist/img/photo1.png')}}" alt="Photo">
-                                                </div>
-                                                <!-- /.col -->
-                                                <div class="col-sm-6">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <img class="img-fluid mb-3" src="{{asset('dashboard/dist/img/photo2.png')}}"
-                                                                 alt="Photo">
-                                                            <img class="img-fluid" src="{{asset('dashboard/dist/img/photo3.jpg')}}"
-                                                                 alt="Photo">
-                                                        </div>
-                                                        <!-- /.col -->
-                                                        <div class="col-sm-6">
-                                                            <img class="img-fluid mb-3" src="{{asset('dashboard/dist/img/photo4.jpg')}}"
-                                                                 alt="Photo">
-                                                            <img class="img-fluid" src="{{asset('dashboard/dist/img/photo1.png')}}"
-                                                                 alt="Photo">
-                                                        </div>
-                                                        <!-- /.col -->
-                                                    </div>
-                                                    <!-- /.row -->
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                            <!-- /.row -->
+                                                            @can('unit-details')
+                                                                <a href="{{route('admin.show-details',$unit->id)}}"
+                                                                   class="btn btn-secondary btn-sm">
+                                                                    <i class="fas fa-info-circle"></i>
+                                                                    Details
+                                                                </a>
+                                                            @endcan
+                                                            @can('unit-edit')
+                                                                <a href="{{route('admin.edit-unit',$unit->id)}}"
+                                                                   class="btn btn-primary btn-sm">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                            @endcan
+                                                            @can('unit-delete')
+                                                                <a href="{{route('admin.delete-unit',$unit->id)}}"
+                                                                   class="btn btn-danger btn-sm"
+                                                                   onclick="return confirm('Are you sure you want to it?');">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                    Delete
+                                                                </a>
+                                                            @endcan
+                                                            @can('unit-change-status')
+                                                                <a href="{{ route('admin.change-status', ['id' => $unit->id, 'status' => $unit->status]) }}"
+                                                                   class="btn btn-sm {{ $unit->getButtonClass() }}"
+                                                                   onclick="return confirm('Are you sure you want to change the status?');">
+                                                                    <i class="fas {{ $unit->isAcceptable() ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
+                                                                    {{ $unit->isAcceptable() ? 'Accept' : 'Reject' }}
+                                                                </a>
+                                                            @endcan
+
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <td colspan="5" class="text-center">
+                                                        No Features
+                                                    </td>
+                                                @endforelse
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <!-- /.post -->
+                                        <!-- /.card-body -->
                                     </div>
                                     <!-- /.tab-pane -->
 
@@ -151,4 +178,21 @@
         </section>
         <!-- /.content -->
     </div>
+    <!-- DataTables -->
+    <script src="{{asset('dashboard/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+
+            $('#example1').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+            });
+        });
+    </script>
 @endsection

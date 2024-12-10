@@ -52,10 +52,11 @@ class BookingRequest extends Model
 
         static::creating(function ($model) {
             if (!$model->booking_id) {
-                $model->booking_id = uniqid();
+                $model->booking_id =rand(1000000000, 9999999999);
             }
         });
     }
+
 
     public function getStatusAttributes(string $status): array
     {

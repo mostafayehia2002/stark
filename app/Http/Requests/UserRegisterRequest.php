@@ -28,12 +28,13 @@ class UserRegisterRequest extends FormRequest
     {
         $id=auth()->id();
         return [
+            //'regex:/^\+966\d{9}$/'
             'full_name' =>'required|string',
-            'phone' => ['required','regex:/^\+966\d{8}$/',Rule::unique('users')->where('type', $this->input('type')).$id],
+            'phone' => ['required','regex:/^\+966\d{9}$/',Rule::unique('users')->where('type', $this->input('type')).$id],
             'email' => 'required|email|unique:users,email,'.$id,
             'type' => 'required|in:owner,renter',
-            'business_name' =>'required_if:type,owner|string',
-            'business_license' =>'required_if:type,owner|string',
+            'business_name' =>'required_if:type,owner',
+            'business_license' =>'required_if:type,owner',
             'address' => 'nullable|string',
         ];
     }

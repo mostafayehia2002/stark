@@ -42,9 +42,10 @@ class UserController extends Controller
 
     public function show($id)
     {
-      $user=User::find($id);
+      $user=User::with('units')->find($id);
 
-      return view('dashboard.users.show',compact('user'));
+
+      return view('dashboard.users.show',compact('user' ));
     }
 
 }
