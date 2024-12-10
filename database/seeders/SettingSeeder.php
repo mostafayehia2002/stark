@@ -62,7 +62,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'=>'timezone',
-                'value'=>'timezone',
+                'value'=>'UTC',
                 'type'=>'general',
                 'is_editable'=>true,
                 'input_type'=>'text',

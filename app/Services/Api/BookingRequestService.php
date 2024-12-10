@@ -52,7 +52,7 @@ class BookingRequestService
 
     public function destroy($id)
     {
-        $request=BookingRequest::whereHas( 'owner', function ($query){
+        $request = BookingRequest::whereHas('owner', function ($query) {
             $query->where('users.id', auth()->id());
         })->where('booking_id', $id)->first();
         if ($request) {
@@ -73,7 +73,7 @@ class BookingRequestService
         $user = auth()->user();
         $request = $user->booking_requests()->firstOrCreate([
             'unit_id' => $request->input('unit_id'),
-            'booking_date'=>$request->input('booking_date'),
+            'booking_date' => $request->input('booking_date'),
         ]);
         if ($request->wasRecentlyCreated) {
             return [
@@ -85,15 +85,16 @@ class BookingRequestService
         return [
             'success' => true,
             'status' => 200,
-            'message' =>'Unit is already in Booking From You',
+            'message' => 'Unit is already in Booking From You',
 
         ];
 
     }
+
     public function changeStatus(ChangeStatusRequest $request): array
     {
         try {
-            $booking_request = BookingRequest::whereHas('owner',function ($query){
+            $booking_request = BookingRequest::whereHas('owner', function ($query) {
                 $query->where('users.id', auth()->id());
             })->where('booking_id', $request->input('booking_id'))->first();
             $status = $request->input('status');
@@ -130,6 +131,7 @@ class BookingRequestService
         }
 
     }
+
     private function handlePending($booking_request)
     {
 
@@ -143,6 +145,8 @@ class BookingRequestService
                 'is_booked' => false
             ]);
         }
+
+
     }
 
     private function handleConfirmed($booking_request)
@@ -154,18 +158,17 @@ class BookingRequestService
     {
 
     }
-    private function handleAccepted($booking_request): void
+
+    private function handleAccepted($booking_request)
     {
         if (!$booking_request->unit->is_booked) {
-
-            $booking_request->booking()->create([
+            $booking_request->booking()->firstOrCreate([
                 'confirmed_date' => now()
             ]);
             $booking_request->unit()->update([
                 'is_booked' => true
             ]);
         }
-
 
     }
 }

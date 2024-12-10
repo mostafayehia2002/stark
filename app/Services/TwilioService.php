@@ -33,11 +33,11 @@ class TwilioService
     public function sendVerificationCode($phoneNumber): array
     {
         try {
-            if (!preg_match('/^\+\d{10,15}$/', $phoneNumber)) {
+            if (!preg_match('/^\+966\d{8,9}$/', $phoneNumber)) {
                 return [
                     'success' => false,
                     'status' => 400,
-                    'message' => 'Invalid phone number format. It should include the country code.',
+                    'message' => 'Invalid phone number format. It should start with +966 followed by 8 or 9 digits.',
                 ];
             }
             $url = "$this->base_url/v2/Services/{$this->verifySid}/Verifications";
@@ -88,11 +88,11 @@ class TwilioService
     public function sendSMS($toPhoneNumber, $message): array
     {
         try {
-            if (!preg_match('/^\+\d{10,15}$/', $toPhoneNumber)) {
+            if (!preg_match('/^\+966\d{8,9}$/', $toPhoneNumber)) {
                 return [
                     'success' => false,
                     'status' => 400,
-                    'message' => 'Invalid phone number format. It should include the country code.',
+                    'message' => 'Invalid phone number format. It should start with +966 followed by 8 or 9 digits.',
                 ];
             }
 
