@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => RedirectIfAuth::class], function () {
-    Route::view('/login', 'dashboard.auth.login')->name('login');
-    Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::view('/admin/login', 'dashboard.auth.login')->name('login');
+    Route::post('/admin', [AdminAuthController::class, 'login'])->name('admin.login');
 });
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'checkPermission']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
