@@ -4,7 +4,7 @@
     <a href="{{route('admin.dashboard')}}" class="brand-link">
         <img src="{{asset('storage/uploads/settings/'.app('settings')->getValue('general','site_logo'))??asset('build/assets/logo-nav-9xhMEncz.jpg')}}" alt="Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">{{env('app_name')}}</span>
+        <span class="brand-text font-weight-light">{{app('settings')->getValue('general','site_name')??env('app_name')}}</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
