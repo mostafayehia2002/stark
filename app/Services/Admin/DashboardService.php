@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\booking;
+use App\Models\Booking;
 use App\Models\BookingRequest;
 use App\Models\ContactUs;
 use App\Models\Unit;
