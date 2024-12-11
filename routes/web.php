@@ -86,7 +86,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'c
 
 Route::fallback(fn() => abort(404));
 /*********************************/
-Route::get('/', function () {
-    return view('app');
-});
+
+//to run react front-end
+//Route::get('/', function () {
+//    return view('app');
+//});
+
+Route::view('/','coming');
 
