@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use http\Env;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -61,7 +62,8 @@ class SettingServiceProvider extends ServiceProvider
         $appName = $this->getValue('general', 'site_name');
         if ($appName) {
             Config::set('app.name', $appName);
-            putenv('APP_NAME=' . $appName);
+            env('APP_NAME',$appName);
+          //putenv('APP_NAME=' . $appName);
         }
     }
 
@@ -69,7 +71,7 @@ class SettingServiceProvider extends ServiceProvider
     {
         $timezone = $this->getValue('general', 'timezone');
         if ($timezone) {
-
+            env('APP_TIMEZONE',$timezone);
             Config::set('app.timezone', $timezone);
         }
     }
