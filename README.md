@@ -21,7 +21,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+#Database ERD Diagram
 
-#Database ERD Diagram 
-
-<img src="Database ERD Diagram.png" alt="Diagrams">
+`<img src="Stark_Brokers_ERD.png" alt="Diagrams">`
