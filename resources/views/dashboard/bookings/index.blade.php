@@ -93,7 +93,7 @@
                     "searching": true,
                     "ordering": false,
                     "info": false,
-                    "autoWidth": false,
+                    "autoWidth": true,
                 });
             });
         </script>
