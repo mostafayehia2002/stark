@@ -1,5 +1,4 @@
 @extends('dashboard.layouts.master',['title'=>'Admin Stark | Home Page'])
-
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

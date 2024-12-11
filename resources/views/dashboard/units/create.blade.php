@@ -22,7 +22,7 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <form action="{{route('admin.store-unit')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.store-unit')}}" method="POST" enctype="multipart/form-data" id="myForm" >
                 @csrf
                 <div class="row">
                     <!-- Unit Information Section -->
@@ -77,16 +77,16 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="number_bedroom">Number of Bedrooms</label>
+                                    <label for="number_bedroom">Number of Bedrooms(option)</label>
                                     <input type="number" id="number_bedroom" name="number_bedroom" class="form-control"
-                                           value="{{ old('number_bedroom') }}">
+                                           value="{{ old('number_bedroom') }}" min="0">
                                     @error('number_bedroom')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="number_bathroom">Number of Bathrooms</label>
-                                    <input type="number" id="number_bathroom" name="number_bathroom"
+                                    <label for="number_bathroom">Number of Bathrooms(option)</label>
+                                    <input type="number" id="number_bathroom" name="number_bathroom" min="0"
                                            class="form-control" value="{{ old('number_bathroom') }}">
                                     @error('number_bathroom')
                                     <div class="text-danger">{{ $message }}</div>
@@ -126,7 +126,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label><strong>Features</strong></label>
                                     <div class="row">
                                         @foreach ($featuresByCategory as $categoryName => $features)
                                             <div class="col-md-6">
@@ -184,7 +183,7 @@
                 <div class="row">
                     <div class="col-12">
                         <a href="#" class="btn btn-secondary">Cancel</a>
-                        <input type="submit" value="Add Unit" class="btn btn-success float-right">
+                        <input type="submit"  id="submitBtn" value="Add Unit" class="btn btn-success float-right">
                     </div>
                 </div>
             </form>

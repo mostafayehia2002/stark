@@ -23,8 +23,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->string('area')->default(0);
-            $table->tinyInteger('number_bedroom')->default(0);
-            $table->tinyInteger('number_bathroom')->default(0);
+            $table->tinyInteger('number_bedroom')->nullable();
+            $table->tinyInteger('number_bathroom')->nullable();
             $table->boolean('is_booked')->default(0);
             $table->string('status')->default(UnitStatus::PENDING);
             $table->timestamps();
