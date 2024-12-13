@@ -18,6 +18,7 @@ class CheckPermission
     {
 
         $routeName = $request->route()->getName();
+
         $permission = Permission::whereRaw("FIND_IN_SET('$routeName',routes)")->first();
 
         if ($permission) {

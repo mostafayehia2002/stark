@@ -187,6 +187,7 @@
                     </div>
                 </div>
             </form>
+          @include('dashboard.layouts.spanner')
         </section>
         <!-- /.content -->
     </div>
@@ -203,3 +204,5 @@
         }
     </style>
 @endpush
+
+

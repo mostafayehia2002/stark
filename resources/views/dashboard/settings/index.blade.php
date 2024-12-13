@@ -39,7 +39,7 @@
                         <div class="tab-content mt-6" id="settingsTabsContent">
                             <!-- General Settings Tab -->
                             <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                                <form action="{{route('admin.update-setting')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('admin.update-setting')}}" method="POST" enctype="multipart/form-data" id="myForm">
                                     @csrf
                                     <div class="row">
                                         @foreach ($settings['general'] ?? [] as $setting)
@@ -62,14 +62,14 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary">Save General Settings</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save General Settings</button>
                                     @endcan
                                 </form>
                             </div>
 
                             <!-- Social Media Settings Tab -->
                             <div class="tab-pane fade" id="social-media" role="tabpanel" aria-labelledby="social-media-tab">
-                                <form action="{{route('admin.update-setting')}}" method="POST">
+                                <form action="{{route('admin.update-setting')}}" method="POST" id="myForm">
                                     @csrf
                                     <div class="row">
                                         @foreach ($settings['social_media'] ?? [] as $setting)
@@ -86,7 +86,7 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary">Save Social Media Settings</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save Social Media Settings</button>
                                     @endcan
                                 </form>
                             </div>
@@ -94,6 +94,7 @@
                     </div>
                 </div>
             </div>
+            @include('dashboard.layouts.spanner')
         </section>
     </div>
 @endsection

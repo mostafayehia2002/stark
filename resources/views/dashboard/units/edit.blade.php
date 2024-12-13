@@ -22,7 +22,7 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <form action="{{route('admin.update-unit',$unit->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.update-unit',$unit->id)}}" method="POST" enctype="multipart/form-data" id="myForm">
                 @csrf
                 <div class="row">
                     <!-- Unit Information Section -->
@@ -187,10 +187,11 @@
                 <div class="row">
                     <div class="col-12">
                         <a href="#" class="btn btn-secondary">Cancel</a>
-                        <input type="submit" value="Update Unit" class="btn btn-success float-right">
+                        <input type="submit" value="Update Unit" class="btn btn-success float-right" id="submitBtn">
                     </div>
                 </div>
             </form>
+            @include('dashboard.layouts.spanner')
         </section>
         <!-- /.content -->
     </div>

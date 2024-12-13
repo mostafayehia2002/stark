@@ -20,9 +20,6 @@
     @yield('content')
 
 
-
-
-
     {{-- include footer--}}
     @include('dashboard.layouts.footer')
 </div>

@@ -28,7 +28,7 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{route('admin.store-admin')}}" method="POST">
+                        <form role="form" action="{{route('admin.store-admin')}}" method="POST" id="myForm">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -64,14 +64,15 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Create</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 </div>
             </div>
-    </div>
+            @include('dashboard.layouts.spanner')
+        </section>
 @endsection
 
 

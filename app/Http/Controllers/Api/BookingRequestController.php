@@ -10,7 +10,7 @@ use App\Http\Resources\BookingRequestDetailsResource;
 use App\Http\Resources\BookingRequestResource;
 use App\Services\Api\BookingRequestService;
 use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
+
 
 class BookingRequestController extends Controller
 {

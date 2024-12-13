@@ -29,7 +29,7 @@
 
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{route('admin.update-admin',$user->id)}}" method="POST">
+                        <form role="form" action="{{route('admin.update-admin',$user->id)}}" method="POST" id="myForm">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -66,14 +66,15 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Update</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 </div>
             </div>
-    </div>
+            @include('dashboard.layouts.spanner')
+        </section>
 @endsection
 
 
