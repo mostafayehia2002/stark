@@ -80,7 +80,6 @@ class UnitAdminService
             if ($request->hasFile('image')) {
                 $images = [];
                 foreach ($request->file('image') as $image) {
-
                     $path = $image->store('uploads/unit_images', 'public');
                     $images[] = $path;
                 }

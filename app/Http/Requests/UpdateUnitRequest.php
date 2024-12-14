@@ -40,7 +40,7 @@ class UpdateUnitRequest extends FormRequest
                 'features' => 'required|array|min:1',
                 'features.*' => 'exists:features,id',
                 'image' => 'nullable|array|min:1|max:10',
-                'image.*' => 'image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+                'image.*' => 'image|mimes:jpg,jpeg,png,gif,webp|max:10000',
             ];
 
     }
