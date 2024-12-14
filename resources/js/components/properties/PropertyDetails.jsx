@@ -58,7 +58,7 @@ const content = {
       'Amenities': 'Amenities',
       'Additional Features': 'Additional Features'
     },
-    features: {
+    features_en: {
       1: 'Parking',
       2: 'Swimming Pool',
       3: 'Gym',
@@ -111,7 +111,7 @@ const content = {
       'Amenities': 'المرافق',
       'Additional Features': 'مميزات إضافية'
     },
-    features: {
+    features_ar: {
       1: 'موقف سيارات',
       2: 'مسبح',
       3: 'صالة رياضية',
@@ -365,7 +365,7 @@ export default function PropertyDetails({ language }) {
                 onClick={handleFavorite}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <FiHeart 
+                <FiHeart
                   className={`w-6 h-6 ${isFavorite ? 'fill-[#BE092B] text-[#BE092B]' : 'text-gray-600'}`}
                 />
               </button>
@@ -391,4 +391,4 @@ export default function PropertyDetails({ language }) {
       )}
     </div>
   )
-} 
+}
