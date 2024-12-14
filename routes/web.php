@@ -87,9 +87,9 @@ Route::fallback(fn() => abort(404));
 /*********************************/
 
 //to run react front-end
-Route::get('/', function () {
+Route::get('/{path?}', function () {
     return view('app');
-});
+})->where('path', '.*');
 
 //Route::view('/','coming');
 
