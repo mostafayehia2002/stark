@@ -1,129 +1,102 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import { authAPI } from '../services/api'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { createContext, useContext, useState, useEffect } from 'react';
+import { authAPI } from '../services/api';
 
-const AuthContext = createContext(null)
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const navigate = useNavigate()
-    const location = useLocation()
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
-    const checkAuth = async (type = null) => {
-        try {
-            const storedType = localStorage.getItem('userType') || type;
+  // Initialize auth state from localStorage
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
 
-            const response = await authAPI.checkAuth(storedType)
-            if (response.success) {
-                setUser(response.user)
-                if (response.user?.profile?.type) {
-                    localStorage.setItem('userType', response.user.profile.type)
-                }
-            } else {
-                setUser(null)
-                localStorage.removeItem('token')
-                localStorage.removeItem('userType')
-            }
-        } catch (err) {
-            console.error('Auth check failed:', err)
-            setUser(null)
-            localStorage.removeItem('token')
-            localStorage.removeItem('userType')
-            if (err.response?.status === 401 && !location.pathname.includes('/login')) {
-                navigate('/login')
-            }
-        } finally {
-            setLoading(false)
-        }
+    if (storedToken && storedUser) {
+      setToken(storedToken);
+      setUser(JSON.parse(storedUser));
     }
 
-    const memoizedCheckAuth = useCallback(checkAuth, [navigate, location])
+    setLoading(false);
+  }, []);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            memoizedCheckAuth()
-        } else {
-            setLoading(false)
-        }
-    }, [memoizedCheckAuth])
+  const updateAuth = (newToken, userData) => {
+    console.log('🔐 Updating auth state:', { hasToken: !!newToken, hasUser: !!userData });
 
-    const login = async (phone) => {
-        try {
-            setError(null);
-            const response = await authAPI.sendOTP({
-                phone,
-                channel: 'sms'
-            });
-            return response;
-        } catch (err) {
-            setError(err.response?.data?.message || err.message);
-            throw err;
-        }
-    };
-
-    const verifyOTP = async (phone, otp, type) => {
-        try {
-            setError(null);
-            const response = await authAPI.verifyOTP({
-                phone,
-                otp,
-                type
-            });
-
-            if (response.success && response.token) {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('userType', type);
-                setUser(response.user);
-            }
-
-            return response;
-        } catch (err) {
-            setError(err.response?.data?.message || err.message);
-            throw err;
-        }
-    };
-
-    const logout = async () => {
-        try {
-            await authAPI.logout()
-            setUser(null)
-            localStorage.removeItem('token')
-            localStorage.removeItem('userType')
-            navigate('/login')
-        } catch (err) {
-            console.error('Logout failed:', err)
-            setUser(null)
-            localStorage.removeItem('token')
-            localStorage.removeItem('userType')
-            navigate('/login')
-        }
+    if (newToken) {
+      localStorage.setItem('token', newToken);
+      setToken(newToken);
     }
 
-    const value = {
-        user,
-        loading,
-        error,
-        setError,
-        login,
-        verifyOTP,
-        logout,
-        checkAuth
+    if (userData) {
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
     }
+  };
 
-    if (loading) {
-        return <div>Loading...</div>
+  const login = async (credentials) => {
+    try {
+      const response = await authAPI.login(credentials);
+      console.log('✅ Login response:', response);
+      return response;
+    } catch (error) {
+      console.error('❌ Login failed:', error);
+      throw error;
     }
+  };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  const verifyOTP = async (verificationData) => {
+    try {
+      const response = await authAPI.verifyOTP(verificationData);
+      console.log('✅ OTP verification response:', response);
+
+      if (response.success) {
+        updateAuth(response.data.token, response.data.user);
+      }
+
+      return response;
+    } catch (error) {
+      console.error('❌ OTP verification failed:', error);
+      throw error;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await authAPI.logout();
+    } catch (error) {
+      console.error('❌ Logout error:', error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setToken(null);
+      setUser(null);
+    }
+  };
+
+  const value = {
+    user,
+    token,
+    loading,
+    login,           // Added login method
+    verifyOTP,       // Added verifyOTP method
+    updateAuth,
+    logout,
+    isAuthenticated: !!token
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const useAuth = () => {
-    const context = useContext(AuthContext)
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider')
-    }
-    return context
-}
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};

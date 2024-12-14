@@ -1,74 +1,143 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
-import { FiUser, FiMail, FiPhone, FiLock } from 'react-icons/fi'
 import { authAPI } from '../../services/api'
+import { formatPhoneNumber, validateSaudiPhone } from '../../utils/phoneUtils'
 
 export default function Register({ language, userType }) {
-  const [step, setStep] = useState('phone')
+  const [step, setStep] = useState('register') // 'register' or 'otp'
   const [formData, setFormData] = useState({
-    name: '',
+    full_name: '',
     email: '',
-    phone: ''
+    phone: '',
+    address: '',
+    business_name: userType === 'owner' ? '' : undefined,
+    business_license: userType === 'owner' ? '' : undefined,
+    type: userType
   })
   const [otp, setOtp] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-
+  
   const navigate = useNavigate()
-  const { checkAuth } = useAuth()
 
   const content = {
     en: {
-      renterTitle: 'Renter Registration',
-      ownerTitle: 'Owner Registration',
+      title: userType === 'renter' ? 'Renter Registration' : 'Owner Registration',
       name: 'Full Name',
       email: 'Email',
       phone: 'Phone Number',
-      otp: 'Enter OTP',
-      sendOtp: 'Send OTP',
-      verifyOtp: 'Verify OTP',
-      loginLink: 'Already have an account? Login',
-      phoneRequired: 'Phone number is required',
-      phoneInvalid: 'Please enter a valid phone number',
-      otpRequired: 'OTP is required',
-      otpInvalid: 'Please enter a valid OTP',
+      address: 'Address',
+      businessName: 'Business Name',
+      businessLicense: 'Business License Number',
+      submit: 'Send OTP',
+      otpTitle: 'Verify OTP',
+      otpMessage: 'Please enter the verification code sent to your phone',
+      otpPlaceholder: 'Enter OTP',
+      verifyButton: 'Verify & Register',
+      successMessage: 'Registration successful! Redirecting...',
+      invalidOtp: 'Invalid OTP. Please try again.',
       resendOtp: 'Resend OTP',
-      otpSent: 'OTP has been sent to your phone'
+      loginLink: 'Already have an account? Login',
+      validationErrors: {
+        fullNameRequired: 'Full name is required',
+        emailRequired: 'Email is required',
+        emailInvalid: 'Please enter a valid email address',
+        phoneRequired: 'Phone number is required',
+        phoneInvalid: 'Please enter a valid Saudi phone number',
+        addressRequired: 'Address is required',
+        businessNameRequired: 'Business name is required for owners',
+        businessLicenseRequired: 'Business license is required for owners',
+        phoneExists: 'This phone number is already registered'
+      },
+      placeholders: {
+        name: 'Enter your full name',
+        email: 'example@email.com',
+        phone: '5XXXXXXXX',
+        address: 'Enter your address',
+        businessName: 'Enter your business name',
+        businessLicense: 'Enter your business license number'
+      }
     },
     ar: {
-      renterTitle: 'تسجيل مستأجر جديد',
-      ownerTitle: 'تسجيل مالك جديد',
+      title: userType === 'renter' ? 'تسجيل مستأجر' : 'تسجيل مالك',
       name: 'الاسم الكامل',
       email: 'البريد الإلكتروني',
       phone: 'رقم الهاتف',
-      otp: 'رمز التحقق',
-      sendOtp: 'إرسال رمز التحقق',
-      verifyOtp: 'تحقق من الرمز',
-      loginLink: 'لديك حساب بالفعل؟ تسجيل الدخول',
-      phoneRequired: 'رقم الهاتف مطلوب',
-      phoneInvalid: 'الرجاء إدخال رقم هاتف صحيح',
-      otpRequired: 'رمز التحقق مطلوب',
-      otpInvalid: 'الرجاء إدخال رمز تحقق صحيح',
+      address: 'العنوان',
+      businessName: 'اسم الشركة',
+      businessLicense: 'رقم الرخصة التجارية',
+      submit: 'إرسال رمز التحقق',
+      otpTitle: 'التحقق من الرمز',
+      otpMessage: 'الرجاء إدخال رمز التحقق المرسل إلى هاتفك',
+      otpPlaceholder: 'أدخل رمز التحقق',
+      verifyButton: 'تحقق وتسجيل',
+      successMessage: 'تم التسجيل بنجاح! جاري التحويل...',
+      invalidOtp: 'رمز التحقق غير صحيح. حاول مرة أخرى.',
       resendOtp: 'إعادة إرسال الرمز',
-      otpSent: 'تم إرسال رمز التحقق إلى هاتفك'
+      loginLink: 'لديك حساب بالفعل؟ تسجيل الدخول',
+      validationErrors: {
+        fullNameRequired: 'الاسم الكامل مطلوب',
+        emailRequired: 'البريد الإلكتروني مطلوب',
+        emailInvalid: 'يرجى إدخال بريد إلكتروني صحيح',
+        phoneRequired: 'رقم الهاتف مطلوب',
+        phoneInvalid: 'يرجى إدخال رقم هاتف سعودي صحيح',
+        addressRequired: 'العنوان مطلوب',
+        businessNameRequired: 'اسم الشركة مطلوب للملاك',
+        businessLicenseRequired: '��قم الرخصة التجارية مطلوب للملاك',
+        phoneExists: 'رقم الهاتف مسجل بالفعل'
+      },
+      placeholders: {
+        name: 'أدخل اسمك الكامل',
+        email: 'example@email.com',
+        phone: '5XXXXXXXX',
+        address: 'أدخل عنوانك',
+        businessName: 'أدخل اسم الشركة',
+        businessLicense: 'أدخل رقم الرخصة التجارية'
+      }
     }
   }
 
   const t = content[language]
 
-  const validatePhone = () => {
-    if (!formData.phone) {
-      setError(t.phoneRequired)
-      return false
+  const validateForm = () => {
+    if (!formData.full_name?.trim()) {
+      setError(t.validationErrors.fullNameRequired);
+      return false;
     }
-    const phoneRegex = /^(\+966|0)?5[0-9]{8}$/
-    if (!phoneRegex.test(formData.phone)) {
-      setError(t.phoneInvalid)
-      return false
+    if (!formData.email?.trim()) {
+      setError(t.validationErrors.emailRequired);
+      return false;
     }
-    return true
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError(t.validationErrors.emailInvalid);
+      return false;
+    }
+    if (!formData.phone?.trim()) {
+      setError(t.validationErrors.phoneRequired);
+      return false;
+    }
+    const formattedPhone = formatPhoneNumber(formData.phone);
+    if (!validateSaudiPhone(formattedPhone)) {
+      setError(t.validationErrors.phoneInvalid);
+      return false;
+    }
+    if (!formData.address?.trim()) {
+      setError(t.validationErrors.addressRequired);
+      return false;
+    }
+    if (userType === 'owner') {
+      if (!formData.business_name?.trim()) {
+        setError(t.validationErrors.businessNameRequired);
+        return false;
+      }
+      if (!formData.business_license?.trim()) {
+        setError(t.validationErrors.businessLicenseRequired);
+        return false;
+      }
+    }
+    return true;
+  };
 
   const validateOtp = () => {
     if (!otp) {
@@ -83,225 +152,266 @@ export default function Register({ language, userType }) {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError('');
 
-    if (!validatePhone()) return
+    if (!validateForm()) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-        let formattedPhone = formData.phone
-        if (!formattedPhone.startsWith('+')) {
-            formattedPhone = formattedPhone.startsWith('0')
-                ? '+966' + formattedPhone.substring(1)
-                : '+966' + formattedPhone
-        }
+      const formattedPhone = formatPhoneNumber(formData.phone);
+      
+      const registrationData = {
+        ...formData,
+        phone: formattedPhone,
+        type: userType,
+        ...(userType === 'owner' ? {
+          business_name: formData.business_name,
+          business_license: formData.business_license
+        } : {})
+      };
 
-        const response = await authAPI.sendOTP({
-            phone: formattedPhone,
-            channel: 'sms'
-        })
+      console.log('🔄 Sending Registration Request:', registrationData);
 
-        if (response.success) {
-            sessionStorage.setItem('registerData', JSON.stringify({
-                ...formData,
-                phone: formattedPhone,
-                type: userType
-            }))
-            setStep('otp')
-            alert(t.otpSent)
-        }
+      const response = await authAPI.register(registrationData);
+
+      if (response.success) {
+        setStep('otp');
+        // Store data for OTP verification
+        localStorage.setItem('auth_phone', formattedPhone);
+        localStorage.setItem('auth_type', userType);
+      } else {
+        throw new Error(response.message || 'Registration failed');
+      }
     } catch (error) {
-        if (error.response?.data?.error_code === 'PROFILE_EXISTS') {
-            setError('An account with this phone number already exists. Please login instead.')
-        } else {
-            setError(error.response?.data?.message || 'Failed to send OTP')
-        }
+      console.error('❌ Registration Error:', error);
+      setError(error.message || 'Registration failed');
     } finally {
-        setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleVerifyOtp = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError('');
 
-    if (!validateOtp()) return
+    if (!validateOtp()) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-        const savedData = JSON.parse(sessionStorage.getItem('registerData'))
-        const response = await authAPI.registerVerifyOTP({
-            full_name: savedData.name,
-            email: savedData.email,
-            phone: savedData.phone,
-            type: userType,
-            business_name: savedData.businessName,
-            business_license: savedData.businessLicense,
-            otp: otp
-        })
+      const storedPhone = localStorage.getItem('auth_phone');
+      const storedType = localStorage.getItem('auth_type');
 
-        if (response.success) {
-            if (response.token) {
-                localStorage.setItem('token', response.token)
-            }
-            await checkAuth()
-            sessionStorage.removeItem('registerData')
+      const verificationData = {
+        otp: otp,
+        phone: storedPhone,
+        type: storedType
+      };
 
-            if (userType === 'renter') {
-                navigate('/properties/available')
-            } else {
-                navigate('/owner/properties/add')
-            }
+      console.log('🔄 Sending OTP Verification:', verificationData);
+
+      const response = await authAPI.verifyOTP(verificationData);
+
+      if (response.success) {
+        // Clean up temporary storage
+        localStorage.removeItem('auth_phone');
+        localStorage.removeItem('auth_type');
+        
+        // Store token and user data
+        localStorage.setItem('token', response.data.token);
+        const userResponse = await authAPI.getUserProfile();
+        if (userResponse.success && userResponse.data) {
+          localStorage.setItem('user', JSON.stringify(userResponse.data));
         }
+        
+        // Navigate to appropriate dashboard
+        const redirectPath = `/${userType}/profile`;
+        navigate(redirectPath);
+      } else {
+        throw new Error(response.message || 'Verification failed');
+      }
     } catch (error) {
-        console.error('OTP verification failed:', error)
-        if (error.response?.data?.error_code === 'PROFILE_EXISTS') {
-            setError('An account with this phone number already exists. Please login instead.')
-        } else {
-            setError(error.response?.data?.message || 'Invalid OTP')
-        }
+      console.error('❌ OTP Verification Error:', error);
+      setError(error.message || 'Verification failed');
     } finally {
-        setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className={`text-center text-2xl sm:text-3xl font-extrabold text-gray-900 ${
-          language === 'ar' ? 'font-arabic' : ''
-        }`}>
-          {userType === 'renter' ? t.renterTitle : t.ownerTitle}
+        <h2 className={`text-center text-3xl font-extrabold text-gray-900 ${language === 'ar' ? 'font-arabic' : ''
+          }`}>
+          {step === 'register' ? t.title : t.otpTitle}
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto w-full sm:max-w-md">
-        <div className="bg-white py-6 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           {error && (
             <div className="mb-4 p-2 bg-red-50 text-red-500 text-sm rounded">
               {error}
             </div>
           )}
 
-          <form onSubmit={step === 'phone' ? handleSubmit : handleVerifyOtp} className="space-y-4 sm:space-y-6">
-            {step === 'phone' ? (
+          <form onSubmit={step === 'register' ? handleSubmit : handleVerifyOtp} className="space-y-6">
+            {step === 'register' ? (
               <>
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.name}
+                  <label htmlFor="full_name" className="block text-sm font-medium text-gray-700">
+                    {t.name} *
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FiUser className="text-gray-400" />
-                    </div>
-                    <input
-                      id="name"
-                      type="text"
-                      required
-                      className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-primary focus:border-primary"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
+                  <input
+                    id="full_name"
+                    type="text"
+                    required
+                    placeholder={t.placeholders.name}
+                    className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                    value={formData.full_name}
+                    onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.email}
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    {t.email} *
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FiMail className="text-gray-400" />
-                    </div>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-primary focus:border-primary"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder={t.placeholders.email}
+                    className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.phone}
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                    {t.phone} *
                   </label>
-                  <div className="relative">
+                  <div className="mt-1 relative rounded-md shadow-sm">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FiPhone className="text-gray-400" />
+                      <span className="text-gray-500 sm:text-sm">+966</span>
                     </div>
                     <input
                       id="phone"
                       type="tel"
                       required
-                      className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-primary focus:border-primary"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+966 5XXXXXXXX"
+                      placeholder={t.placeholders.phone}
+                      className="pl-16 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                      value={formData.phone.replace(/^\+966/, '')}
+                      onChange={(e) => {
+                        const input = e.target.value.replace(/\D/g, '');
+                        const phone = input.length > 0 ? `+966${input}` : '';
+                        setFormData({ ...formData, phone });
+                      }}
+                      maxLength="9"
                       dir="ltr"
                     />
                   </div>
                 </div>
+
+                <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    {t.address} *
+                  </label>
+                  <input
+                    id="address"
+                    type="text"
+                    required
+                    placeholder={t.placeholders.address}
+                    className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  />
+                </div>
+
+                {userType === 'owner' && (
+                  <>
+                    <div>
+                      <label htmlFor="business_name" className="block text-sm font-medium text-gray-700">
+                        {t.businessName} *
+                      </label>
+                      <input
+                        id="business_name"
+                        type="text"
+                        required
+                        placeholder={t.placeholders.businessName}
+                        className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                        value={formData.business_name}
+                        onChange={(e) => setFormData({ ...formData, business_name: e.target.value })}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="business_license" className="block text-sm font-medium text-gray-700">
+                        {t.businessLicense} *
+                      </label>
+                      <input
+                        id="business_license"
+                        type="text"
+                        required
+                        placeholder={t.placeholders.businessLicense}
+                        className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                        value={formData.business_license}
+                        onChange={(e) => setFormData({ ...formData, business_license: e.target.value })}
+                      />
+                    </div>
+                  </>
+                )}
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-hover transition-colors duration-200 disabled:opacity-50"
+                  >
+                    {isLoading ? '...' : t.submit}
+                  </button>
+                </div>
               </>
             ) : (
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-1">
-                  {t.otp}
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FiLock className="text-gray-400" />
-                  </div>
-                  <input
-                    id="otp"
-                    type="text"
-                    required
-                    maxLength={6}
-                    className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-primary focus:border-primary"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                    placeholder="123456"
-                    dir="ltr"
-                  />
-                </div>
+                <p className={`text-sm text-gray-600 mb-4 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                  {t.otpMessage}
+                </p>
+                <input
+                  type="text"
+                  placeholder={t.otpPlaceholder}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary mb-4"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  maxLength={6}
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-hover transition-colors duration-200 mb-4"
+                >
+                  {t.verifyButton}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStep('register')}
+                  className="w-full text-gray-600 text-sm hover:text-gray-900"
+                >
+                  {t.resendOtp}
+                </button>
               </div>
             )}
 
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors ${
-                  isLoading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
+            <div className="mt-6 text-center">
+              <Link
+                to={`/login/${userType}`}
+                className="text-sm font-medium text-primary hover:text-primary-hover"
               >
-                {isLoading ? '...' : step === 'phone' ? t.sendOtp : t.verifyOtp}
-              </button>
+                {t.loginLink}
+              </Link>
             </div>
           </form>
-
-          {step === 'otp' && (
-            <div className="mt-4 text-center">
-              <button
-                onClick={() => setStep('phone')}
-                className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-              >
-                {t.resendOtp}
-              </button>
-            </div>
-          )}
-
-          <div className="mt-6 text-center">
-            <Link
-              to={`/login/${userType}`}
-              className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-            >
-              {t.loginLink}
-            </Link>
-          </div>
         </div>
       </div>
     </div>

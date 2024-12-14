@@ -236,7 +236,6 @@ export default function PropertyDetails({ language }) {
             setLoading(true)
             const response = await propertyAPI.getPropertyDetails(id)
             if (response?.data) {
-                console.log('Property details:', response.data)
                 setProperty(response.data)
             } else {
                 throw new Error('Property not found')
@@ -316,7 +315,7 @@ export default function PropertyDetails({ language }) {
                 {property.title}
             </h1>
 
-            {/* Image Gallery */}
+            {/* Updated Image Gallery without arrows */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 {/* Main Image */}
                 <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden">
@@ -327,14 +326,13 @@ export default function PropertyDetails({ language }) {
                     />
                 </div>
 
-                {/* Thumbnails */}
-                <div className="grid grid-cols-2 gap-4 h-fit">
+                {/* Thumbnails Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 h-fit">
                     {property.images.map((image, index) => (
                         <div
                             key={index}
-                            className={`relative aspect-video cursor-pointer overflow-hidden rounded-lg ${
-                                selectedImage === index ? 'ring-2 ring-primary' : ''
-                            }`}
+                            className={`relative aspect-video cursor-pointer overflow-hidden rounded-lg ${selectedImage === index ? 'ring-2 ring-primary' : ''
+                                }`}
                             onClick={() => setSelectedImage(index)}
                         >
                             <img
@@ -350,7 +348,7 @@ export default function PropertyDetails({ language }) {
                 </div>
             </div>
 
-            {/* Property Details Grid */}
+            {/* Property Details */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="md:col-span-2">
                     {/* Basic Features */}
@@ -364,20 +362,24 @@ export default function PropertyDetails({ language }) {
                                 <FaBuilding className="text-primary" />
                                 <span>{property.type}</span>
                             </div>
-                            {property.bedrooms !== null && (
+                            {property.bedrooms !== undefined && (
                                 <div className="flex items-center gap-2">
                                     <IoBedOutline className="text-primary" />
                                     <span>{property.bedrooms} {t.bedrooms}</span>
                                 </div>
                             )}
-                            <div className="flex items-center gap-2">
-                                <IoWaterOutline className="text-primary" />
-                                <span>{property.bathrooms} {t.bathrooms}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <FiMaximize className="text-primary" />
-                                <span>{property.area} m²</span>
-                            </div>
+                            {property.bathrooms !== undefined && (
+                                <div className="flex items-center gap-2">
+                                    <IoWaterOutline className="text-primary" />
+                                    <span>{property.bathrooms} {t.bathrooms}</span>
+                                </div>
+                            )}
+                            {property.area !== undefined && (
+                                <div className="flex items-center gap-2">
+                                    <FiMaximize className="text-primary" />
+                                    <span>{property.area} m²</span>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -391,25 +393,43 @@ export default function PropertyDetails({ language }) {
                     </div>
 
                     {/* Amenities */}
-                    {property.amenities && property.amenities.length > 0 && (
-                        <div className="bg-white rounded-lg shadow-md p-6">
-                            <h2 className={`text-2xl font-bold mb-4 ${language === 'ar' ? 'font-arabic' : ''
-                                }`}>
-                                {t.amenities}
-                            </h2>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {property.amenities.map(amenity => {
-                                    const Icon = amenityIcons[amenity.title.toLowerCase().replace(/\s+/g, '_')] || FiCheck
-                                    return (
-                                        <div key={amenity.id} className="flex items-center gap-2">
-                                            <Icon className="text-primary" />
-                                            <span>{amenity.title}</span>
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        <h2 className={`text-2xl font-bold mb-4 ${language === 'ar' ? 'font-arabic' : ''
+                            }`}>
+                            {t.amenities}
+                        </h2>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                            {Object.entries(t.amenityCategories).map(([category, amenities]) => {
+                                // Filter available amenities in this category
+                                const availableAmenities = amenities.filter(amenity =>
+                                    property.amenities?.includes(amenity)
+                                )
+
+                                // Only show category if it has available amenities
+                                if (availableAmenities.length === 0) return null
+
+                                return (
+                                    <div key={category} className="space-y-3">
+                                        <h3 className="font-semibold text-gray-700">{category}</h3>
+                                        <div className="space-y-2">
+                                            {availableAmenities.map(amenity => {
+                                                const Icon = amenityIcons[amenity]
+                                                return (
+                                                    <div
+                                                        key={amenity}
+                                                        className="flex items-center gap-2 text-gray-900"
+                                                    >
+                                                        {Icon && <Icon className="text-primary" />}
+                                                        <span>{t.amenityLabels[amenity]}</span>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
-                                    )
-                                })}
-                            </div>
+                                    </div>
+                                )
+                            })}
                         </div>
-                    )}
+                    </div>
                 </div>
 
                 {/* Sidebar */}
@@ -451,4 +471,4 @@ export default function PropertyDetails({ language }) {
             )}
         </div>
     )
-}
+} 

@@ -1,33 +1,5 @@
 import { useState } from 'react'
-import { 
-    FiCheck, 
-    FiHome, 
-    FiDollarSign, 
-    FiMapPin, 
-    FiMaximize2
-} from 'react-icons/fi'
-import {
-    FaSnowflake,
-    FaParking,
-    FaSwimmingPool,
-    FaDumbbell,
-    FaShieldAlt,
-    FaBuilding,
-    FaUmbrella,
-    FaTree,
-    FaUser,
-    FaBox,
-    FaCouch,
-    FaBlender,
-    FaWifi,
-    FaSatellite,
-    FaPhone,
-    FaTools,
-    FaMosque,
-    FaShoppingCart,
-    FaGraduationCap,
-    FaPaw
-} from 'react-icons/fa'
+import { FiCheck } from 'react-icons/fi'
 
 export default function PropertyFilters({ language, activeFilters, onFilterChange }) {
     const [showCustomRange, setShowCustomRange] = useState(false)
@@ -35,30 +7,6 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
         min: '',
         max: ''
     })
-
-    // Map amenities to icons - using same icons as PropertyDetails
-    const amenityIcons = {
-        central_ac: FaSnowflake,
-        parking: FaParking,
-        swimming_pool: FaSwimmingPool,
-        gym: FaDumbbell,
-        security: FaShieldAlt,
-        elevator: FaBuilding,
-        balcony: FaUmbrella,
-        garden: FaTree,
-        maid_room: FaUser,
-        storage: FaBox,
-        furnished: FaCouch,
-        kitchen_appliances: FaBlender,
-        internet: FaWifi,
-        satellite: FaSatellite,
-        intercom: FaPhone,
-        maintenance: FaTools,
-        mosque: FaMosque,
-        shopping: FaShoppingCart,
-        schools: FaGraduationCap,
-        pets_allowed: FaPaw
-    };
 
     const content = {
         en: {
@@ -102,44 +50,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 dammam: 'Dammam',
                 khobar: 'Khobar'
             },
-            amenityCategories: {
-                'Basic Features': [
-                    'central_ac',
-                    'parking',
-                    'elevator',
-                    'security'
-                ],
-                'Comfort & Convenience': [
-                    'furnished',
-                    'kitchen_appliances',
-                    'balcony',
-                    'storage'
-                ],
-                'Leisure & Recreation': [
-                    'swimming_pool',
-                    'gym',
-                    'garden',
-                    'playground'
-                ],
-                'Services & Utilities': [
-                    'internet',
-                    'satellite',
-                    'intercom',
-                    'maintenance'
-                ],
-                'Nearby Facilities': [
-                    'mosque',
-                    'shopping',
-                    'schools'
-                ],
-                'Additional Features': [
-                    'maid_room',
-                    'driver_rooms',
-                    'private_roof',
-                    'pets_allowed'
-                ]
-            },
-            amenityLabels: {
+            amenityOptions: {
                 central_ac: 'Central AC',
                 parking: 'Parking',
                 swimming_pool: 'Swimming Pool',
@@ -159,10 +70,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 mosque: 'Nearby Mosque',
                 shopping: 'Shopping Centers',
                 schools: 'Schools Nearby',
-                pets_allowed: 'Pets Allowed',
-                driver_rooms: "Driver's Room",
-                private_roof: 'Private Roof',
-                playground: 'Playground'
+                pets_allowed: 'Pets Allowed'
             },
             customRange: 'Custom Range',
             minPrice: 'Min Price',
@@ -178,7 +86,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 '300-500': '300 - 500 m²',
                 '500-1000': '500 - 1,000 m²',
                 '1000': 'Above 1,000 m²'
-            }
+            },
         },
         ar: {
             propertyType: 'نوع العقار',
@@ -221,44 +129,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 dammam: 'الدمام',
                 khobar: 'الخبر'
             },
-            amenityCategories: {
-                'Basic Features': [
-                    'central_ac',
-                    'parking',
-                    'elevator',
-                    'security'
-                ],
-                'Comfort & Convenience': [
-                    'furnished',
-                    'kitchen_appliances',
-                    'balcony',
-                    'storage'
-                ],
-                'Leisure & Recreation': [
-                    'swimming_pool',
-                    'gym',
-                    'garden',
-                    'playground'
-                ],
-                'Services & Utilities': [
-                    'internet',
-                    'satellite',
-                    'intercom',
-                    'maintenance'
-                ],
-                'Nearby Facilities': [
-                    'mosque',
-                    'shopping',
-                    'schools'
-                ],
-                'Additional Features': [
-                    'maid_room',
-                    'driver_rooms',
-                    'private_roof',
-                    'pets_allowed'
-                ]
-            },
-            amenityLabels: {
+            amenityOptions: {
                 central_ac: 'تكييف مركزي',
                 parking: 'موقف سيارات',
                 swimming_pool: 'مسبح',
@@ -278,10 +149,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 mosque: 'مسجد قريب',
                 shopping: 'مراكز تسوق',
                 schools: 'مدارس قريبة',
-                pets_allowed: 'يسمح بالحيوانات الأليفة',
-                driver_rooms: "غرفة سائق",
-                private_roof: 'السقف الخاص',
-                playground: 'الملعب'
+                pets_allowed: 'يسمح بالحيوانات الأليفة'
             },
             customRange: 'نطاق مخصص',
             minPrice: 'السعر الأدنى',
@@ -297,7 +165,7 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 '300-500': '300 - 500 م²',
                 '500-1000': '500 - 1,000 م²',
                 '1000': 'أكثر من 1,000 م²'
-            }
+            },
         }
     }
 
@@ -492,38 +360,27 @@ export default function PropertyFilters({ language, activeFilters, onFilterChang
                 </div>
             </div>
 
-            {/* Amenities with categorized layout */}
+            {/* Amenities */}
             <div className="mt-6">
                 <h3 className={`text-lg font-semibold mb-3 ${
                     language === 'ar' ? 'font-arabic' : ''
                 }`}>
                     {t.amenities}
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {Object.entries(t.amenityCategories).map(([category, amenities]) => (
-                        <div key={category} className="space-y-3">
-                            <h4 className="font-medium text-gray-700">{category}</h4>
-                            <div className="space-y-2">
-                                {amenities.map(amenity => {
-                                    const Icon = amenityIcons[amenity];
-                                    return (
-                                        <button
-                                            key={amenity}
-                                            onClick={() => handleAmenityToggle(amenity)}
-                                            className={`flex items-center gap-2 w-full p-2 rounded-md border ${
-                                                activeFilters.amenities.includes(amenity)
-                                                    ? 'bg-primary text-white border-primary'
-                                                    : 'border-gray-300 hover:border-primary'
-                                            }`}
-                                        >
-                                            {Icon && <Icon size={16} />}
-                                            <span className="text-sm">{t.amenityLabels[amenity]}</span>
-                                            {activeFilters.amenities.includes(amenity) && <FiCheck size={16} className="ml-auto" />}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {Object.entries(t.amenityOptions).map(([value, label]) => (
+                        <button
+                            key={value}
+                            onClick={() => handleAmenityToggle(value)}
+                            className={`flex items-center justify-center gap-2 p-2 rounded-md border ${
+                                activeFilters.amenities.includes(value)
+                                    ? 'bg-primary text-white border-primary'
+                                    : 'border-gray-300 hover:border-primary'
+                            }`}
+                        >
+                            {activeFilters.amenities.includes(value) && <FiCheck />}
+                            {label}
+                        </button>
                     ))}
                 </div>
             </div>
