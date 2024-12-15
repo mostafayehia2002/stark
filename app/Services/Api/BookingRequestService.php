@@ -3,6 +3,8 @@
 namespace App\Services\Api;
 
 use App\Enums\BookingStatus;
+use App\Enums\UnitType;
+use App\Enums\UserType;
 use App\Http\Requests\BookingUnitRequest;
 use App\Http\Requests\ChangeStatusRequest;
 use App\Models\BookingRequest;
@@ -14,9 +16,15 @@ class BookingRequestService
     public function getAllBookingRequests(): array
     {
         $user = auth()->user();
-        $booking_requests = BookingRequest::with(['unit', 'owner' => function ($query) use ($user) {
-            $query->where('users.id', $user->id);
-        }])->orderBy('created_at', 'DESC')->paginate(15);
+        $booking_requests = BookingRequest::with('unit', 'owner')
+            ->when($user->type === UserType::OWNER->value, function ($query) use ($user) {
+                $query->whereHas('owner', function ($q) use ($user) {
+                    $q->where('users.id', $user->id);
+                });
+            })
+            ->when($user->type === UserType::RENTER->value, function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->orderBy('created_at', 'DESC')->paginate(15);
         if (!$booking_requests->isEmpty()) {
             return [
                 'success' => true,
@@ -52,9 +60,16 @@ class BookingRequestService
 
     public function destroy($id)
     {
-        $request = BookingRequest::whereHas('owner', function ($query) {
-            $query->where('users.id', auth()->id());
+        $user = auth()->user();
+        $request = BookingRequest::when($user->type === UserType::OWNER->value, function ($query) use ($user) {
+            $query->whereHas('owner', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        })->when($user->type === UserType::RENTER->value, function ($query) use ($user) {
+
+            $query->where('user_id', $user->id);
         })->where('booking_id', $id)->first();
+
         if ($request) {
             $request->delete();
             return [
@@ -159,7 +174,7 @@ class BookingRequestService
 
     }
 
-    private function handleAccepted($booking_request)
+    private function handleAccepted($booking_request): void
     {
         if (!$booking_request->unit->is_booked) {
             $booking_request->booking()->firstOrCreate([

@@ -48,7 +48,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/', 'getAllBookingRequests');
         Route::get('/details/{id}', 'details');
         Route::get('/status', 'getStatus');
-        Route::post('/change-status', 'changeStatus');
+        Route::post('/change-status', 'changeStatus')->middleware('checkUserType:owner');
         Route::get('/delete/{id}', 'destroy');
         Route::post('/store', 'store')->middleware('checkUserType:renter');
     });
