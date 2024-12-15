@@ -115,7 +115,7 @@
                                     @foreach ($unit->images as $image)
                                         <div class="col-md-6 mb-3">
                                             <img src="{{ asset('storage/'.$image->url) }}" alt="Unit Image"
-                                                 class="img-fluid rounded">
+                                                 class="img-fluid rounded" loading="lazy">
                                         </div>
                                     @endforeach
                                 </div>
