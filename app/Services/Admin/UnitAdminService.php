@@ -7,6 +7,8 @@ use App\Enums\UnitType;
 use App\Enums\UserType;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
+use App\Jobs\StoreUnitImages;
+use App\Jobs\UpdateUnitImages;
 use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -43,10 +45,8 @@ class UnitAdminService
         try {
             $unit = Unit::findOrFail($id);
             if ($unit->images) {
-                foreach ($unit->images as $image) {
-                    Storage::disk('public')->delete($image->url);
-                    $image->delete();
-                }
+            //delete all images
+                UpdateUnitImages::dispatch($unit);
             }
             $unit->delete();
             return [
@@ -84,9 +84,7 @@ class UnitAdminService
                     $path = $image->store('uploads/unit_images', 'public');
                     $images[] = $path;
                 }
-                $unit->images()->createMany(array_map(function ($image) {
-                    return ['url' => $image];
-                }, $images));
+                 StoreUnitImages::dispatch($unit, $images);
             }
             DB::commit();
             return [
@@ -128,15 +126,8 @@ class UnitAdminService
             $unit->features()->sync($request->input('features'));
             // Check if new images were uploaded
             if ($request->hasFile('image')) {
-                // Delete old images from storage and database
-                foreach ($unit->images as $oldImage) {
-                    // Delete the image file from storage
-                    if (Storage::disk('public')->exists($oldImage->url)) {
-                        Storage::disk('public')->delete($oldImage->url);
-                    }
-                    // Delete the image record from the database
-                    $oldImage->delete();
-                }
+
+                UpdateUnitImages::dispatch($unit);
 
                 // Upload new images and store their paths
                 $images = [];
@@ -146,9 +137,7 @@ class UnitAdminService
                 }
 
                 // Attach the new images to the unit
-                $unit->images()->createMany(array_map(function ($image) {
-                    return ['url' => $image];
-                }, $images));
+                StoreUnitImages::dispatch($unit, $images);
             }
 
             // Commit the transaction
