@@ -65,6 +65,7 @@ class UnitAdminService
     {
         try {
             DB::beginTransaction();
+
             $unit = Unit::create([
                 'user_id' => auth()->id(),
                 'title' => $request->input('title'),

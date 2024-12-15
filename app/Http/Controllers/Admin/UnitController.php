@@ -53,6 +53,7 @@ class UnitController extends Controller
 
             toastr()->success($response['message']);
         } else {
+
             toastr()->error($response['message']);
         }
         return redirect()->route('admin.show-unit');
