@@ -132,10 +132,32 @@ const PropertyCard = memo(({ property, language, onNavigate }) => {
     const [imageError, setImageError] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [favoriteLoading, setFavoriteLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleFavorite = async (e) => {
         e.stopPropagation();
         if (favoriteLoading) return;
+
+        // Check if user is logged in by looking for token
+        const token = localStorage.getItem('token');
+        if (!token) {
+            toast.error(
+                language === 'ar'
+                    ? 'يجب تسجيل الدخول لإضافة العقار إلى المفضلة'
+                    : 'Please login to add properties to favorites'
+            );
+            setTimeout(() => {
+                const shouldLogin = window.confirm(
+                    language === 'ar'
+                        ? 'هل تريد تسجيل الدخول أو إنشاء حساب جديد؟'
+                        : 'Would you like to login or create an account?'
+                );
+                if (shouldLogin) {
+                    navigate('/login/renter');
+                }
+            }, 1000);
+            return;
+        }
 
         try {
             setFavoriteLoading(true);
@@ -154,11 +176,22 @@ const PropertyCard = memo(({ property, language, onNavigate }) => {
             }
         } catch (error) {
             console.error('Failed to update favorite status:', error);
-            toast.error(
-                language === 'ar'
-                    ? 'حدث خطأ أثناء تحديث المفضلة'
-                    : 'Failed to update favorites'
-            );
+            if (error.response?.status === 401) {
+                // Clear token and redirect to login
+                localStorage.removeItem('token');
+                toast.error(
+                    language === 'ar'
+                        ? 'انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى'
+                        : 'Session expired. Please login again'
+                );
+                setTimeout(() => navigate('/login/renter'), 1500);
+            } else {
+                toast.error(
+                    language === 'ar'
+                        ? 'حدث خطأ أثناء تحديث المفضلة'
+                        : 'Failed to update favorites'
+                );
+            }
         } finally {
             setFavoriteLoading(false);
         }
@@ -497,7 +530,7 @@ export default function AvailableProperties({ language }) {
             } else {
                 setError(
                     language === 'ar'
-                        ? 'عذراً، ��دث خطأ أثناء تحميل العقارات. يرجى المحاولة مرة أخرى.'
+                        ? 'عذراً، حدث خطأ أثناء تحميل العقارات. يرجى المحاولة مرة أخرى.'
                         : 'Sorry, there was an error loading properties. Please try again.'
                 );
             }
@@ -606,7 +639,7 @@ export default function AvailableProperties({ language }) {
                 </h1>
                 <button
                     onClick={() => setShowFilters(!showFilters)}
-                    className="bg-primary text-white px-4 py-2 rounded-lg text-sm md:text-base md:px-4 md:py-2 px-3 py-1.5"
+                    className="bg-primary text-white rounded-lg text-sm md:text-base px-3 py-1.5 md:px-4 md:py-2"
                 >
                     {showFilters ? t.hideFilters : t.showFilters}
                 </button>
