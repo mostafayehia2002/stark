@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FiMaximize, FiHeart } from 'react-icons/fi';
 import { IoBedOutline, IoWaterOutline, IoLocationOutline } from "react-icons/io5";
 import { propertyAPI } from '../services/api';
+import favoritesAPI from '../services/favoritesAPI';
+import { toast } from 'react-hot-toast';
 
 export default function FeaturedProperties({ language }) {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function FeaturedProperties({ language }) {
         setLoading(true);
         const response = await propertyAPI.getFeaturedProperties();
         console.log('Featured properties response:', response);
-        
+
         if (response?.success && Array.isArray(response.data)) {
           setProperties(response.data);
         } else {
@@ -26,7 +28,7 @@ export default function FeaturedProperties({ language }) {
       } catch (error) {
         console.error('Failed to fetch featured properties:', error);
         setError(error);
-      } finally { 
+      } finally {
         setLoading(false);
       }
     };
@@ -37,60 +39,74 @@ export default function FeaturedProperties({ language }) {
   const content = {
     en: {
       title: 'Featured Properties',
-      subtitle: 'Discover our hand-picked premium properties',
-      viewAll: 'View All Properties',
+      subtitle: 'Discover our handpicked selection of premium properties',
       new: 'New',
       featured: 'Featured',
-      viewDetails: 'View Details',
-      save: 'Save',
       from: 'From',
+      currency: 'SAR',
+      viewDetails: 'View Details',
+      viewAll: 'View All Properties',
       amenities: {
-        pool: 'Swimming Pool',
-        garden: 'Garden',
-        security: '24/7 Security',
-        parking: 'Parking',
-        gym: 'Gym',
-        elevator: 'Elevator',
-        balcony: 'Balcony',
-        maid_room: "Maid's Room",
-        storage: 'Storage',
-        reception: 'Reception',
-        meeting_rooms: 'Meeting Rooms',
-        driver_room: "Driver's Room",
-        playground: 'Playground',
-        electricity: 'Electricity',
-        water: 'Water',
-        sewage: 'Sewage',
-        private_roof: 'Private Roof'
+        'parking': 'Parking',
+        'swimming pool': 'Swimming Pool',
+        'gym': 'Gym',
+        '24/7 security': '24/7 Security',
+        'elevator': 'Elevator',
+        'garden': 'Garden',
+        'central ac': 'Central AC',
+        'balcony': 'Balcony',
+        'maid\'s room': 'Maid\'s Room',
+        'storage room': 'Storage Room',
+        'kitchen appliances': 'Kitchen Appliances',
+        'internet': 'Internet',
+        'satellite/cable tv': 'Satellite/Cable TV',
+        'intercom': 'Intercom',
+        'maintenance': 'Maintenance',
+        'nearby mosque': 'Nearby Mosque',
+        'shopping centers': 'Shopping Centers',
+        'schools nearby': 'Schools Nearby',
+        'pets allowed': 'Pets Allowed',
+        'sea view': 'Sea View',
+        'city view': 'City View',
+        'garden view': 'Garden View',
+        'street view': 'Street View',
+        'mall view': 'Mall View'
       }
     },
     ar: {
-      title: 'عقارات مميزة',
-      subtitle: 'اكتشف عقاراتنا المميزة المختارة بعناية',
-      viewAll: 'عرض جميع العقارات',
+      title: 'العقارات المميزة',
+      subtitle: 'اكتشف مجموعتنا المختارة من العقارات الفاخرة',
       new: 'جديد',
       featured: 'مميز',
-      viewDetails: 'عرض التفاصيل',
-      save: 'حفظ',
       from: 'من',
+      currency: 'ريال',
+      viewDetails: 'عرض التفاصيل',
+      viewAll: 'عرض جميع العقارات',
       amenities: {
-        pool: 'مسبح',
-        garden: 'حديقة',
-        security: 'أمن 24/7',
-        parking: 'مكان سيارات',
-        gym: 'صالة رياضية',
-        elevator: 'مصعد',
-        balcony: 'شرفة',
-        maid_room: 'غرفة خادمة',
-        storage: 'مخزن',
-        reception: 'استقبال',
-        meeting_rooms: 'قاعات اجتماعات',
-        driver_room: 'غرفة سائق',
-        playground: 'ملعب',
-        electricity: 'كهرباء',
-        water: 'ماء',
-        sewage: 'صرف صحي',
-        private_roof: 'سطح خاص'
+        'parking': 'موقف سيارات',
+        'swimming pool': 'مسبح',
+        'gym': 'صالة رياضية',
+        '24/7 security': 'حراسة أمنية 24/7',
+        'elevator': 'مصعد',
+        'garden': 'حديقة',
+        'central ac': 'تكييف مركزي',
+        'balcony': 'شرفة',
+        'maid\'s room': 'غرفة خادمة',
+        'storage room': 'غرفة تخزين',
+        'kitchen appliances': 'أجهزة مطبخ',
+        'internet': 'إنترنت',
+        'satellite/cable tv': 'قنوات فضائية/تلفاز',
+        'intercom': 'اتصال داخلي',
+        'maintenance': 'صيانة',
+        'nearby mosque': 'مسجد قريب',
+        'shopping centers': 'مراكز تسوق قريبة',
+        'schools nearby': 'مدارس قريبة',
+        'pets allowed': 'يسمح بالحيوانات الأليفة',
+        'sea view': 'إطلالة بحرية',
+        'city view': 'إطلالة على المدينة',
+        'garden view': 'إطلالة على الحديقة',
+        'street view': 'إطلالة على الشارع',
+        'mall view': 'إطلالة على المول'
       }
     }
   };
@@ -98,6 +114,40 @@ export default function FeaturedProperties({ language }) {
   const t = content[language];
 
   const PropertyCard = ({ property }) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [favoriteLoading, setFavoriteLoading] = useState(false);
+
+    const handleFavorite = async (e) => {
+      e.stopPropagation();
+      if (favoriteLoading) return;
+
+      try {
+        setFavoriteLoading(true);
+        if (isFavorite) {
+          const response = await favoritesAPI.removeFromFavorites(property.id);
+          if (response.success) {
+            setIsFavorite(false);
+            toast.success(language === 'ar' ? 'تم إزالة العقار من المفضلة' : 'Property removed from favorites');
+          }
+        } else {
+          const response = await favoritesAPI.addToFavorites(property.id);
+          if (response.success) {
+            setIsFavorite(true);
+            toast.success(language === 'ar' ? 'تم إضافة العقار إلى المفضلة' : 'Property added to favorites');
+          }
+        }
+      } catch (error) {
+        console.error('Failed to update favorite status:', error);
+        toast.error(
+          language === 'ar'
+            ? 'حدث خطأ أثناء تحديث المفضلة'
+            : 'Failed to update favorites'
+        );
+      } finally {
+        setFavoriteLoading(false);
+      }
+    };
+
     console.log('Rendering property:', property);
 
     return (
@@ -120,14 +170,12 @@ export default function FeaturedProperties({ language }) {
               </span>
             )}
           </div>
-          <button 
-            className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              // Handle save
-            }}
+          <button
+            className={`absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors ${favoriteLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={handleFavorite}
+            disabled={favoriteLoading}
           >
-            <FiHeart className="text-[#BE092B]" />
+            <FiHeart className={`${isFavorite ? 'text-[#BE092B] fill-current' : 'text-[#BE092B]'}`} />
           </button>
         </div>
 
@@ -138,9 +186,9 @@ export default function FeaturedProperties({ language }) {
               <span>{property.address}</span>
             </div>
           )}
-          
+
           <h3 className="text-xl font-semibold mb-4 line-clamp-2 text-gray-800">{property.title}</h3>
-          
+
           <div className="flex items-center gap-4 mb-4 text-gray-600">
             {property.number_bedroom && (
               <div className="flex items-center gap-1">
@@ -165,11 +213,11 @@ export default function FeaturedProperties({ language }) {
           {property.features?.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
               {property.features.slice(0, 3).map(feature => (
-                <span 
+                <span
                   key={feature.id}
                   className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full border border-gray-100"
                 >
-                  {feature.name}
+                  {t.amenities[feature.name.toLowerCase()] || feature.name}
                 </span>
               ))}
               {property.features.length > 3 && (
@@ -227,7 +275,7 @@ export default function FeaturedProperties({ language }) {
         ) : error ? (
           <div className="text-center py-12">
             <p className="text-red-500">
-              {language === 'ar' 
+              {language === 'ar'
                 ? 'عذراً، حدث خطأ أثناء تحميل العقارات المميزة'
                 : 'Sorry, failed to load featured properties'
               }

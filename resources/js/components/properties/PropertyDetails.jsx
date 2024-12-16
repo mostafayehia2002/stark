@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { propertyAPI } from '../../services/api'
-import { FiMaximize, FiMapPin, FiHeart } from 'react-icons/fi'
+import favoritesAPI from '../../services/favoritesAPI'
+import { FiMaximize, FiMapPin, FiHeart, FiArrowLeft } from 'react-icons/fi'
 import { IoBedOutline, IoWaterOutline } from "react-icons/io5"
 import BookingForm from './BookingForm'
 import {
@@ -30,6 +31,7 @@ import {
   FaRoad,
   FaStore
 } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 const content = {
   en: {
@@ -97,7 +99,7 @@ const content = {
     removeFromFavorites: 'إزالة من المفضلة',
     currency: 'ريال',
     sqm: 'م²',
-    bedrooms: 'غرف النوم',
+    bedrooms: 'أرف النوم',
     bathrooms: 'دورات المياه',
     area: 'المساحة',
     propertyTypes: {
@@ -169,6 +171,7 @@ const featureIcons = {
 };
 
 export default function PropertyDetails({ language }) {
+  const navigate = useNavigate()
   const { id } = useParams()
   const [property, setProperty] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -210,13 +213,25 @@ export default function PropertyDetails({ language }) {
   const handleFavorite = async () => {
     try {
       if (isFavorite) {
-        await propertyAPI.removeFromFavorites(id)
+        const response = await favoritesAPI.removeFromFavorites(property.id)
+        if (response.success) {
+          setIsFavorite(false)
+          toast.success(language === 'ar' ? 'تم إزالة العقار من المفضلة' : 'Property removed from favorites')
+        }
       } else {
-        await propertyAPI.addToFavorites(id)
+        const response = await favoritesAPI.addToFavorites(property.id)
+        if (response.success) {
+          setIsFavorite(true)
+          toast.success(language === 'ar' ? 'تم إضافة العقار إلى المفضلة' : 'Property added to favorites')
+        }
       }
-      setIsFavorite(!isFavorite)
     } catch (error) {
       console.error('Failed to update favorite status:', error)
+      toast.error(
+        language === 'ar'
+          ? 'حدث خطأ أثناء تحديث المفضلة'
+          : 'Failed to update favorites'
+      )
     }
   }
 
@@ -240,6 +255,15 @@ export default function PropertyDetails({ language }) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Back Button */}
+      <button
+        onClick={() => navigate('/properties/available')}
+        className="flex items-center gap-1.5 text-sm text-[#BE092B] hover:text-[#9C0722] mb-4 transition-colors"
+      >
+        <FiArrowLeft className="w-4 h-4" />
+        <span>{language === 'ar' ? 'رجوع' : 'Back'}</span>
+      </button>
+
       {/* Image Gallery */}
       <div className="relative h-[60vh] mb-8 rounded-lg overflow-hidden">
         <img
