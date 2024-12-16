@@ -1,32 +1,22 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-URymAMCx.css",
+    "file": "assets/app-BQ0sKJMa.css",
     "src": "resources/css/app.css",
     "isEntry": true
-  },
-  "resources/js/assets/logo-footer.jpg": {
-    "file": "assets/logo-footer-DooaD-Hu.jpg",
-    "src": "resources/js/assets/logo-footer.jpg"
-  },
-  "resources/js/assets/logo-nav.jpg": {
-    "file": "assets/logo-nav-9xhMEncz.jpg",
-    "src": "resources/js/assets/logo-nav.jpg"
   },
   "resources/js/assets/pic1.jpg": {
     "file": "assets/pic1-ltIYY7rL.jpg",
     "src": "resources/js/assets/pic1.jpg"
   },
   "resources/js/main.jsx": {
-    "file": "assets/main-BG3RXDgc.js",
+    "file": "assets/main-DyVFqDuf.js",
     "name": "main",
     "src": "resources/js/main.jsx",
     "isEntry": true,
     "css": [
-      "assets/main-DUewgffG.css"
+      "assets/main-DKG4GUp_.css"
     ],
     "assets": [
-      "assets/logo-nav-9xhMEncz.jpg",
-      "assets/logo-footer-DooaD-Hu.jpg",
       "assets/pic1-ltIYY7rL.jpg"
     ]
   }

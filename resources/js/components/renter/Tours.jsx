@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiCalendar, FiClock, FiMapPin, FiCheck, FiX, FiTrash2, FiEye } from 'react-icons/fi'
 import bookingAPI from '../../services/bookingAPI'
+import { toast } from 'react-hot-toast'
 
 export default function Tours({ language }) {
   const navigate = useNavigate()
@@ -69,8 +70,13 @@ export default function Tours({ language }) {
     }
   };
 
-  const handleViewProperty = (unitId) => {
-    navigate(`/properties/${unitId}`)
+  const handleViewProperty = (bookingId) => {
+    const details = detailedRequests[bookingId];
+    if (!details?.unit?.id) {
+      toast.error(language === 'ar' ? 'لا يمكن العثور على تفاصيل العقار' : 'Property details not found');
+      return;
+    }
+    navigate(`/properties/${details.unit.id}`);
   }
 
   const content = {
@@ -179,13 +185,15 @@ export default function Tours({ language }) {
                 className="border border-gray-200 rounded-lg overflow-hidden hover:border-primary transition-colors"
               >
                 <div className="flex flex-col md:flex-row">
-                  {/* Property Image */}
-                  <div className="w-full md:w-40 h-40 md:h-auto">
-                    <img
-                      src={details?.unit?.images?.[0]?.url || 'https://placehold.co/600x400/png/white?text=Property+Image'}
-                      alt={details?.unit?.title}
-                      className="w-full h-full object-cover"
-                    />
+                  {/* Property Image Container */}
+                  <div className="relative w-full md:w-40 flex-shrink-0 bg-gray-100">
+                    <div className="w-full aspect-square">
+                      <img
+                        src={details?.unit?.images?.[0]?.url || 'https://placehold.co/600x400/png/white?text=Property+Image'}
+                        alt={details?.unit?.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </div>
 
                   {/* Booking Details */}
@@ -228,7 +236,7 @@ export default function Tours({ language }) {
                           </button>
                         )}
                         <button
-                          onClick={() => handleViewProperty(request.unit_id)}
+                          onClick={() => handleViewProperty(request.booking_id)}
                           className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1"
                         >
                           <FiEye className="w-4 h-4" />
