@@ -24,7 +24,7 @@ class DashboardService
                 'recentUsers' => User::latest()->take(10)->get(),
                 'requests'=>BookingRequest::latest()->take(10)->get(),
                 'messagesCount'=>ContactUs::get()->count(),
-                'messages'=>ContactUs::latest()->take(10)->get(),
+                'messages'=>ContactUs::latest()->take(5)->get(),
                 'bookingCount'=>Booking::get()->count(),
             ];
         });
