@@ -23,7 +23,7 @@ class LoginAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' =>[
+            'emailOrPhone' =>[
                 'required',
                 'string',
             ],
@@ -33,8 +33,8 @@ class LoginAdminRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'login.required' => 'The email or phone number is required.',
-            'login.exists' => 'No account found with the provided email or phone number.',
+            'emailOrPhone.required' => 'The email or phone number is required.',
+            'emailOrPhone.exists' => 'No account found with the provided email or phone number.',
             'password.required' => 'The password is required.',
             'password.min' => 'The password must be at least 8 characters.',
         ];

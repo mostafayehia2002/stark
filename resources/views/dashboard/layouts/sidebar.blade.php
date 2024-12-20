@@ -27,9 +27,9 @@
                 <li class="nav-header">Users Management</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fa-solid fa-user-secret"></i>
+                        <i class="nav-icon fa-solid fa-user-secret"></i>
                         <p>
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="nav-icon right fas fa-angle-left"></i>
                             Admins
                         </p>
                     </a>
@@ -37,7 +37,7 @@
                         @can('admin-list')
                             <li class="nav-item">
                                 <a href="{{route('admin.show-admins')}}" class="nav-link">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="nav-icon fas fa-eye"></i>
                                     <p>
                                         Show Admins
                                     </p>
@@ -47,7 +47,7 @@
                         @can('admin-create')
                             <li class="nav-item">
                                 <a href="{{route('admin.create-admin')}}" class="nav-link">
-                                    <i class="fa-solid fa-user-plus"></i>
+                                    <i class="nav-icon fa-solid fa-user-plus"></i>
                                     <p>
                                         Add Admin
                                     </p>
@@ -59,7 +59,7 @@
                 @can('user-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-users')}}" class="nav-link">
-                            <i class="fas fa-eye"></i>
+                            <i class="nav-icon fas fa-eye"></i>
                             <p>
                                 Show Users
                             </p>
@@ -70,7 +70,7 @@
                 @can('category-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-category')}}" class="nav-link">
-                            <i class="fas fa-tags"></i>
+                            <i class="nav-icon fas fa-tags"></i>
                             <p>
                                 Categories
                             </p>
@@ -89,9 +89,9 @@
                 @endcan
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-building"></i>
+                        <i class="nav-icon fas fa-building"></i>
                         <p>
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="nav-icon right fas fa-angle-left"></i>
                             Units
                         </p>
                     </a>
@@ -99,7 +99,7 @@
                         @can('unit-create')
                         <li class="nav-item">
                             <a href="{{route('admin.create-unit')}}" class="nav-link">
-                                <i class="fas fa-plus"></i>
+                                <i class="nav-icon fas fa-plus"></i>
                                 <p>
                                     Add Unit
                                 </p>
@@ -109,7 +109,7 @@
                         @can('unit-list')
                         <li class="nav-item">
                             <a href="{{route('admin.show-unit')}}" class="nav-link">
-                                <i class="fas fa-eye"></i>
+                                <i class="nav-icon fas fa-eye"></i>
                                 <p>
                                     Show Unit
                                 </p>
@@ -122,7 +122,7 @@
                 @can('booking-request-list')
                 <li class="nav-item">
                     <a href="{{route('admin.show-booking-request')}}" class="nav-link">
-                        <i class="fas fa-eye"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                              Booking Requests
                         </p>
@@ -132,7 +132,7 @@
                 @can('booking-list')
                 <li class="nav-item">
                     <a href="{{route('admin.show-booking')}}" class="nav-link">
-                        <i class="fas fa-eye"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             Booking
                         </p>
@@ -144,7 +144,7 @@
                  @can('show-setting')
                 <li class="nav-item">
                     <a href="{{route('admin.show-setting')}}" class="nav-link">
-                        <i class="fas fa-eye"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             Setting
                         </p>
@@ -153,7 +153,7 @@
                 @endcan
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-lock"></i>
+                        <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Permissions
                             <i class="right fas fa-angle-left"></i>
@@ -163,7 +163,7 @@
                         @can('role-list')
                             <li class="nav-item">
                                 <a href="{{route('admin.roles.index')}}" class="nav-link">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="nav-icon fas fa-eye"></i>
                                     <p>
                                         Show Roles
                                     </p>
@@ -173,7 +173,7 @@
                         @can('role-create')
                             <li class="nav-item">
                                 <a href="{{route('admin.roles.create')}}" class="nav-link">
-                                    <i class="fas fa-plus-circle"></i>
+                                    <i class="nav-icon fas fa-plus-circle"></i>
                                     <p>
                                         Create Role
                                     </p>
@@ -186,13 +186,14 @@
                 @can('message-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-message')}}" class="nav-link">
-                            <i class="fas fa-envelope"></i>
+                            <i class="nav-icon fas fa-envelope"></i>
                             <p>
                                 Contact Us
                             </p>
                         </a>
                     </li>
                 @endcan
+
             </ul>
 
         </nav>

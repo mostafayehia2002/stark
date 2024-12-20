@@ -18,6 +18,27 @@
     <!-- SEARCH FORM -->
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+{{--  Language--}}
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fas fa-globe"></i>
+                <span class="badge badge-info navbar-badge">{{ strtoupper(app()->getLocale()) }}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">Change Language</span>
+                <div class="dropdown-divider"></div>
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" hreflang="{{ $localeCode }}" class="dropdown-item">
+                    <i class="flag-icon flag-icon-us mr-2"></i>
+                    {{ $properties['native'] }}
+                </a>
+                    <div class="dropdown-divider"></div>
+                @endforeach
+            </div>
+
+
+        </li>
+
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

@@ -100,8 +100,8 @@ class TwilioService
 
             $response = $this->makeRequest($url, [
                 'To' => $toPhoneNumber,
-                'From' => $this->from, // الرقم الذي سترسل منه الرسالة
-                'Body' => $message, // محتوى الرسالة
+                'From' => $this->from,
+                'Body' => $message,
             ]);
               Storage::put('test.json',json_encode($response->json()));
             return [

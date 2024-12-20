@@ -22,8 +22,8 @@ class AdminAuthService
             $remember = $request->has('remember');
             $user = User::where('type', UserType::ADMIN)->where('status', UserStatus::ACTIVE)
                 ->where(function ($query) use ($credentials) {
-                    $query->where('email', $credentials['login'])
-                        ->orWhere('phone', $credentials['login']);
+                    $query->where('email', $credentials['emailOrPhone'])
+                        ->orWhere('phone', $credentials['emailOrPhone']);
                 })
                 ->first();
             if ($user && Hash::check(request()->input('password'), $user->password)) {
