@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Categories</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_all_categories')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-category')}}">Categories</a></li>
-                            <li class="breadcrumb-item active">Units Management</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-category')}}">{{trans('dashboard.categories')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.units_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -21,7 +21,7 @@
                     <div class="col-sm-6">
                         <a href="#AddCategoryModal" data-toggle="modal" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
-                            Add Category
+                            {{trans('dashboard.add_category')}}
                         </a>
                     </div>
                 @endcan
@@ -93,7 +93,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Category</h4>
+                        <h4 class="modal-title">{{trans('dashboard.add_category')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -130,7 +130,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Update Category</h4>
+                        <h4 class="modal-title">{{trans('dashboard.update_category')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

@@ -6,11 +6,11 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('admin.dashboard')}}" class="nav-link">Home</a>
+            <a href="{{route('admin.dashboard')}}" class="nav-link">{{trans('dashboard.home')}}</a>
         </li>
         @can('message-list')
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('admin.show-message')}}" class="nav-link">Contact Us</a>
+            <a href="{{route('admin.show-message')}}" class="nav-link">{{trans('dashboard.contact_us')}}</a>
         </li>
         @endcan
     </ul>
@@ -25,7 +25,7 @@
                 <span class="badge badge-info navbar-badge">{{ strtoupper(app()->getLocale()) }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">Change Language</span>
+                <span class="dropdown-item dropdown-header">{{trans('dashboard.change_language')}}</span>
                 <div class="dropdown-divider"></div>
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" hreflang="{{ $localeCode }}" class="dropdown-item">
@@ -70,11 +70,11 @@
                 <div class="dropdown-divider"></div>
                 @empty
                     <p class="text-sm text-gray-500">
-                       You currently have no unread messages.
+                      {{trans('dashboard.You_currently_have_no_unread_messages')}}
                     </p>
                     <div class="dropdown-divider"></div>
                 @endforelse
-                <a href="{{route('admin.show-message')}}" class="dropdown-item dropdown-footer">See All Messages</a>
+                <a href="{{route('admin.show-message')}}" class="dropdown-item dropdown-footer">{{trans('dashboard.see_all_messages')}}</a>
             </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -84,7 +84,7 @@
                 <span class="badge badge-warning navbar-badge">15</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <span class="dropdown-item dropdown-header">{{trans('dashboard.notifications')}}</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -101,7 +101,7 @@
                     <span class="float-right text-muted text-sm">2 days</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <a href="#" class="dropdown-item dropdown-footer">{{trans('dashboard.see_all_notifications')}}</a>
             </div>
         </li>
 

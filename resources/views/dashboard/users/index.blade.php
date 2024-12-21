@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Show Users'])
+@extends('dashboard.layouts.master',['title'=>'Admin | Show Users'])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -7,13 +7,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Users</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_all_users')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Show Users</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Users</a></li>
-                            <li class="breadcrumb-item active">Users Management</li>
+                            <li class="breadcrumb-item"><a href="">{{trans('dashboard.show_users')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.users')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.users_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

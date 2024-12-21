@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Units'])
+@extends('dashboard.layouts.master',['title'=>'Admin  | Units'])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4>Unit Details</h4>
+                        <h4>{{trans('dashboard.unit_details')}}</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Details</li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">Units Management</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.unit_details')}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">{{trans('dashboard.units_management')}}</a></li>
                         </ol>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header bg-primary text-white">
-                                <h5><i class="fas fa-info-circle"></i> Unit Information</h5>
+                                <h5><i class="fas fa-info-circle"></i>{{trans('dashboard.unit_information')}}</h5>
                             </div>
                             <div class="card-body">
                                 <p><strong>Title:</strong>{{ $unit->title }}</p>
@@ -70,7 +70,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header bg-success text-white">
-                                <h5><i class="fas fa-user"></i> Owner Information</h5>
+                                <h5><i class="fas fa-user"></i>{{trans('dashboard.owner_information')}}</h5>
                             </div>
                             <div class="card-body">
                                 <p><strong>Full Name:</strong> {{ $unit->owner->full_name }}</p>
@@ -85,7 +85,7 @@
                         <!-- Features -->
                         <div class="card">
                             <div class="card-header bg-warning text-white">
-                                <h5><i class="fas fa-list"></i> Features</h5>
+                                <h5><i class="fas fa-list"></i> {{trans('dashboard.features')}}</h5>
                             </div>
                             <div class="card-body">
                                 @foreach ($featuresByCategory as $categoryName => $features)
@@ -108,7 +108,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header bg-info text-white">
-                                <h5><i class="fas fa-images"></i> Images</h5>
+                                <h5><i class="fas fa-images"></i> {{trans('dashboard.images')}}</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">

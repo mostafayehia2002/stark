@@ -8,13 +8,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Update Admin Info</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.update_admin_info')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.edit-admin',['id'=>$user->id])}}">Edit Admin</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admins</a></li>
-                            <li class="breadcrumb-item active">Users Management</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.edit-admin',['id'=>$user->id])}}">{{trans('dashboard.edit_admin')}}</a></li>
+
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.admins')}}</a></li>
+
+                            <li class="breadcrumb-item active">{{trans('dashboard.users_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

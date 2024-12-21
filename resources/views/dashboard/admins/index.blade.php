@@ -7,14 +7,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Admins</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_all_admins')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">Show Admins</a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-admins')}}">{{trans('dashboard.show_admins')}}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admins</a></li>
-                            <li class="breadcrumb-item active">Users Management</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.admins')}}</a></li>
+
+                            <li class="breadcrumb-item active">{{trans('dashboard.users_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

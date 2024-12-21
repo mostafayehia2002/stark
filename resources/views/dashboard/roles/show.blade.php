@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Show Role'])
+@extends('dashboard.layouts.master',['title'=>'Admin | Show Role'])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -8,13 +8,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show Role</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_roles')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.show-admins') }}">Show Role</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Permissions</a></li>
-                            <li class="breadcrumb-item active">Setting</li>
+                            <li class="breadcrumb-item"><a href="">{{trans('dashboard.show_roles')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('dashboard.permissions')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.setting')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

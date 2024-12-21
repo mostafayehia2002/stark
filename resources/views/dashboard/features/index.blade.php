@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Features'])
+@extends('dashboard.layouts.master',['title'=>'Admin | Features'])
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Features</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_all_features')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-feature')}}">Features</a></li>
-                            <li class="breadcrumb-item active">Units Management</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-feature')}}">{{trans('dashboard.features')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.units_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -21,7 +21,7 @@
                     <div class="col-sm-6">
                         <a href="#AddFeatureModal" data-toggle="modal" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
-                            Add Feature
+                           {{trans('dashboard.add_feature')}}
                         </a>
                     </div>
                 @endcan
@@ -98,7 +98,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Feature</h4>
+                        <h4 class="modal-title">{{trans('dashboard.add_feature')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -145,7 +145,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Update Feature</h4>
+                        <h4 class="modal-title"> {{trans('dashboard.update_feature')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

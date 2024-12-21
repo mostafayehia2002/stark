@@ -24,13 +24,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-header">Users Management</li>
+                <li class="nav-header"> {{trans('dashboard.users_management')}}</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-user-secret"></i>
                         <p>
                             <i class="nav-icon right fas fa-angle-left"></i>
-                            Admins
+                            {{trans('dashboard.admins')}}
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -39,7 +39,7 @@
                                 <a href="{{route('admin.show-admins')}}" class="nav-link">
                                     <i class="nav-icon fas fa-eye"></i>
                                     <p>
-                                        Show Admins
+                                        {{trans('dashboard.show_admins')}}
                                     </p>
                                 </a>
                             </li>
@@ -49,7 +49,7 @@
                                 <a href="{{route('admin.create-admin')}}" class="nav-link">
                                     <i class="nav-icon fa-solid fa-user-plus"></i>
                                     <p>
-                                        Add Admin
+                                        {{trans('dashboard.add_admin')}}
                                     </p>
                                 </a>
                             </li>
@@ -59,20 +59,20 @@
                 @can('user-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-users')}}" class="nav-link">
-                            <i class="nav-icon fas fa-eye"></i>
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Show Users
+                                {{trans('dashboard.show_users')}}
                             </p>
                         </a>
                     </li>
                 @endcan
-                <li class="nav-header">Units Management</li>
+                <li class="nav-header">{{trans('dashboard.units_management')}}</li>
                 @can('category-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-category')}}" class="nav-link">
                             <i class="nav-icon fas fa-tags"></i>
                             <p>
-                                Categories
+                                {{trans('dashboard.categories')}}
                             </p>
                         </a>
                     </li>
@@ -80,9 +80,9 @@
                 @can('feature-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-feature')}}" class="nav-link">
-                            <i class="fas fa-cogs"></i>
+                            <i class="nav-icon fas fa-star"></i>
                             <p>
-                                Features
+                                {{trans('dashboard.features')}}
                             </p>
                         </a>
                     </li>
@@ -92,7 +92,7 @@
                         <i class="nav-icon fas fa-building"></i>
                         <p>
                             <i class="nav-icon right fas fa-angle-left"></i>
-                            Units
+                            {{trans('dashboard.units')}}
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -101,7 +101,7 @@
                             <a href="{{route('admin.create-unit')}}" class="nav-link">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>
-                                    Add Unit
+                                    {{trans('dashboard.add_unit')}}
                                 </p>
                             </a>
                         </li>
@@ -111,20 +111,20 @@
                             <a href="{{route('admin.show-unit')}}" class="nav-link">
                                 <i class="nav-icon fas fa-eye"></i>
                                 <p>
-                                    Show Unit
+                                    {{trans('dashboard.show_units')}}
                                 </p>
                             </a>
                         </li>
                         @endcan
                     </ul>
                 </li>
-                <li class="nav-header">Booking</li>
+                <li class="nav-header">  {{trans('dashboard.booking')}}</li>
                 @can('booking-request-list')
                 <li class="nav-item">
                     <a href="{{route('admin.show-booking-request')}}" class="nav-link">
-                        <i class="nav-icon fas fa-eye"></i>
+                        <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                             Booking Requests
+                            {{trans('dashboard.booking_request')}}
                         </p>
                     </a>
                 </li>
@@ -134,19 +134,19 @@
                     <a href="{{route('admin.show-booking')}}" class="nav-link">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
-                            Booking
+                            {{trans('dashboard.show_booking')}}
                         </p>
                     </a>
                 </li>
                 @endcan
 
-                <li class="nav-header">Setting</li>
+                <li class="nav-header">{{trans('dashboard.setting')}}</li>
                  @can('show-setting')
                 <li class="nav-item">
                     <a href="{{route('admin.show-setting')}}" class="nav-link">
-                        <i class="nav-icon fas fa-eye"></i>
+                        <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            Setting
+                            {{trans('dashboard.show_setting')}}
                         </p>
                     </a>
                 </li>
@@ -155,7 +155,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
-                            Permissions
+                            {{trans('dashboard.permissions')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -165,7 +165,7 @@
                                 <a href="{{route('admin.roles.index')}}" class="nav-link">
                                     <i class="nav-icon fas fa-eye"></i>
                                     <p>
-                                        Show Roles
+                                        {{trans('dashboard.show_roles')}}
                                     </p>
                                 </a>
                             </li>
@@ -175,25 +175,33 @@
                                 <a href="{{route('admin.roles.create')}}" class="nav-link">
                                     <i class="nav-icon fas fa-plus-circle"></i>
                                     <p>
-                                        Create Role
+                                        {{trans('dashboard.create_role')}}
                                     </p>
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
-                <li class="nav-header">Support</li>
+                <li class="nav-header"> {{trans('dashboard.support')}}</li>
                 @can('message-list')
                     <li class="nav-item">
                         <a href="{{route('admin.show-message')}}" class="nav-link">
                             <i class="nav-icon fas fa-envelope"></i>
                             <p>
-                                Contact Us
+                                {{trans('dashboard.contact_us')}}
                             </p>
                         </a>
                     </li>
                 @endcan
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-question-circle"></i>
 
+                        <p>
+                            {{trans('dashboard.faq')}}
+                        </p>
+                    </a>
+                </li>
             </ul>
 
         </nav>

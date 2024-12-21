@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Show Users'])
+@extends('dashboard.layouts.master',['title'=>'Admin  | Show Users'])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4>Profile</h4>
+                        <h5>{{trans('dashboard.show_user_profile_details')}}</h5>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User Profile</li>
+                            <li class="breadcrumb-item"><a href="">{{trans('dashboard.profile')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.users')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.users_management')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -30,7 +31,7 @@
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                         src="{{asset('storage/uploads/settings/profile.jpg')}}"
+                                         src="{{asset('dashboard/dist/img/profile.jpg')}}"
                                          alt="User profile picture">
                                 </div>
 

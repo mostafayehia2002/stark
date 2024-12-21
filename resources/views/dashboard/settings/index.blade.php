@@ -8,11 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4>Show Settings</h4>
+                        <h4>{{trans('dashboard.show_setting')}}</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Settings</li>
+                            <li class="breadcrumb-item">{{trans('dashboard.show_setting')}}</li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.setting')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -23,17 +24,14 @@
         <section class="content">
             <div class="container">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Settings Management</h3>
-                    </div>
                     <div class="card-body">
                         <!-- Tabs for Settings -->
                         <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
                             <li class="nav-item">
-                                <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" role="tab" aria-controls="general" aria-selected="true">General Settings</button>
+                                <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" role="tab" aria-controls="general" aria-selected="true">{{trans('dashboard.general_settings')}}</button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="social-media-tab" data-bs-toggle="tab" data-bs-target="#social-media" role="tab" aria-controls="social-media" aria-selected="false">Social Media</button>
+                                <button class="nav-link" id="social-media-tab" data-bs-toggle="tab" data-bs-target="#social-media" role="tab" aria-controls="social-media" aria-selected="false">{{trans('dashboard.social_media')}}</button>
                             </li>
                         </ul>
                         <div class="tab-content mt-6" id="settingsTabsContent">
@@ -62,7 +60,7 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save General Settings</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save</button>
                                     @endcan
                                 </form>
                             </div>
@@ -86,7 +84,7 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save Social Media Settings</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save</button>
                                     @endcan
                                 </form>
                             </div>

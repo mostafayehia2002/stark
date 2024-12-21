@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4>Add New Unit</h4>
+                        <h4>{{trans('dashboard.add_new_unit')}}</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Add Unit</li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">Units Management</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.add_unit')}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">{{trans('dashboard.units_management')}}</a></li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Unit Information</h3>
+                                <h3 class="card-title">{{trans('dashboard.unit_information')}}</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"
@@ -117,7 +117,7 @@
                     <div class="col-md-6">
                         <div class="card card-secondary">
                             <div class="card-header">
-                                <h3 class="card-title">Features</h3>
+                                <h3 class="card-title">{{trans('dashboard.features')}}</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"
                                             data-toggle="tooltip" title="Collapse">
@@ -155,7 +155,7 @@
 
                             <div class="card card-secondary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Images</h3>
+                                    <h3 class="card-title">{{trans('dashboard.images')}}</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"
                                                 data-toggle="tooltip" title="Collapse">
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label><strong>Image</strong></label>
+                                        <label><strong>{{trans('dashboard.images')}}</strong></label>
                                         <div class="row">
                                             <input class="form-control" type="File" name="image[]" multiple accept="image/*">
                                             @error('image')

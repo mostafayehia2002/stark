@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Contact us'])
+@extends('dashboard.layouts.master',['title'=>'Admin | Contact us'])
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Message</h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.see_all_messages')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-message')}}">Messages</a></li>
-                            <li class="breadcrumb-item active">Members</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.show-message')}}">{{trans('dashboard.messages')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.support')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -61,7 +61,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Show Message</h4>
+                                                                <h4 class="modal-title">{{trans('dashboard.show_message')}}</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                                                         onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
                                                                 >

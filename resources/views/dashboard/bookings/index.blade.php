@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Booking'])
+@extends('dashboard.layouts.master',['title'=>'Admin | Booking'])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="m-0 text-dark">Show All Booking </h4>
+                        <h4 class="m-0 text-dark">{{trans('dashboard.show_all_booking')}}</h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Show Booking</a></li>
-                            <li class="breadcrumb-item active">Booking</li>
+                            <li class="breadcrumb-item"><a href="">{{trans('dashboard.show_booking')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.booking')}}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
