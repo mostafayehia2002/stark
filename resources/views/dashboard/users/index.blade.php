@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Show Users'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.show_users')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -12,7 +12,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">{{trans('dashboard.show_users')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.users')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.dashboard')}}">{{trans('dashboard.users')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('dashboard.users_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -31,74 +32,78 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{trans('label.username')}}</th>
+                                    <th>{{trans('label.email')}}</th>
+                                    <th>{{trans('label.phone')}}</th>
+                                    <th>{{trans('label.type')}}</th>
+                                    <th>{{trans('label.status')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($users as $user)
                                     <tr>
-                                        <td>{{$user->id}}</td>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$user->username}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone}}</td>
                                         <td>
-                                            {{$user->type}}
+                                            {{trans('enums.'.$user->type)}}
                                         </td>
                                         <td>
                                             @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
-                                                <label class="badge bg-success"> {{$user->status}}</label>
+                                                <label
+                                                    class="badge bg-success"> {{trans('enums.'.$user->status)}}</label>
                                             @else
-                                                <label class="badge bg-danger"> {{$user->status}}</label>
-                                                 @endif
+                                                <label class="badge bg-danger">{{trans('enums.'.$user->status)}}</label>
+                                        @endif
 
-                        <td>{{$user->created_at}}</td>
-                        <td>
-                            @can('user-delete')
-                                <a href="{{route('admin.delete-user',$user->id)}}"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Are you sure you want to delete this user?');">
-                                    <i class="fa-solid fa-trash"></i>
-                                    Delete
-                                </a>
-                            @endcan
-                            @can('user-detail')
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.details-user',$user->id)}}"> <i class="fas fa-eye"></i> details</a>
-                            @endcan
-                            @can('user-block')
-                                <a href="{{route('admin.block-user',$user->id)}}"
-                                   class="btn btn-warning btn-sm"
-                                   onclick="return confirm('Are you sure you want do it');">
-                                    @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
-                                        <i class="fas fa-ban"></i>
-                                        Block
-                                    @else
-                                        <i class="fas fa-unlock"></i>
-                                        Un Block
-                                    @endif
+                                        <td>{{$user->created_at}}</td>
+                                        <td>
+                                            @can('user-delete')
+                                                <a href="{{route('admin.delete-user',$user->id)}}"
+                                                   title="{{trans('label.delete')}}"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Are you sure you want to delete this user?');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            @endcan
+                                            @can('user-detail')
+                                                <a class="btn btn-primary btn-sm" title="{{trans('label.detail')}}"
+                                                   href="{{route('admin.details-user',$user->id)}}"><i
+                                                        class="fas fa-info-circle"></i></a>
+                                            @endcan
+                                            @can('user-block')
+                                                @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
+                                                    <a href="{{route('admin.block-user',$user->id)}}"
+                                                       class="btn btn-warning btn-sm" title="{{trans('label.block')}}"
+                                                       onclick="return confirm('Are you sure to block user');">
+                                                        <i class="fas fa-ban"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{route('admin.block-user',$user->id)}}"
+                                                       class="btn btn-warning btn-sm" title="{{trans('label.unblock')}}"
+                                                       onclick="return confirm('Are you sure to unblock user');">
+                                                        <i class="fas fa-unlock"></i>
+                                                    </a>
+                                                @endif
 
-                                </a>
-                            @endcan
-                        </td>
-                        </tr>
+                                            @endcan
+                                        </td>
+                                    </tr>
 
-                        @empty
-                            <td colspan="8" class="text-center">No Data</td>
-                            @endforelse
-                            </tbody>
+                                @empty
+                                    <td colspan="8" class="text-center">{{trans('label.no_data_found')}}</td>
+                                @endforelse
+                                </tbody>
 
                             </table>
                             {{ $users->links() }}
 
-                            </div>
-                    <!-- /.card-body -->
+                        </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>

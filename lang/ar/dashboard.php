@@ -76,6 +76,9 @@ return [
     'role_management' => 'إدارة الأدوار',
     'add_permission' => 'انشاء صلاحية',
     'create_new_role' => 'اضافة دور جديد',
-    'edit_role'=>'تعديل الدور'
+    'edit_role' => 'تعديل الدور',
+    'copyright'=>'حقوق النشر',
+    'all_rights_reserved' => 'جميع الحقوق محفوظة',
+
 
 ];

@@ -1,6 +1,5 @@
-@extends('dashboard.layouts.master', ['title' => 'Admin Stark | Update Unit'])
+@extends('dashboard.layouts.master', ['title' =>trans('dashboard.update_unit')])
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -38,7 +37,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Unit Title</label>
+                                    <label for="title">{{trans('label.unit_title')}}:</label>
                                     <input type="text" id="title" name="title" class="form-control"
                                            value="{{ old('title' ,$unit->title)}}">
                                     @error('title')
@@ -46,7 +45,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price">{{trans('label.price')}}:</label>
                                     <input type="number" id="price" name="price" class="form-control"
                                            value="{{ old('price',$unit->price) }}">
                                     @error('price')
@@ -54,12 +53,12 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Unit Type</label>
+                                    <label for="type">{{trans('label.type')}}:</label>
                                     <select id="type" name="type" class="form-control">
                                         <option value="" disabled selected>Select Unit Type</option>
                                         @foreach(\App\Enums\UnitType::cases() as $unitType)
                                             <option value="{{ $unitType->value }}" @selected(old('type', $unit->type) == $unitType->value) >
-                                                {{ ucfirst($unitType->name) }}
+                                                {{trans('enums.'.ucfirst($unitType->name))  }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -69,7 +68,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="area">Area (in sqm)</label>
+                                    <label for="area">{{trans('label.area')}}:</label>
                                     <input type="number" id="area" name="area" class="form-control"
                                            value="{{ old('area',$unit->area) }}">
                                     @error('area')
@@ -77,7 +76,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="number_bedroom">Number of Bedrooms</label>
+                                    <label for="number_bedroom">{{trans('label.number_of_bedrooms')}}{{trans('label.optional')}}:</label>
                                     <input type="number" id="number_bedroom" name="number_bedroom" class="form-control"
                                            value="{{ old('number_bedroom' ,$unit->number_bedroom )}}">
                                     @error('number_bedroom')
@@ -85,7 +84,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="number_bathroom">Number of Bathrooms</label>
+                                    <label for="number_bathroom">{{trans('label.number_of_bathrooms')}}{{trans('label.optional')}}:</label>
                                     <input type="number" id="number_bathroom" name="number_bathroom"
                                            class="form-control"
                                            value="{{ old('number_bathroom' ,$unit->number_bathroom) }}">
@@ -94,7 +93,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
+                                    <label for="address">{{trans('label.address')}}:</label>
                                     <input type="text" id="address" name="address" class="form-control"
                                            value="{{ old('address',$unit->address )}}">
                                     @error('address')
@@ -102,7 +101,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">{{trans('label.description')}}:</label>
                                     <textarea id="description" name="description" class="form-control"
                                               rows="4">{{ old('description',$unit->description)}}</textarea>
                                     @error('description')
@@ -166,7 +165,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label><strong>Image</strong></label>
+                                    <label><strong>{{trans('dashboard.images')}}</strong></label>
                                     <div class="row">
                                         <input class="form-control" type="File" name="image[]" multiple
                                                accept="image/*">
@@ -185,8 +184,8 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="#" class="btn btn-secondary">Cancel</a>
-                        <input type="submit" value="Update Unit" class="btn btn-success float-right" id="submitBtn">
+                        <input type="reset" class="btn btn-danger" value="{{trans('label.reset')}}">
+                        <input type="submit" value="{{trans('label.update')}}" class="btn btn-success float-right" id="submitBtn">
                     </div>
                 </div>
             </form>

@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Units'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.unit_details')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

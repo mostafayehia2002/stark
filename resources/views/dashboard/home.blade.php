@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Home'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.home')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -11,7 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('dashboard.home')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.dashboard')}}">{{trans('dashboard.home')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('dashboard.dashboard')}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -150,10 +151,10 @@
                                     <table class="table m-0">
                                         <thead>
                                         <tr>
-                                            <th>Booking ID</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Created At</th>
+                                            <th>{{trans('label.booking_id')}}</th>
+                                            <th>{{trans('label.booking_date')}}</th>
+                                            <th>{{trans('label.status')}}</th>
+                                            <th>{{trans('label.created_at')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -167,9 +168,9 @@
                                                     @php
                                                         $status = $request->getStatusAttributes($request->status);
                                                     @endphp
-
                                                     <label class="badge bg-{{ $status['color'] }}">
-                                                        {{ $status['label'] }}
+
+                                                        {{ trans('enums.'.$status['label']) }}
                                                     </label>
                                                 </td>
                                                 <td>
@@ -249,20 +250,20 @@
                             <div class="card-body p-0">
                                 <ul class="products-list product-list-in-card pl-2 pr-2">
                                     @foreach($messages as $message)
-                                    <li class="item">
-                                        <div class="product-img">
-                                            <img src="{{asset('dashboard/dist/img/default-150x150.png')}}"
-                                                 alt="Product Image" class="img-size-50">
-                                        </div>
-                                        <div class="product-info">
+                                        <li class="item">
+                                            <div class="product-img">
+                                                <img src="{{asset('dashboard/dist/img/default-150x150.png')}}"
+                                                     alt="Product Image" class="img-size-50">
+                                            </div>
+                                            <div class="product-info">
                                             <span class="product-title">
                                                 {{$message->full_name}}
                                             </span>
-                                            <span class="product-description">
+                                                <span class="product-description">
                                             {{$message->message}}
                                              </span>
-                                        </div>
-                                    </li>
+                                            </div>
+                                        </li>
                                     @endforeach
 
                                 </ul>

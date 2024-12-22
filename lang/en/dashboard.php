@@ -76,8 +76,8 @@ return [
      'role_management'=>'Role Management',
     'create_new_role'=>'Create New Role',
     'edit_role'=>'Edit Role',
-
-
+    'copyright'=>'Copyright',
+    'all_rights_reserved'=>'All rights reserved.',
 
 
 ];

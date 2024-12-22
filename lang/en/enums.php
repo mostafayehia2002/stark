@@ -1,22 +1,26 @@
 <?php
 
 return[
-    'owner'=>'owner',
-    'renter'=>'renter',
-    'admin'=>'admin',
+    'owner'=>'Owner',
+    'renter'=>'Renter',
+    'admin'=>'Admin',
 
-    'active'=>'active',
-    'inactive'=>'inactive',
+    'active'=>'Active',
+    'inactive'=>'Inactive',
 
-    'apartment'=>'apartment',
-    'villa'=>'villa',
-    'office'=>'office',
-    'shop'=>'shop',
-    'land'=>'land',
+    'apartment'=>'Apartment',
+    'villa'=>'Villa',
+    'office'=>'Office',
+    'shop'=>'Shop',
+    'land'=>'Land',
 
-    'pending'=>'pending',
-    'accepted'=>'accepted',
-    'rejected'=>'rejected',
-    'confirmed'=>'confirmed',
-    'cancelled'=>'cancelled',
+    'pending'=>'Pending',
+    'accepted'=>'Accepted',
+    'rejected'=>'Rejected',
+    'confirmed'=>'Confirmed',
+    'cancelled'=>'Cancelled',
+
+    'accept'=>'Accept',
+    'reject'=>'Reject',
+    'unknown'=>'Unknown',
 ];

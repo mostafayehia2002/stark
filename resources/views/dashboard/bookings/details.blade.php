@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Booking Details'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.details')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">{{'dashboard.details'}}</li>
+                            <li class="breadcrumb-item active">{{trans('dashboard.details')}}</li>
                             <li class="breadcrumb-item"><a href="">{{trans('dashboard.booking')}}</a></li>
                         </ol>
                     </div>

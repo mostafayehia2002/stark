@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin  | Units'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.unit_details')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -19,7 +19,7 @@
             </div>
             <div class="text-right mb-3">
                 <button class="btn btn-secondary btn-sm" onclick="window.print()">
-                    <i class="fas fa-print"></i> Print Details
+                    <i class="fas fa-print"></i> {{trans('label.print')}}
                 </button>
             </div>
         </section>
@@ -34,33 +34,33 @@
                                 <h5><i class="fas fa-info-circle"></i>{{trans('dashboard.unit_information')}}</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Title:</strong>{{ $unit->title }}</p>
-                                <p><strong>Price:</strong> {{ $unit->price }} {{$unit->currancy}}</p>
-                                <p><strong>Type:</strong> {{ $unit->type }}</p>
-                                <p><strong>Area:</strong> {{ $unit->area }}</p>
-                                <p><strong>Number of Bedrooms:</strong> {{ $unit->number_bedroom }}</p>
-                                <p><strong>Number of Bathrooms:</strong> {{ $unit->number_bathroom }}</p>
-                                <p><strong>Location:</strong> {{ $unit->address }}</p>
-                                <p><strong>Description:</strong> {{ $unit->description }}</p>
-                                <p><strong>Is Booked:</strong>
+                                <p><strong>{{trans('label.unit_title')}}:</strong>{{ $unit->title }}</p>
+                                <p><strong>{{trans('label.price')}}:</strong> {{ $unit->price }} {{$unit->currancy}}</p>
+                                <p><strong>{{trans('label.type')}}:</strong> {{ $unit->type }}</p>
+                                <p><strong>{{trans('label.area')}}:</strong> {{ $unit->area }}</p>
+                                <p><strong>{{trans('label.number_of_bedrooms')}}:</strong> {{ $unit->number_bedroom }}</p>
+                                <p><strong>{{trans('label.number_of_bathrooms')}}:</strong> {{ $unit->number_bathroom }}</p>
+                                <p><strong>{{trans('label.address')}}:</strong> {{ $unit->address }}</p>
+                                <p><strong>{{trans('label.description')}}:</strong> {{ $unit->description }}</p>
+                                <p><strong>{{trans('label.is_booked')}}:</strong>
                                     @if($unit->is_booked)
-                                    <span class="badge badge-success">Yes</span>
+                                    <span class="badge badge-success">{{trans('label.yes')}}</span>
                                     @else
-                                        <span class="badge badge-primary">No</span>
+                                        <span class="badge badge-primary">{{trans('label.no')}}</span>
                                     @endif
                                 </p>
-                                <p><strong>Created At:</strong> {{ $unit->created_at }}</p>
-                                <p><strong>Last Update At:</strong> {{ $unit->updated_at }}</p>
+                                <p><strong>{{trans('label.created_at')}}:</strong> {{ $unit->created_at }}</p>
+                                <p><strong>{{trans('label.last_update_at')}}:</strong> {{ $unit->updated_at }}</p>
                                 <p>
-                                    <strong>Status:</strong>
+                                    <strong>{{trans('label.status')}}:</strong>
                                     @if ($unit->status == 'pending')
-                                        <span class="badge badge-warning">Pending</span>
+                                        <span class="badge badge-warning">{{trans('enums.pending')}}</span>
                                     @elseif ($unit->status == 'accepted')
-                                        <span class="badge badge-success">Accepted</span>
+                                        <span class="badge badge-success">{{trans('enums.accepted')}}</span>
                                     @elseif ($unit->status == 'rejected')
-                                        <span class="badge badge-danger">Rejected</span>
+                                        <span class="badge badge-danger">{{trans('enums.rejected')}}</span>
                                     @else
-                                        <span class="badge badge-secondary">Unknown</span>
+                                        <span class="badge badge-secondary">{{trans('enums.unknown')}}</span>
                                     @endif
                                 </p>
                             </div>
@@ -73,13 +73,13 @@
                                 <h5><i class="fas fa-user"></i>{{trans('dashboard.owner_information')}}</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Full Name:</strong> {{ $unit->owner->full_name }}</p>
-                                <p><strong>UserName:</strong> {{ $unit->owner->username }}</p>
-                                <p><strong>Email:</strong> {{ $unit->owner->email }}</p>
-                                <p><strong>Phone:</strong> {{ $unit->owner->phone }}</p>
-                                <p><strong>Business Name:</strong> {{ $unit->owner->business_name }}</p>
-                                <p><strong>Business License:</strong> {{ $unit->owner->business_license }}</p>
-                                <p><strong>Address:</strong> {{ $unit->owner->address }}</p>
+                                <p><strong>{{trans('label.full_name')}}:</strong> {{ $unit->owner->full_name }}</p>
+                                <p><strong>{{trans('label.username')}}:</strong> {{ $unit->owner->username }}</p>
+                                <p><strong>{{trans('label.email')}}:</strong> {{ $unit->owner->email }}</p>
+                                <p><strong>{{trans('label.phone')}}:</strong> {{ $unit->owner->phone }}</p>
+                                <p><strong>{{trans('label.business_name')}}:</strong> {{ $unit->owner->business_name }}</p>
+                                <p><strong>{{trans('label.business_license')}}:</strong> {{ $unit->owner->business_license }}</p>
+                                <p><strong>{{trans('label.address')}}:</strong> {{ $unit->owner->address }}</p>
                             </div>
                         </div>
                         <!-- Features -->

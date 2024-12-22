@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Contact us'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.messages')])
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -31,12 +31,12 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Is User</th>
-                                    <th>Message</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>{{trans('label.full_name')}}</th>
+                                    <th>{{trans('label.email')}}</th>
+                                    <th>{{trans('label.is_user')}}</th>
+                                    <th>{{trans('label.message')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -55,7 +55,6 @@
                                             @can('message-read')
                                             <a href="#exampleModal{{$contact->id}}" data-toggle="modal" class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
                                                 <i class="fas fa-eye"></i>
-                                                Show
                                             </a>
                                                 <div class="modal fade" id="exampleModal{{$contact->id}}">
                                                     <div class="modal-dialog">
@@ -91,14 +90,13 @@
                                                class="btn btn-danger btn-sm"
                                                onclick="return confirm('Are you sure you want to do it?');">
                                                 <i class="fa-solid fa-trash"></i>
-                                                Delete
                                             </a>
                                             @endcan
                                         </td>
                                     </tr>
 
                                 @empty
-                                    <td  colspan="6" class="text-center">No Messages</td>
+                                    <td  colspan="6" class="text-center">{{trans('label.no_data_found')}}</td>
                                 @endforelse
                                 </tbody>
 

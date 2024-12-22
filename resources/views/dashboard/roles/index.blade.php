@@ -1,5 +1,5 @@
 
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Show Roles'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.show_roles')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -38,10 +38,10 @@
             <div class="card-body">
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <th width="100px">No</th>
-                        <th>Name</th>
-                        <th>Created At</th>
-                        <th width="280px">Action</th>
+                        <th width="100px">#</th>
+                        <th>{{trans('label.role_name')}}</th>
+                        <th>{{trans('label.created_at')}}</th>
+                        <th width="280px">{{trans('label.action')}}</th>
                     </tr>
                     @foreach ($roles as $key => $role)
                         <tr>

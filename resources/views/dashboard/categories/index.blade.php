@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin Stark | Category'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.categories')])
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -39,40 +39,38 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#ID</th>
-                                    <th>Name</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{trans('label.category_name')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($categories as $category)
                                     <tr>
-                                        <td>{{$category->id}}</td>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>{{$category->created_at}}</td>
                                         <td>
                                             @can('category-delete')
-                                                <a href="{{route('admin.delete-category',$category->id)}}"
+                                                <a href="{{route('admin.delete-category',$category->id)}}" title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to do it?');">
                                                     <i class="fa-solid fa-trash"></i>
-                                                    Delete
                                                 </a>
                                             @endcan
                                             @can('category-update')
-                                                <a href="#UpdateCategoryModal" data-toggle="modal"
+                                                <a href="#UpdateCategoryModal" data-toggle="modal" title="{{trans('label.update')}}"
                                                    class="btn btn-sm btn-primary" data-id="{{$category->id}}"
                                                    data-name="{{$category->name}}">
                                                     <i class="fas fa-edit"></i>
-                                                    Edit
                                                 </a>
                                             @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <td colspan="3" class="text-center">
-                                        No Categories
+                                        {{trans('label.no_data_found')}}
                                     </td>
                                 @endforelse
                                 </tbody>
@@ -103,18 +101,18 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="category_name">Category Name</label>
+                                    <label for="category_name">{{trans('label.category_name')}}:</label>
                                     <input type="text" class="form-control" id="category_name"
-                                           placeholder="Category Name" name="name" value="{{old('name')}}">
+                                           placeholder="{{trans('label.category_name')}}" name="name" value="{{old('name')}}">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary"
-                            >Add
+                            >{{trans('label.create')}}
                             </button>
                             <button type="reset" class="btn btn-default" data-dismiss="modal"
-                            >Close
+                            >{{trans('label.reset')}}
                             </button>
                         </div>
                     </form>
@@ -141,18 +139,18 @@
                             <div class="card-body">
                                 <input type="hidden" id="category_id" name="id" value="">
                                 <div class="form-group">
-                                    <label for="category_name">Category Name</label>
+                                    <label for="category_name">{{trans('label.category_name')}}:</label>
                                     <input type="text" class="form-control" id="category_name"
-                                           placeholder="Category Name" name="name" value="">
+                                           placeholder="{{trans('label.category_name')}}" name="name" value="">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary"
-                            >Update
+                            >{{trans('label.update')}}
                             </button>
                             <button type="reset" class="btn btn-default" data-dismiss="modal"
-                            >Close
+                            >{{trans('label.reset')}}
                             </button>
                         </div>
                     </form>

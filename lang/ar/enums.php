@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'owner' => 'المالك',
-    'renter' => 'المستأجر',
-    'admin' => 'المسؤول',
+    'owner' => 'مالك',
+    'renter' => 'مستأجر',
+    'admin' => 'مسؤول',
 
     'active' => 'نشط',
     'inactive' => 'غير نشط',
@@ -19,5 +19,9 @@ return [
     'rejected' => 'مرفوض',
     'confirmed' => 'مؤكد',
     'cancelled' => 'ملغي',
+
+    'accept'=>'قبول',
+    'reject'=>'رفض',
+    'unknown'=>'غير معروف'
 ];
 

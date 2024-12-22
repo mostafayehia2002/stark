@@ -58,7 +58,7 @@ class Unit extends Model
     }
     public function getNextStatus(): string
     {
-        return $this->isAcceptable() ? 'ACCEPT' : 'REJECT';
+        return $this->isAcceptable() ? 'accept' : 'reject';
     }
 
     public function getButtonClass(): string

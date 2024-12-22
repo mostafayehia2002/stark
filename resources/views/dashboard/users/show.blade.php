@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin  | Show Users'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.profile')])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -37,17 +37,17 @@
 
                                 <h3 class="profile-username text-center">{{$user->full_name}}</h3>
 
-                                <p class="text-muted text-center">{{$user->type}}</p>
+                                <p class="text-muted text-center">{{trans('enums.'.$user->type)}}</p>
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
-                                        <b>UserName</b> <a class="float-right">{{$user->username}}</a>
+                                        <b>{{trans('label.username')}}:</b> <a class="float-right">{{$user->username}}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Email</b> <a class="float-right">{{$user->email}}</a>
+                                        <b>{{trans('label.email')}}:</b> <a class="float-right">{{$user->email}}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Phone</b> <a class="float-right">{{$user->phone}}</a>
+                                        <b>{{trans('label.phone')}}:</b> <a class="float-right">{{$user->phone}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -58,25 +58,23 @@
                         <!-- About Me Box -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">About Me</h3>
+                                <h3 class="card-title">{{trans('label.about_me')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i>Business Name</strong>
+                                <strong><i class="fas fa-book mr-1"></i>{{trans('label.business_name')}}:</strong>
                                 <p class="text-muted">
                                     {{$user->business_name??'Not Added'}}
                                 </p>
                                 <hr>
-                                <strong><i class="fas fa-book mr-1"></i>Business Licences</strong>
+                                <strong><i class="fas fa-book mr-1"></i>{{trans('label.business_license')}}:</strong>
                                 <p class="text-muted">
                                     {{$user->business_licences??'Not Added'}}
                                 </p>
                                 <hr>
 
-                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
+                                <strong><i class="fas fa-map-marker-alt mr-1"></i> {{trans('label.address')}}:</strong>
                                 <p class="text-muted">{{$user->address??'Not Added'}}</p>
-
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -87,7 +85,7 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>
+                                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">{{trans('label.activity')}}</a>
                                     </li>
                                 </ul>
                             </div><!-- /.card-header -->
@@ -99,53 +97,51 @@
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                 <tr>
-                                                    <th>#ID</th>
-                                                    <th>Title</th>
-                                                    <th>Type</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th>#</th>
+                                                    <th>{{trans('label.title')}}</th>
+                                                    <th>{{trans('label.type')}}</th>
+                                                    <th>{{trans('label.status')}}</th>
+                                                    <th>{{trans('label.action')}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 @forelse($user->units as $unit)
                                                     <tr>
-                                                        <td>{{$unit->id}}</td>
+                                                        <td>{{$loop->index+1}}</td>
                                                         <td>{{$unit->title}}</td>
-                                                        <td>{{$unit->type}}</td>
+                                                        <td>{{trans('enums.'.$unit->type)}}</td>
                                                         <td>
                                                             @if($unit->status==\App\Enums\UnitStatus::PENDING->value)
-                                                                <label class="badge bg-warning">{{$unit->status}}</label>
+                                                                <label class="badge bg-warning">{{trans('enums.'.$unit->status)}}</label>
                                                             @elseif($unit->status==\App\Enums\UnitStatus::REJECTED->value)
-                                                                <label class="badge bg-danger">{{$unit->status}}</label>
+                                                                <label class="badge bg-danger">{{trans('enums.'.$unit->status)}}</label>
                                                             @else
-                                                                <label class="badge bg-success">{{$unit->status}}</label>
+                                                                <label class="badge bg-success">{{trans('enums.'.$unit->status)}}</label>
                                                             @endif
                                                         </td>
                                                         <td>
 
                                                             @can('unit-details')
-                                                                <a href="{{route('admin.show-details',$unit->id)}}"
+                                                                <a href="{{route('admin.show-details',$unit->id)}}" title="{{trans('label.detail')}}"
                                                                    class="btn btn-secondary btn-sm">
                                                                     <i class="fas fa-info-circle"></i>
-                                                                    Details
                                                                 </a>
                                                             @endcan
                                                             @can('unit-edit')
-                                                                <a href="{{route('admin.edit-unit',$unit->id)}}"
+                                                                <a href="{{route('admin.edit-unit',$unit->id)}}" title="{{trans('label.update')}}"
                                                                    class="btn btn-primary btn-sm">
-                                                                    <i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                                    <i class="fa-solid fa-pen-to-square"></i></a>
                                                             @endcan
                                                             @can('unit-delete')
-                                                                <a href="{{route('admin.delete-unit',$unit->id)}}"
+                                                                <a href="{{route('admin.delete-unit',$unit->id)}}" title="{{trans('label.delete')}}"
                                                                    class="btn btn-danger btn-sm"
                                                                    onclick="return confirm('Are you sure you want to it?');">
                                                                     <i class="fa-solid fa-trash"></i>
-                                                                    Delete
                                                                 </a>
                                                             @endcan
                                                             @can('unit-change-status')
                                                                 <a href="{{ route('admin.change-status', ['id' => $unit->id, 'status' => $unit->status]) }}"
-                                                                   class="btn btn-sm {{ $unit->getButtonClass() }}"
+                                                                   class="btn btn-sm {{ $unit->getButtonClass() }}" title="{{trans('label.change_status')}}"
                                                                    onclick="return confirm('Are you sure you want to change the status?');">
                                                                     <i class="fas {{ $unit->isAcceptable() ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                                                     {{ $unit->isAcceptable() ? 'Accept' : 'Reject' }}
@@ -156,7 +152,7 @@
                                                     </tr>
                                                 @empty
                                                     <td colspan="5" class="text-center">
-                                                        No Features
+                                                        {{trans('label.no_data_found')}}
                                                     </td>
                                                 @endforelse
                                                 </tbody>

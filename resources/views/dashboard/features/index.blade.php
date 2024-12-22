@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Features'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.features')])
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -12,7 +12,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-feature')}}">{{trans('dashboard.features')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.show-feature')}}">{{trans('dashboard.features')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('dashboard.units_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -21,7 +22,7 @@
                     <div class="col-sm-6">
                         <a href="#AddFeatureModal" data-toggle="modal" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
-                           {{trans('dashboard.add_feature')}}
+                            {{trans('dashboard.add_feature')}}
                         </a>
                     </div>
                 @endcan
@@ -39,45 +40,45 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#ID</th>
-                                    <th>Name</th>
-                                    <th>Category Name</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{trans('label.feature_name')}}</th>
+                                    <th>{{trans('label.category_name')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($features as $feature)
                                     <tr>
-                                        <td>{{$feature->id}}</td>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$feature->name}}</td>
                                         <td>{{$feature->category->name}}</td>
                                         <td>{{$feature->created_at}}</td>
                                         <td>
                                             @can('feature-delete')
                                                 <a href="{{route('admin.delete-feature',$feature->id)}}"
+                                                   title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to do it?');">
                                                     <i class="fa-solid fa-trash"></i>
-                                                    Delete
                                                 </a>
                                             @endcan
                                             @can('feature-update')
                                                 <a href="#UpdateFeatureModal" data-toggle="modal"
+                                                   title="{{trans('label.update')}}"
                                                    class="btn btn-sm btn-primary"
                                                    data-feature_id="{{ $feature->id }}"
                                                    data-feature_name="{{ $feature->name }}"
                                                    data-category_id="{{ $feature->category->id}}"
                                                 >
                                                     <i class="fas fa-edit"></i>
-                                                    Edit
                                                 </a>
                                             @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <td colspan="5" class="text-center">
-                                        No Features
+                                        {{trans('label.no_data_found')}}
                                     </td>
                                 @endforelse
                                 </tbody>
@@ -108,7 +109,7 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="category_id">Category Name</label>
+                                    <label for="category_id">{{trans('label.category_name')}}:</label>
                                     <select class="form-control" id="category_id" name="category_id">
                                         <option disabled>Select Category</option>
                                         @foreach($categories as $category)
@@ -117,19 +118,19 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="feature_name">Feature Name</label>
+                                    <label for="feature_name">{{trans('label.feature_name')}}:</label>
                                     <input type="text" class="form-control" id="feature_name"
-                                           placeholder="Feature Name" name="feature_name"
+                                           placeholder="{{trans('label.feature_name')}}" name="feature_name"
                                            value="{{old('feature_name')}}">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary"
-                            >Add
+                            >{{trans('label.create')}}
                             </button>
                             <button type="reset" class="btn btn-default" data-dismiss="modal"
-                            >Close
+                            >{{trans('label.reset')}}
                             </button>
                         </div>
                     </form>
@@ -155,7 +156,7 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="category_id">Category Name</label>
+                                    <label for="category_id">{{trans('label.category_name')}}:</label>
                                     <select class="form-control" id="category_id" name="category_id">
                                         <option disabled>Select Category</option>
                                         @foreach($categories as $category)
@@ -165,18 +166,18 @@
                                 </div>
                                 <input type="hidden" name="feature_id" id="feature_id" value="">
                                 <div class="form-group">
-                                    <label for="feature_name">Feature Name</label>
+                                    <label for="feature_name">{{trans('label.feature_name')}}:</label>
                                     <input type="text" class="form-control" id="feature_name"
-                                           placeholder="Feature Name" name="feature_name" value="">
+                                           placeholder="{{trans('label.feature_name')}}" name="feature_name" value="">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary"
-                            >Update
+                            >{{trans('label.update')}}
                             </button>
                             <button type="reset" class="btn btn-default" data-dismiss="modal"
-                            >Close
+                            >{{trans('label.reset')}}
                             </button>
                         </div>
                     </form>

@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use App\Enums\BookingStatus;
-use App\Enums\UserType;
 use App\Traits\CustomizeDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+
 
 class BookingRequest extends Model
 {
@@ -62,11 +61,11 @@ class BookingRequest extends Model
     {
         // Define the mapping of status colors and labels
         $statusConfig = [
-            BookingStatus::PENDING->value => ['color' => 'warning', 'label' => 'Pending'],
-            BookingStatus::CONFIRMED->value => ['color' => 'success', 'label' => 'Confirmed'],
-            BookingStatus::REJECTED->value => ['color' => 'danger', 'label' => 'Rejected'],
-            BookingStatus::ACCEPTED->value => ['color' => 'primary', 'label' => 'Accepted'],
-            BookingStatus::CANCELLED->value => ['color' => 'secondary', 'label' => 'Cancelled'],
+            BookingStatus::PENDING->value => ['color' => 'warning', 'label' => 'pending'],
+            BookingStatus::CONFIRMED->value => ['color' => 'success', 'label' => 'confirmed'],
+            BookingStatus::REJECTED->value => ['color' => 'danger', 'label' => 'rejected'],
+            BookingStatus::ACCEPTED->value => ['color' => 'primary', 'label' => 'accepted'],
+            BookingStatus::CANCELLED->value => ['color' => 'secondary', 'label' => 'cancelled'],
         ];
 
         // Return the status configuration for the given status or default values

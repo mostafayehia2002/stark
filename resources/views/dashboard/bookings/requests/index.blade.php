@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Booking Requests'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.booking_request')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -32,19 +32,19 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#ID</th>
-                                    <th>Booking Id</th>
-                                    <th>Booking Date</th>
-                                    <th>Unit Title</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{trans('label.booking_id')}}</th>
+                                    <th>{{trans('label.booking_date')}}</th>
+                                    <th>{{trans('label.unit_title')}}</th>
+                                    <th>{{trans('label.status')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($booking_requests as $request)
                                     <tr>
-                                        <td>{{$request->id}}</td>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$request->booking_id}}</td>
                                         <td>{{$request->booking_date}}</td>
                                         <td>{{$request->unit->title}}</td>
@@ -63,7 +63,6 @@
                                                 <a href="{{route('admin.details-booking-request',$request->id)}}"
                                                    class="btn btn-secondary btn-sm">
                                                     <i class="fas fa-info-circle"></i>
-                                                    Details
                                                 </a>
                                             @endcan
                                             @can('booking-request-delete')
@@ -71,7 +70,6 @@
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to it?');">
                                                     <i class="fa-solid fa-trash"></i>
-                                                    Delete
                                                 </a>
                                             @endcan
                                             @can('booking-request-change-status')
@@ -79,14 +77,13 @@
                                                    data-toggle="modal" data-id="{{$request->id}}"
                                                    data-status="{{$request->status}}">
                                                     <i class="fas fa-sync-alt"></i>
-                                                    Change Status
                                                 </a>
                                             @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <td colspan="7" class="text-center">
-                                        No Booking Requests
+                                        {{trans('label.no_data_found')}}
                                     </td>
                                 @endforelse
                                 </tbody>

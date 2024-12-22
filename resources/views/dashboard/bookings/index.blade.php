@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Booking'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.show_booking')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -30,17 +30,17 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#ID</th>
-                                    <th>Booking Request Id</th>
-                                    <th>Booking Date</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{trans('label.booking_request_id')}}</th>
+                                    <th>{{trans('label.booking_date')}}</th>
+                                    <th>{{trans('label.created_at')}}</th>
+                                    <th>{{trans('label.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($bookings as $booking)
                                     <tr>
-                                        <td>{{$booking->id}}</td>
+                                        <td>{{$loop->index+1}}</td>
                                         <td>{{$booking->booking_request_id}}</td>
                                         <td>{{$booking->confirmed_date}}</td>
                                         <td>{{$booking->created_at}}</td>
@@ -49,7 +49,6 @@
                                                 <a href="{{route('admin.details-booking',$booking->booking_request_id)}}"
                                                    class="btn btn-secondary btn-sm">
                                                     <i class="fas fa-info-circle"></i>
-                                                    Details
                                                 </a>
                                             @endcan
                                             @can('booking-delete')
@@ -57,14 +56,13 @@
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to it?');">
                                                     <i class="fa-solid fa-trash"></i>
-                                                    Delete
                                                 </a>
                                             @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <td colspan="5" class="text-center">
-                                        No Booking
+                                        {{trans('label.no_data_found')}}
                                     </td>
                                 @endforelse
                                 </tbody>
