@@ -19,7 +19,7 @@
             </div>
             <div class="text-right mb-3">
                 <button class="btn btn-secondary btn-sm" onclick="window.print()">
-                    <i class="fas fa-print"></i> Print Details
+                    <i class="fas fa-print"></i> {{trans('label.print')}}
                 </button>
             </div>
         </section>
@@ -34,34 +34,31 @@
                                 <h5><i class="fas fa-info-circle"></i>{{trans('dashboard.unit_information')}}</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Title:</strong>{{ $request->unit->title }}</p>
-                                <p><strong>Price:</strong> {{ $request->unit->price }} {{$request->unit->currancy}}</p>
-                                <p><strong>Type:</strong> {{ $request->unit->type }}</p>
-                                <p><strong>Area:</strong> {{ $request->unit->area }}</p>
-                                <p><strong>Number of Bedrooms:</strong> {{ $request->unit->number_bedroom }}</p>
-                                <p><strong>Number of Bathrooms:</strong> {{ $request->unit->number_bathroom }}</p>
-                                <p><strong>Location:</strong> {{ $request->unit->address }}</p>
-                                <p><strong>Description:</strong> {{ $request->unit->description }}</p>
-                                <p><strong>Is Booked:</strong>
+                                <p><strong>{{trans('label.unit_title')}}:</strong>{{ $request->unit->title }}</p>
+                                <p><strong>{{trans('label.price')}}:</strong> {{ $request->unit->price }} {{$request->unit->currancy}}</p>
+                                <p><strong>{{trans('label.type')}}:</strong> {{ $request->unit->type }}</p>
+                                <p><strong>{{trans('label.area')}}:</strong> {{ $request->unit->area }}</p>
+                                <p><strong>{{trans('label.number_of_bedrooms')}}:</strong> {{ $request->unit->number_bedroom }}</p>
+                                <p><strong>{{trans('label.number_of_bathrooms')}}:</strong> {{ $request->unit->number_bathroom }}</p>
+                                <p><strong>{{trans('label.address')}}:</strong> {{ $request->unit->address }}</p>
+                                <p><strong>{{trans('label.description')}}:</strong> {{ $request->unit->description }}</p>
+                                <p><strong>{{trans('label.is_booked')}}:</strong>
                                     @if($request->unit->is_booked)
-                                        <span class="badge badge-success">Yes</span>
+                                        <span class="badge badge-success">{{trans('label.yes')}}</span>
                                     @else
-                                        <span class="badge badge-primary">No</span>
+                                        <span class="badge badge-primary">{{trans('label.no')}}</span>
                                     @endif
                                 </p>
-                                <p><strong>Created At:</strong> {{ $request->unit->created_at }}</p>
-                                <p><strong>Last Update At:</strong> {{ $request->unit->updated_at }}</p>
+                                <p><strong>{{trans('label.created_at')}}:</strong> {{ $request->unit->created_at }}</p>
+                                <p><strong>{{trans('label.last_update_at')}}:</strong> {{ $request->unit->updated_at }}</p>
                                 <p>
-                                    <strong>Status:</strong>
-                                    @if ($request->unit->status == 'pending')
-                                        <span class="badge badge-warning">Pending</span>
-                                    @elseif ($request->unit->status == 'accepted')
-                                        <span class="badge badge-success">Accepted</span>
-                                    @elseif ($request->unit->status == 'rejected')
-                                        <span class="badge badge-danger">Rejected</span>
-                                    @else
-                                        <span class="badge badge-secondary">Unknown</span>
-                                    @endif
+                                    <strong>{{trans('label.status')}}:</strong>
+                                    @php
+                                        $status =$request->getStatusAttributes($request->unit->status);
+                                    @endphp
+                                    <span class="badge badge-{{ $status['color'] }}">
+                                        {{ translate_enums($status['label'] )}}
+                                    </span>
                                 </p>
                             </div>
                         </div>
@@ -73,13 +70,13 @@
                                 <h5><i class="fas fa-user"></i>{{trans('dashboard.owner_information')}}</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Full Name:</strong> {{ $request->owner->full_name }}</p>
-                                <p><strong>UserName:</strong> {{ $request->owner->username }}</p>
-                                <p><strong>Email:</strong> {{ $request->owner->email }}</p>
-                                <p><strong>Phone:</strong> {{ $request->owner->phone }}</p>
-                                <p><strong>Business Name:</strong> {{ $request->owner->business_name }}</p>
-                                <p><strong>Business License:</strong> {{ $request->owner->business_license }}</p>
-                                <p><strong>Address:</strong> {{ $request->owner->address }}</p>
+                                <p><strong>{{trans('label.full_name')}}:</strong> {{ $request->owner->full_name }}</p>
+                                <p><strong>{{trans('label.username')}}:</strong> {{ $request->owner->username }}</p>
+                                <p><strong>{{trans('label.email')}}:</strong> {{ $request->owner->email }}</p>
+                                <p><strong>{{trans('label.phone')}}:</strong> {{ $request->owner->phone }}</p>
+                                <p><strong>{{trans('label.business_name')}}:</strong> {{ $request->owner->business_name }}</p>
+                                <p><strong>{{trans('label.business_license')}}:</strong> {{ $request->owner->business_license }}</p>
+                                <p><strong>{{trans('label.address')}}:</strong> {{ $request->owner->address }}</p>
                             </div>
                         </div>
                         <div class="card">
@@ -87,11 +84,11 @@
                                 <h5><i class="fas fa-user"></i>{{trans('dashboard.renter_information')}}</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Full Name:</strong> {{ $request->user->full_name }}</p>
-                                <p><strong>UserName:</strong> {{ $request->user->username }}</p>
-                                <p><strong>Email:</strong> {{ $request->user->email }}</p>
-                                <p><strong>Phone:</strong> {{ $request->user->phone }}</p>
-                                <p><strong>Address:</strong> {{ $request->user->address }}</p>
+                                <p><strong>{{trans('label.full_name')}}:</strong> {{ $request->user->full_name }}</p>
+                                <p><strong>{{trans('label.username')}}:</strong> {{ $request->user->username }}</p>
+                                <p><strong>{{trans('label.email')}}:</strong> {{ $request->user->email }}</p>
+                                <p><strong>{{trans('label.phone')}}:</strong> {{ $request->user->phone }}</p>
+                                <p><strong>{{trans('label.address')}}:</strong> {{ $request->user->address }}</p>
                             </div>
                         </div>
                     </div>
@@ -124,8 +121,8 @@
                                     <h5><i class="fas fa-info-circle"></i>{{trans('dashboard.booking_information')}}</h5>
                                 </div>
                                 <div class="card-body">
-                                    <p><strong>Booking Request ID</strong>{{$request->booking->booking_request_id}}</p>
-                                    <p><strong>Booking Date</strong>{{$request->booking->confirmed_date}}</p>
+                                    <p><strong>{{trans('label.booking_request_id')}}:</strong>{{$request->booking->booking_request_id}}</p>
+                                    <p><strong>{{trans('label.booking_date')}}:</strong>{{$request->booking->confirmed_date}}</p>
                                 </div>
                             </div>
                         </div>

@@ -169,8 +169,7 @@
                                                         $status = $request->getStatusAttributes($request->status);
                                                     @endphp
                                                     <label class="badge bg-{{ $status['color'] }}">
-
-                                                        {{ trans('enums.'.$status['label']) }}
+                                                        {{ translate_enums($status['label']) }}
                                                     </label>
                                                 </td>
                                                 <td>

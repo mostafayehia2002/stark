@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master',['title'=>'Admin | Show Role'])
+@extends('dashboard.layouts.master',['title'=>trans('dashboard.show_roles')])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -22,7 +22,7 @@
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-right">
                         <a class="btn btn-primary" href="{{ route('admin.roles.index') }}">
-                            <i class="fa fa-arrow-left"></i> Back
+                            <i class="fa fa-arrow-left"></i> {{trans('label.back')}}
                         </a>
                     </div>
                 </div>
@@ -38,21 +38,21 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Name:</strong>
+                                    <strong>{{trans('label.role_name')}}:</strong>
                                     <p class="text-muted">{{ $role->name }}</p>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Permissions:</strong>
+                                    <strong>{{trans('label.permissions')}}:</strong>
                                     <div class="d-flex flex-wrap">
                                         @if(!empty($rolePermissions))
                                             @foreach($rolePermissions as $v)
-                                                <span class="badge badge-success mr-2 mb-2">{{ $v->name }}</span>
+                                                <span class="badge badge-success mr-2 mb-2">{{translate_permission($v->name)}}</span>
                                             @endforeach
                                         @else
-                                            <span class="text-muted">No permissions assigned</span>
+                                            <span class="text-muted">{{trans('label.no_data_found')}}</span>
                                         @endif
                                     </div>
                                 </div>

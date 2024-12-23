@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master', ['title' => 'Admin Stark | Settings'])
+@extends('dashboard.layouts.master', ['title' => trans('dashboard.show_setting')])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -42,7 +42,7 @@
                                     <div class="row">
                                         @foreach ($settings['general'] ?? [] as $setting)
                                             <div class="col-md-6 mb-3">
-                                                <label for="{{ $setting->key }}" class="form-label">{{ ucfirst(str_replace('_', ' ', $setting->key)) }}</label>
+                                                <label for="{{ $setting->key }}" class="form-label">{{trans('label.'.$setting->key ) }}</label>
                                                 <input
                                                     type="{{ $setting->input_type }}"
                                                     class="form-control"
@@ -60,7 +60,7 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">{{trans('label.save')}}</button>
                                     @endcan
                                 </form>
                             </div>
@@ -72,7 +72,7 @@
                                     <div class="row">
                                         @foreach ($settings['social_media'] ?? [] as $setting)
                                             <div class="col-md-6 mb-3">
-                                                <label for="{{ $setting->key }}" class="form-label">{{ ucfirst($setting->key) }}</label>
+                                                <label for="{{ $setting->key }}" class="form-label">{{ trans('label.'.$setting->key) }}</label>
                                                 <input
                                                     type="{{ $setting->input_type }}"
                                                     class="form-control"
@@ -84,7 +84,7 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">Save</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">{{trans('label.save')}}</button>
                                     @endcan
                                 </form>
                             </div>

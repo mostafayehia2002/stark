@@ -54,13 +54,13 @@
                                 <p>
                                     <strong>{{trans('label.status')}}:</strong>
                                     @if ($unit->status == 'pending')
-                                        <span class="badge badge-warning">{{trans('enums.pending')}}</span>
+                                        <span class="badge badge-warning">{{translate_enums('pending')}}</span>
                                     @elseif ($unit->status == 'accepted')
-                                        <span class="badge badge-success">{{trans('enums.accepted')}}</span>
+                                        <span class="badge badge-success">{{translate_enums('accepted')}}</span>
                                     @elseif ($unit->status == 'rejected')
-                                        <span class="badge badge-danger">{{trans('enums.rejected')}}</span>
+                                        <span class="badge badge-danger">{{translate_enums('rejected')}}</span>
                                     @else
-                                        <span class="badge badge-secondary">{{trans('enums.unknown')}}</span>
+                                        <span class="badge badge-secondary">{{trans('unknown')}}</span>
                                     @endif
                                 </p>
                             </div>

@@ -1,5 +1,4 @@
-@extends('dashboard.layouts.master', ['title' => 'Admin Stark | Create Permission'])
-
+@extends('dashboard.layouts.master', ['title' => trans('dashboard.add_permission')])
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -28,7 +27,7 @@
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
                         <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin.roles.index') }}">
-                            <i class="fa fa-arrow-left"></i> Back
+                            <i class="fa fa-arrow-left"></i> {{trans('label.back')}}
                         </a>
                     </div>
                 </div>
@@ -42,18 +41,18 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Name:</strong>
-                                        <input type="text" name="name" placeholder="Name" class="form-control" required>
+                                        <strong>{{trans('label.role_name')}}:</strong>
+                                        <input type="text" name="name" placeholder="{{trans('label.role_name')}}" class="form-control" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Permission:</strong>
+                                        <strong>{{trans('label.permissions')}}:</strong>
                                         <div class="form-group">
                                             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                                 <input type="checkbox" class="custom-control-input permission-checkbox" id="checkAll">
-                                                <label class="custom-control-label" for="checkAll">Select All</label>
+                                                <label class="custom-control-label" for="checkAll">{{trans('label.select_all')}}</label>
                                             </div>
                                         </div>
                                         <div class="permissions-list mt-3">
@@ -61,7 +60,7 @@
                                                 <div class="form-group">
                                                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                                         <input type="checkbox" class="custom-control-input permission-checkbox" id="customSwitch{{$value->id}}" name="permission[{{$value->id}}]" value="{{$value->id}}">
-                                                        <label class="custom-control-label" for="customSwitch{{$value->id}}">{{ $value->name }}</label>
+                                                        <label class="custom-control-label" for="customSwitch{{$value->id}}">{{translate_permission($value->name)}}</label>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -71,7 +70,7 @@
 
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary btn-sm mb-3">
-                                        <i class="fa-solid fa-floppy-disk"></i> Submit
+                                        <i class="fa-solid fa-floppy-disk"></i>{{trans('label.save')}}
                                     </button>
                                 </div>
                             </div>

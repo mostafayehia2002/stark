@@ -71,7 +71,7 @@ class SettingSeeder extends Seeder
             ],
 
             [
-              'key' =>'FaceBook',
+              'key' =>'facebook',
                'value'=>'https://www.facebook.com/FaceBook',
                 'type' =>'social_media',
                 'is_editable'=>true,
@@ -80,7 +80,7 @@ class SettingSeeder extends Seeder
                 'updated_at'=>now()
             ],
             [
-                'key' =>'Instagram',
+                'key' =>'instagram',
                 'value'=>'https://instagram.com/starkbrokers',
                 'type' =>'social_media',
                 'is_editable'=>true,
@@ -89,7 +89,7 @@ class SettingSeeder extends Seeder
                 'updated_at'=>now()
             ],
             [
-                'key' =>'WhatsApp',
+                'key' =>'whatsApp',
                 'value'=>'https://wa.me/+966539313803',
                 'type' =>'social_media',
                 'is_editable'=>true,
@@ -98,7 +98,7 @@ class SettingSeeder extends Seeder
                 'updated_at'=>now()
             ],
             [
-                'key' =>'Twitter',
+                'key' =>'twitter',
                 'value'=>'https://x.com/starbrokers',
                 'type' =>'social_media',
                 'is_editable'=>true,
@@ -107,7 +107,7 @@ class SettingSeeder extends Seeder
                 'updated_at'=>now()
             ],
             [
-                'key' =>'LinkedIn',
+                'key' =>'linkedin',
                 'value'=>'https://www.linkedin.com/company/stark-brokers',
                 'type' =>'social_media',
                 'is_editable'=>true,

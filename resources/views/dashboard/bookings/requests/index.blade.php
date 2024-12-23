@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.show-booking-request')}}">
-                                  {{trans('dashboard.booking_request')}}
+                                    {{trans('dashboard.booking_request')}}
                                 </a></li>
                             <li class="breadcrumb-item active">  {{trans('dashboard.booking')}}</li>
                         </ol>
@@ -52,21 +52,22 @@
                                             @php
                                                 $status = $request->getStatusAttributes($request->status);
                                             @endphp
-
                                             <label class="badge bg-{{ $status['color'] }}">
-                                                {{ $status['label'] }}
+                                                {{ translate_enums($status['label'] )}}
                                             </label>
                                         </td>
                                         <td>{{$request->created_at}}</td>
                                         <td>
                                             @can('booking-request-details')
                                                 <a href="{{route('admin.details-booking-request',$request->id)}}"
+                                                   title="{{trans('label.detail')}}"
                                                    class="btn btn-secondary btn-sm">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
                                             @endcan
                                             @can('booking-request-delete')
                                                 <a href="{{route('admin.delete-booking-request',$request->id)}}"
+                                                   title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to it?');">
                                                     <i class="fa-solid fa-trash"></i>
@@ -74,6 +75,7 @@
                                             @endcan
                                             @can('booking-request-change-status')
                                                 <a href="#ChangeStatusModal" class="btn btn-sm btn-outline-primary"
+                                                   title="{{trans('label.change_status')}}"
                                                    data-toggle="modal" data-id="{{$request->id}}"
                                                    data-status="{{$request->status}}">
                                                     <i class="fas fa-sync-alt"></i>
@@ -102,7 +104,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Change Status</h4>
+                        <h4 class="modal-title">{{trans('label.change_status')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -113,11 +115,12 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <input type="hidden" name="request_id" id="request_id">
-                                    <label for="status">Status</label>
+                                    <label for="status">{{trans('label.status')}}</label>
                                     <select class="form-control" id="status" name="status">
                                         <option disabled>Select Status</option>
                                         @foreach(\App\Enums\BookingStatus::cases() as $status)
-                                            <option value="{{$status->value}}">{{$status->value}}</option>
+                                            <option
+                                                value="{{$status->value}}">{{translate_enums($status->value)}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -125,10 +128,10 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="submit" class="btn btn-primary"
-                            >Change
+                            >{{trans('label.change')}}
                             </button>
                             <button type="reset" class="btn btn-default" data-dismiss="modal"
-                            >Close
+                            >{{trans('label.reset')}}
                             </button>
                         </div>
                     </form>

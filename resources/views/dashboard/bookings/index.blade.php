@@ -47,12 +47,14 @@
                                         <td>
                                             @can('booking-details')
                                                 <a href="{{route('admin.details-booking',$booking->booking_request_id)}}"
+                                                   title="{{trans('label.detail')}}"
                                                    class="btn btn-secondary btn-sm">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
                                             @endcan
                                             @can('booking-delete')
                                                 <a href="{{route('admin.delete-booking',$booking->id)}}"
+                                                   title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
                                                    onclick="return confirm('Are you sure you want to it?');">
                                                     <i class="fa-solid fa-trash"></i>

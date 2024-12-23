@@ -37,7 +37,7 @@
 
                                 <h3 class="profile-username text-center">{{$user->full_name}}</h3>
 
-                                <p class="text-muted text-center">{{trans('enums.'.$user->type)}}</p>
+                                <p class="text-muted text-center">{{$user->translate_type()}}</p>
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
@@ -109,18 +109,17 @@
                                                     <tr>
                                                         <td>{{$loop->index+1}}</td>
                                                         <td>{{$unit->title}}</td>
-                                                        <td>{{trans('enums.'.$unit->type)}}</td>
+                                                        <td>{{$unit->translate_type()}}</td>
                                                         <td>
                                                             @if($unit->status==\App\Enums\UnitStatus::PENDING->value)
-                                                                <label class="badge bg-warning">{{trans('enums.'.$unit->status)}}</label>
+                                                                <label class="badge bg-warning">{{$unit->translat_status()}}</label>
                                                             @elseif($unit->status==\App\Enums\UnitStatus::REJECTED->value)
-                                                                <label class="badge bg-danger">{{trans('enums.'.$unit->status)}}</label>
+                                                                <label class="badge bg-danger">{{$unit->translat_status()}}</label>
                                                             @else
-                                                                <label class="badge bg-success">{{trans('enums.'.$unit->status)}}</label>
+                                                                <label class="badge bg-success">{{$unit->translat_status()}}</label>
                                                             @endif
                                                         </td>
                                                         <td>
-
                                                             @can('unit-details')
                                                                 <a href="{{route('admin.show-details',$unit->id)}}" title="{{trans('label.detail')}}"
                                                                    class="btn btn-secondary btn-sm">

@@ -65,4 +65,17 @@ class Unit extends Model
     {
         return $this->isAcceptable() ? 'btn-success' : 'btn-danger';
     }
+
+
+    public function translate_type(): string
+    {
+        return translate_enums($this->type);
+    }
+
+    public function translate_status(): string
+    {
+        return translate_enums($this->status);
+    }
+
+
 }

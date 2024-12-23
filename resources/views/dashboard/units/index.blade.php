@@ -46,16 +46,16 @@
                                     <tr>
                                         <td>{{$loop->index+1}}</td>
                                         <td>{{$unit->title}}</td>
-                                        <td>{{trans('enums.'.$unit->type)}}</td>
+                                        <td>{{$unit->translate_type()}}</td>
                                         <td>{{$unit->price}}</td>
                                         <td>{{$unit->owner->email}}</td>
                                         <td>
                                             @if($unit->status==\App\Enums\UnitStatus::PENDING->value)
-                                                <label class="badge bg-warning">{{trans('enums.'.$unit->status)}}</label>
+                                                <label class="badge bg-warning">{{$unit->translate_status()}}</label>
                                             @elseif($unit->status==\App\Enums\UnitStatus::REJECTED->value)
-                                                <label class="badge bg-danger">{{trans('enums.'.$unit->status)}}</label>
+                                                <label class="badge bg-danger">{{$unit->translate_status()}}</label>
                                             @else
-                                                <label class="badge bg-success">{{trans('enums.'.$unit->status)}}</label>
+                                                <label class="badge bg-success">{{$unit->translate_status()}}</label>
                                             @endif
                                         </td>
                                         <td>{{$unit->created_at}}</td>

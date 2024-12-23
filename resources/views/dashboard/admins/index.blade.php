@@ -64,10 +64,10 @@
                                         <td>
                                             @if($admin->status===\App\Enums\UserStatus::ACTIVE->value)
                                                 <label
-                                                    class="badge bg-success"> {{trans('enums.'.$admin->status)}}</label>
+                                                    class="badge bg-success"> {{$admin->translate_status()}}</label>
                                             @else
                                                 <label
-                                                    class="badge bg-danger"> {{trans('enums.'.$admin->status)}}</label>
+                                                    class="badge bg-danger">{{$admin->translate_status()}}</label>
                                             @endif
                                         </td>
                                         <td>{{$admin->created_at}}</td>

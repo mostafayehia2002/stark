@@ -50,14 +50,14 @@
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone}}</td>
                                         <td>
-                                            {{trans('enums.'.$user->type)}}
+                                            {{$user->translate_type()}}
                                         </td>
                                         <td>
                                             @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
                                                 <label
-                                                    class="badge bg-success"> {{trans('enums.'.$user->status)}}</label>
+                                                    class="badge bg-success"> {{ $user->translate_status() }}</label>
                                             @else
-                                                <label class="badge bg-danger">{{trans('enums.'.$user->status)}}</label>
+                                                <label class="badge bg-danger">{{$user->translate_status()}}</label>
                                         @endif
 
                                         <td>{{$user->created_at}}</td>

@@ -32,6 +32,16 @@ class User extends Authenticatable
     ];
 
 
+    public function translate_type(): string
+    {
+        return translate_enums($this->type);
+    }
+
+    public function translate_status(): string
+    {
+        return translate_enums($this->status);
+    }
+
     public function units()
     {
         return $this->hasMany(Unit::class);

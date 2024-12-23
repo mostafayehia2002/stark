@@ -58,7 +58,7 @@
                                         <option value="" disabled selected>Select Unit Type</option>
                                         @foreach(\App\Enums\UnitType::cases() as $unitType)
                                             <option value="{{ $unitType->value }}" @selected(old('type', $unit->type) == $unitType->value) >
-                                                {{trans('enums.'.ucfirst($unitType->name))  }}
+                                                {{translate_enums($unitType->name)  }}
                                             </option>
                                         @endforeach
                                     </select>

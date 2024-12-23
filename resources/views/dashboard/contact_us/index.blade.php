@@ -46,9 +46,9 @@
                                         <td>{{$contact->email}}</td>
                                         <td>
                                             @if($contact->is_user==1)
-                                                <label class="badge bg-success">yes</label>
+                                                <label class="badge bg-success">{{trans('label.yes')}}</label>
                                               @else
-                                                <label class="badge bg-danger">no</label>
+                                                <label class="badge bg-danger">{{trans('label.no')}}</label>
                                         @endif
                                         </td>
                                         <td>
@@ -73,7 +73,7 @@
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal"
                                                                         onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
-                                                                >Close</button>
+                                                                >{{trans('label.save')}}</button>
                                                             </div>
                                                         </div>
                                                         <!-- /.modal-content -->
@@ -87,6 +87,7 @@
                                         <td>
                                             @can('message-delete')
                                             <a href="{{route('admin.delete-message',$contact->id)}}"
+                                               title="{{trans('label.delete')}}"
                                                class="btn btn-danger btn-sm"
                                                onclick="return confirm('Are you sure you want to do it?');">
                                                 <i class="fa-solid fa-trash"></i>
