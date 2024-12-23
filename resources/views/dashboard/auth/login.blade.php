@@ -6,7 +6,7 @@
     <title>Admin Stark Brokers | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/jpg" href="{{asset('storage/uploads/settings/'.app('settings')->getValue('general','site_logo'))??asset('build/assets/logo-nav-9xhMEncz.jpg')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
@@ -27,13 +27,13 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">{{trans('label.sign_in_to_start_your_session')}}</p>
 
             <form action="{{route('admin.login')}}" method="POST">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" class="form-control @error('emailOrPhone') is-invalid @enderror"
-                           placeholder="Email Or Phone" name="emailOrPhone">
+                           placeholder="{{trans('label.email_or_phone')}}" name="emailOrPhone">
 
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                           placeholder="Password" name="password">
+                           placeholder="{{trans('label.password')}}" name="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -51,17 +51,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember" name="remember">
                             <label for="remember">
-                                Remember Me
+                                {{trans('label.remember_me')}}
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{trans('label.sign_in')}}</button>
                     </div>
                     <!-- /.col -->
                 </div>

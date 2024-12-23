@@ -1,5 +1,11 @@
 <?php
 return [
+    'sign_in_to_start_your_session' => 'قم بتسجيل الدخول لبدء جلستك',
+    'sign_in' => 'تسجيل الدخول',
+    'email_or_phone' => 'البريد الإلكتروني أو رقم الهاتف',
+    'remember_me' => 'تذكرني',
+    'logout' => 'تسجيل الخروج',
+
     'booking_id' => 'معرف الحجز',
     'booking_date' => 'تاريخ الحجز',
     'status' => 'الحالة',

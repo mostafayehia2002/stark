@@ -1,5 +1,10 @@
 <?php
 return [
+    'sign_in_to_start_your_session'=>'Sign in to start your session',
+    'sign_in'=>'Sign in',
+    'email_or_phone'=>'Email or Phone',
+    'remember_me'=>'Remember Me',
+    'logout'=>'Logout',
     'booking_id' => 'Booking Id',
     'booking_date' => 'Booking Date',
     'status' => 'Status',

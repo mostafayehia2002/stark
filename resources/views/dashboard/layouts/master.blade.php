@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/jpg" href="{{asset('build/assets/logo-nav-9xhMEncz.jpg')}}">
+    <link rel="icon" type="image/jpg" href="{{asset('storage/uploads/settings/'.app('settings')->getValue('general','site_logo'))??asset('build/assets/logo-nav-9xhMEncz.jpg')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{--include  css style   --}}
     @include('dashboard.layouts.styles')
