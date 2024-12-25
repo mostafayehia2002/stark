@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         // ContactUs::factory()->count(10)->create();
         $this->call([
-            //SettingSeeder::class,
-            // PermissionTableSeeder::class,
-            // UserSeeder::class,
-            //CategorySeeder::class,
-            //FeatureSeeder::class,
+            SettingSeeder::class,
+            PermissionTableSeeder::class,
+            UserSeeder::class,
+            CategorySeeder::class,
+            FeatureSeeder::class,
             FAQSeeder::class,
         ]);
 

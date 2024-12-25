@@ -47,10 +47,11 @@ return [
     'booking-delete' => 'Delete Booking',
     'show-setting' => 'Show Settings',
     'update-setting' => 'Update Settings',
-    'FAQ-list' => 'FAQ List',
-    'FAQ-create' => 'Create FAQ',
-    'FAQ-edit' => 'Edit FAQ',
-    'FAQ-delete' => 'Delete FAQ',
+
+    'faq-list' => 'FAQ List',
+    'faq-create' => 'Create FAQ',
+    'faq-edit' => 'Edit FAQ',
+    'faq-delete' => 'Delete FAQ',
 
 ];
 

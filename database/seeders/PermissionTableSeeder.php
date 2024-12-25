@@ -61,10 +61,10 @@ class PermissionTableSeeder extends Seeder
             'show-setting'=>'admin.show-setting',
             'update-setting'=>'admin.update-setting',
 
-            'FAQ-list'=>'admin.FAQ-list',
-            'FAQ-create'=>'admin.FAQ-create',
-            'FAQ-edit'=>'admin.FAQ-edit',
-            'FAQ-delete'=>'admin.FAQ-delete',
+            'faq-list'=>'admin.FAQ-list',
+            'faq-create'=>'admin.FAQ-create',
+            'faq-edit'=>'admin.FAQ-edit',
+            'faq-delete'=>'admin.FAQ-delete',
 
         ];
 
