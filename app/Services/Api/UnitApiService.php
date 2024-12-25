@@ -56,7 +56,6 @@ class UnitApiService
                 $query->whereIn('features.id', $request->get('features'));
             });
         }
-
         $units = $units->orderBy('created_at', 'DESC')->paginate(15);
        if(!$units->isEmpty()){
            return [
@@ -66,7 +65,7 @@ class UnitApiService
        }
        return [
            'success' => false,
-           'message' => 'No data found',
+           'message' => translate_message('no_data_found'),
        ];
     }
 
@@ -82,7 +81,7 @@ class UnitApiService
         }
         return [
             'success' => false,
-            'message' => 'No data found',
+            'message' => translate_message('no_data_found'),
         ];
 
     }
@@ -98,7 +97,7 @@ class UnitApiService
         }
         return [
             'success' => false,
-            'message' => 'No data found',
+            'message' => translate_message('no_data_found'),
         ];
 
     }

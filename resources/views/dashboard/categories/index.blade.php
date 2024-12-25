@@ -1,6 +1,5 @@
 @extends('dashboard.layouts.master',['title'=>trans('dashboard.categories')])
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -12,7 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-category')}}">{{trans('dashboard.categories')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.show-category')}}">{{trans('dashboard.categories')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('dashboard.units_management')}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -53,16 +53,20 @@
                                         <td>{{$category->created_at}}</td>
                                         <td>
                                             @can('category-delete')
-                                                <a href="{{route('admin.delete-category',$category->id)}}" title="{{trans('label.delete')}}"
+                                                <a href="{{route('admin.delete-category',$category->id)}}"
+                                                   title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
-                                                   onclick="return confirm('Are you sure you want to do it?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             @endcan
                                             @can('category-update')
-                                                <a href="#UpdateCategoryModal" data-toggle="modal" title="{{trans('label.update')}}"
+                                                <a href="#UpdateCategoryModal" data-toggle="modal"
+                                                   title="{{trans('label.update')}}"
                                                    class="btn btn-sm btn-primary" data-id="{{$category->id}}"
-                                                   data-name="{{$category->name}}">
+                                                   data-name_en="{{$category->getTranslation('name','en')}}"
+                                                   data-name_ar="{{$category->getTranslation('name','ar')}}"
+                                                >
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             @endcan
@@ -101,9 +105,22 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="category_name">{{trans('label.category_name')}}:</label>
-                                    <input type="text" class="form-control" id="category_name"
-                                           placeholder="{{trans('label.category_name')}}" name="name" value="{{old('name')}}">
+                                    <label for="category_name_en">{{trans('label.category_name_en')}}:</label>
+                                    <input type="text" class="form-control" id="category_name_en"
+                                           placeholder="{{trans('label.category_name_en')}}" name="name_en"
+                                           value="{{old('name_en')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="category_name_ar">{{trans('label.category_name_ar')}}:</label>
+                                    <input type="text" class="form-control" id="category_name_ar"
+                                           placeholder="{{trans('label.category_name_ar')}}" name="name_ar"
+                                           value="{{old('name_ar')}}">
+                                    @error('name_ar')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -123,7 +140,7 @@
         </div>
         <!-- /.Add Category Model-->
 
-        {{-- Add Category Model       --}}
+        {{-- Update Category Model       --}}
         <div class="modal fade" id="UpdateCategoryModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -139,9 +156,22 @@
                             <div class="card-body">
                                 <input type="hidden" id="category_id" name="id" value="">
                                 <div class="form-group">
-                                    <label for="category_name">{{trans('label.category_name')}}:</label>
-                                    <input type="text" class="form-control" id="category_name"
-                                           placeholder="{{trans('label.category_name')}}" name="name" value="">
+                                    <label for="category_name_en">{{trans('label.category_name_en')}}:</label>
+                                    <input type="text" class="form-control" id="category_name_en"
+                                           placeholder="{{trans('label.category_name_en')}}" name="name_en"
+                                           value="{{old('name_en')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="category_name_ar">{{trans('label.category_name_ar')}}:</label>
+                                    <input type="text" class="form-control" id="category_name_ar"
+                                           placeholder="{{trans('label.category_name_ar')}}" name="name_ar"
+                                           value="{{old('name_ar')}}">
+                                    @error('name_ar')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -184,10 +214,12 @@
             $('#UpdateCategoryModal').on('show.bs.modal', function (event) {
                 let button = $(event.relatedTarget)
                 let id = button.data('id')
-                let name = button.data('name')
+                let name_en = button.data('name_en')
+                let name_ar = button.data('name_ar')
                 let modal = $(this)
                 modal.find('.modal-body #category_id').val(id);
-                modal.find('.modal-body #category_name').val(name);
+                modal.find('.modal-body #category_name_en').val(name_en);
+                modal.find('.modal-body #category_name_ar').val(name_ar);
             })
         </script>
     @endpush

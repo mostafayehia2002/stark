@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFeatureRequest;
+use App\Http\Requests\UpdateFeatureRequest;
 use App\Models\Category;
 use App\Models\Feature;
 use App\Services\Admin\FeatureService;
@@ -26,12 +28,8 @@ class FeatureController extends Controller
         return view('dashboard.features.index', compact('features', 'categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreFeatureRequest $request)
     {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'feature_name' => 'required'
-        ]);
         $response = $this->featureService->store($request);
         if ($response['success']) {
             toastr()->success($response['message']);
@@ -44,13 +42,8 @@ class FeatureController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(UpdateFeatureRequest $request)
     {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'feature_id' => 'required|exists:features,id',
-            'feature_name' => 'required|unique:features,name,'.$request->input('feature_id'),
-        ]);
         $response = $this->featureService->update($request);
         if ($response['success']) {
             toastr()->success($response['message']);

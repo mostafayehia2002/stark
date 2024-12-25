@@ -33,7 +33,7 @@ class UserRegisterService
             return [
                 'success' => false,
                 'status'=>400,
-                'message' => 'An account with this phone number already exists for this user type. Please login instead'
+                'message' => translate_message('account_already_exist')
             ];
         }
         try {

@@ -37,3 +37,11 @@ if (!function_exists('translate_enums')) {
         return trans('enums.' . strtolower($enum));
     }
 }
+
+if (!function_exists('translate_message')) {
+    function translate_message(string $message): string
+    {
+
+        return trans('message.' . strtolower($message));
+    }
+}

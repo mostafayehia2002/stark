@@ -30,12 +30,12 @@ class AdminAuthService
                 Auth::login($user, $remember);
                 return [
                     'success' => true,
-                    'message' => 'successfully logged in',
+                    'message' =>translate_message('success_login') ,
                 ];
             }
             return [
                 'success' => false,
-                'message' => 'Invalid credentials',
+                'message' =>translate_message('invalid_credentials'),
             ];
         } catch (\Exception $exception) {
             return [
@@ -54,12 +54,12 @@ class AdminAuthService
                 Auth::logout();
                 return [
                     'success' => true,
-                    'message' => "Successfully logged out",
+                    'message' => translate_message('success_logout'),
                 ];
             }
             return [
                 'success' => false,
-                'message' => "Unauthenticated",
+                'message' => translate_message('unauthenticated'),
             ];
         } catch (\Exception $exception) {
             return [

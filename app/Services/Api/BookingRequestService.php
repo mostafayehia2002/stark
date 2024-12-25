@@ -33,7 +33,7 @@ class BookingRequestService
         }
         return [
             'success' => false,
-            'message' => 'No bookings requests found',
+            'message' =>translate_message('no_data_found'),
         ];
 
     }
@@ -54,7 +54,7 @@ class BookingRequestService
         }
         return [
             'success' => false,
-            'message' => 'No bookings requests found',
+            'message' =>translate_message('no_data_found'),
         ];
     }
 
@@ -74,12 +74,12 @@ class BookingRequestService
             $request->delete();
             return [
                 'success' => true,
-                'message' => 'Booking request has been deleted',
+                'message' => translate_message('success_deleted'),
             ];
         }
         return [
             'success' => false,
-            'message' => 'No bookings requests found',
+            'message' => translate_message('no_data_found'),
         ];
     }
 
@@ -94,13 +94,13 @@ class BookingRequestService
             return [
                 'success' => true,
                 'status' => 201,
-                'message' => 'Successfully Send Request of Booking Unit',
+                'message' => translate_message('success_send_request'),
             ];
         }
         return [
             'success' => true,
             'status' => 200,
-            'message' => 'Unit is already in Booking From You',
+            'message' => translate_message('unit_already_booking'),
 
         ];
 
@@ -136,7 +136,7 @@ class BookingRequestService
             $booking_request->update(['status' => $status]);
             return [
                 'success' => true,
-                'message' => 'Booking request has been updated'
+                'message' => translate_message('success_updated'),
             ];
         } catch (\Exception $exception) {
             return [

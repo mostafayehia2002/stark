@@ -26,7 +26,7 @@ class UserLoginService
             return [
                 'success' => false,
                 'status'=>400,
-                'message' => 'User Not Found'
+                'message' => translate_message('user_not_found')
             ];
         }
         $otpResponse=$this->service->sendVerificationCode($data['phone']);

@@ -26,7 +26,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'=>'site_logo',
-                'value'=>'',
+                'value'=>'logo.jpg',
                 'type'=>'general',
                 'is_editable'=>true,
                 'input_type'=>'file',

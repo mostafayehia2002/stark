@@ -75,14 +75,14 @@
                                             @can('unit-delete')
                                                 <a href="{{route('admin.delete-unit',$unit->id)}}" title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
-                                                   onclick="return confirm('Are you sure you want to it?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             @endcan
                                             @can('unit-change-status')
                                                 <a href="{{ route('admin.change-status', ['id' => $unit->id, 'status' => $unit->status]) }}"
                                                    class="btn btn-sm {{ $unit->getButtonClass() }}" title="{{trans('label.change_status')}}"
-                                                   onclick="return confirm('Are you sure you want to change the status?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_change_status')}}');">
                                                     <i class="fas {{ $unit->isAcceptable() ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                                     {{ $unit->isAcceptable() ? trans('enums.accept') :trans('enums.reject')  }}
                                                 </a>

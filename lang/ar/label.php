@@ -5,7 +5,6 @@ return [
     'email_or_phone' => 'البريد الإلكتروني أو رقم الهاتف',
     'remember_me' => 'تذكرني',
     'logout' => 'تسجيل الخروج',
-
     'booking_id' => 'معرف الحجز',
     'booking_date' => 'تاريخ الحجز',
     'status' => 'الحالة',
@@ -17,8 +16,12 @@ return [
     'role' => 'الدور',
     'password' => 'كلمة المرور',
     'action' => 'الإجراء',
-    'category_name' => 'اسم الفئة',
+    'category_name' => 'الفئة',
+    'category_name_en' => 'اسم الفئة (بالإنجليزية)',
+    'category_name_ar' => 'اسم الفئة (بالعربية)',
     'feature_name' => 'اسم الميزة',
+    'feature_name_en' => 'اسم الميزة (بالإنجليزية)',
+    'feature_name_ar' => 'اسم الميزة (بالعربية)',
     'title' => 'العنوان',
     'type' => 'النوع',
     'price' => 'السعر',
@@ -71,6 +74,11 @@ return [
     'whatsapp' => 'واتساب',
     'twitter' => 'تويتر',
     'linkedin' => 'لينكد إن',
+
+    'question_en' => 'السؤال (بالإنجليزية)',
+    'question_ar' => 'السؤال (بالعربية)',
+    'answer_en' => 'الإجابة (بالإنجليزية)',
+    'answer_ar' => 'الإجابة (بالعربية)',
 
 
 ];

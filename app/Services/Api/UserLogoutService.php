@@ -16,12 +16,12 @@ class UserLogoutService
            $request->user()->currentAccessToken()->delete();
            return [
                'success'=>true,
-               'message'=>'Successfully logged out'
+               'message'=>translate_message('success_logout')
            ];
        }
        return [
            'success'=>false,
-           'message'=>'Something went wrong'
+           'message'=>translate_message('something_went_wrong')
        ];
     }
 

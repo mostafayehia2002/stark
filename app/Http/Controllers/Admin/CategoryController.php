@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
@@ -23,11 +24,8 @@ class CategoryController extends Controller
         return view('dashboard.categories.index', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
         $response = $this->categoryService->store($request);
         if ($response['success']) {
             toastr()->success($response['message']);
@@ -38,11 +36,8 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(CategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
         $response = $this->categoryService->update($request);
         if ($response['success']) {
             toastr()->success($response['message']);

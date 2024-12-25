@@ -39,13 +39,6 @@ class UserRegisterRequest extends FormRequest
         ];
     }
 
-    public function messages(): array{
-        return [
-            'phone.regex' => 'The phone number must be in the international format starting with + followed by the country code and phone number.',
-            'business_name.required_if' => 'The business name is required when type is owner.',
-            'business_license.required_if' => 'The business license is required when type is owner.',
-        ];
-    }
 
     protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {

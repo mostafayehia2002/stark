@@ -17,7 +17,7 @@ class SettingService
       }
       return [
           'success'=>false,
-          'message'=>'No data found',
+          'message'=>translate_message('no_data_found'),
       ];
     }
 }

@@ -193,15 +193,16 @@
                         </a>
                     </li>
                 @endcan
+                @can('FAQ-list')
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.FAQ-list')}}" class="nav-link">
                         <i class="nav-icon fas fa-question-circle"></i>
-
                         <p>
                             {{trans('dashboard.faq')}}
                         </p>
                     </a>
                 </li>
+                @endcan
             </ul>
 
         </nav>

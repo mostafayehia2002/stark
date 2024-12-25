@@ -13,7 +13,7 @@ class ContactUsService
             ContactUs::findOrFail($id)->update(['is_read' => 1]);
             return [
                 'success' => true,
-                'message' => 'Successfully Read Message'
+                'message' => translate_message('success_read_message')
             ];
         } catch (\Exception $exception) {
             return [
@@ -29,7 +29,7 @@ class ContactUsService
             ContactUs::findOrFail($id)->delete();
                 return [
                     'success' => true,
-                    'message' => 'Successfully Delete Message'
+                    'message' =>translate_message('success_deleted')
                 ];
         } catch (\Exception $exception) {
             return [

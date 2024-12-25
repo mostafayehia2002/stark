@@ -21,7 +21,7 @@ class VerifyOtpService
         if (!$verifyResponse['success']) {
             return[
                 'success' => false,
-                'message' => 'Invalid OTP',
+                'message' => translate_message('something_went_wrong'),
             ];
         }
         // Find user by phone number
@@ -29,7 +29,7 @@ class VerifyOtpService
         if (!$user) {
             return [
                 'success' => false,
-                'message' => 'User not found. Please register first.',
+                'message' => translate_message('user_not_found'),
             ];
         }
         if($verifyResponse['status']==='approved') {

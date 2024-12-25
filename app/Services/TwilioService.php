@@ -37,7 +37,7 @@ class TwilioService
                 return [
                     'success' => false,
                     'status' => 400,
-                    'message' => 'Invalid phone number format. It should start with +966 followed by 8 or 9 digits.',
+                    'message' => translate_message('invalid_phone_number'),
                 ];
             }
             $url = "$this->base_url/v2/Services/{$this->verifySid}/Verifications";
@@ -49,8 +49,8 @@ class TwilioService
                 'success' => $response->successful(),
                 'status'=>$response->json('status'),
                  'message' =>$response->json('status')==='pending'
-                   ?'Verification Sent Successfully'
-                   : 'Failed To Send Verification Code',
+                   ?translate_message('success_verify')
+                   :translate_message('failed_send_code'),
             ];
         } catch (\Exception $e) {
             return [
@@ -74,8 +74,8 @@ class TwilioService
                     'success'=>$response->successful(),
                     'status'=>$response->json('status'),
                     'message' =>$response->json('status')==='approved'
-                        ?'Successfully Verify OTP'
-                        : 'Failed to Verify OTP',
+                        ?translate_message('success_verify_otp')
+                        : translate_message('failed_verify_otp'),
                 ];
         } catch (\Exception $e) {
             return [

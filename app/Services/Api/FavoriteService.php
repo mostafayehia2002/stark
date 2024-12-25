@@ -18,13 +18,13 @@ class FavoriteService
             return [
                 'success' => true,
                 'status' => 201,
-                'message' => 'Successfully added to favorite unit',
+                'message' => translate_message('success_added'),
             ];
         }
         return [
             'success' => true,
             'status' => 200,
-            'message' => 'Unit is already in favorites',
+            'message' => translate_message('unit_already_favorites'),
 
         ];
     }
@@ -37,13 +37,13 @@ class FavoriteService
             $favorite->delete();
             return [
                 'success' => true,
-                'message' => 'Successfully removed from favorite units',
+                'message' => translate_message('success_removed'),
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Favorite unit not found',
+            'message' => translate_message('item_not_found'),
         ];
     }
 
@@ -59,7 +59,7 @@ class FavoriteService
         }
         return [
             'success' => false,
-            'message' => 'Favorites not found',
+            'message' => translate_message('no_data_found'),
         ];
     }
 }

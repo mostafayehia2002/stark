@@ -66,7 +66,7 @@
                                                 <a href="{{route('admin.delete-user',$user->id)}}"
                                                    title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
-                                                   onclick="return confirm('Are you sure you want to delete this user?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             @endcan
@@ -79,13 +79,13 @@
                                                 @if($user->status===\App\Enums\UserStatus::ACTIVE->value)
                                                     <a href="{{route('admin.block-user',$user->id)}}"
                                                        class="btn btn-warning btn-sm" title="{{trans('label.block')}}"
-                                                       onclick="return confirm('Are you sure to block user');">
+                                                       onclick="return confirm('{{translate_message('are_you_sure_block')}}');">
                                                         <i class="fas fa-ban"></i>
                                                     </a>
                                                 @else
                                                     <a href="{{route('admin.block-user',$user->id)}}"
                                                        class="btn btn-warning btn-sm" title="{{trans('label.unblock')}}"
-                                                       onclick="return confirm('Are you sure to unblock user');">
+                                                       onclick="return confirm('{{translate_message('are_you_sure_unblock')}}');">
                                                         <i class="fas fa-unlock"></i>
                                                     </a>
                                                 @endif

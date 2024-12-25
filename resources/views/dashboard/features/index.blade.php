@@ -1,6 +1,5 @@
 @extends('dashboard.layouts.master',['title'=>trans('dashboard.features')])
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -28,7 +27,7 @@
                 @endcan
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
+        <!-- .content-header -->
         <!-- Main content -->
         <!-- Main content -->
         <section class="content">
@@ -59,7 +58,7 @@
                                                 <a href="{{route('admin.delete-feature',$feature->id)}}"
                                                    title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
-                                                   onclick="return confirm('Are you sure you want to do it?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             @endcan
@@ -68,7 +67,8 @@
                                                    title="{{trans('label.update')}}"
                                                    class="btn btn-sm btn-primary"
                                                    data-feature_id="{{ $feature->id }}"
-                                                   data-feature_name="{{ $feature->name }}"
+                                                   data-feature_name_en="{{ $feature->getTranslation('name','en') }}"
+                                                   data-feature_name_ar="{{ $feature->getTranslation('name','ar') }}"
                                                    data-category_id="{{ $feature->category->id}}"
                                                 >
                                                     <i class="fas fa-edit"></i>
@@ -118,10 +118,22 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="feature_name">{{trans('label.feature_name')}}:</label>
-                                    <input type="text" class="form-control" id="feature_name"
-                                           placeholder="{{trans('label.feature_name')}}" name="feature_name"
-                                           value="{{old('feature_name')}}">
+                                    <label for="feature_name_en">{{trans('label.feature_name_en')}}:</label>
+                                    <input type="text" class="form-control" id="feature_name_en"
+                                           placeholder="{{trans('label.feature_name_en')}}" name="name_en"
+                                           value="{{old('name_en')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="feature_name_en">{{trans('label.feature_name_ar')}}:</label>
+                                    <input type="text" class="form-control" id="feature_name_ar"
+                                           placeholder="{{trans('label.feature_name_ar')}}" name="name_ar"
+                                           value="{{old('name_ar')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -139,7 +151,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.Add Feature Model-->
+        <!-- .Add Feature Model-->
 
         {{-- Update Feature Model       --}}
         <div class="modal fade" id="UpdateFeatureModal">
@@ -166,9 +178,22 @@
                                 </div>
                                 <input type="hidden" name="feature_id" id="feature_id" value="">
                                 <div class="form-group">
-                                    <label for="feature_name">{{trans('label.feature_name')}}:</label>
-                                    <input type="text" class="form-control" id="feature_name"
-                                           placeholder="{{trans('label.feature_name')}}" name="feature_name" value="">
+                                    <label for="feature_name_en">{{trans('label.feature_name_en')}}:</label>
+                                    <input type="text" class="form-control" id="feature_name_en"
+                                           placeholder="{{trans('label.feature_name_en')}}" name="name_en"
+                                           value="{{old('name_en')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="feature_name_ar">{{trans('label.feature_name_ar')}}:</label>
+                                    <input type="text" class="form-control" id="feature_name_ar"
+                                           placeholder="{{trans('label.feature_name_ar')}}" name="name_ar"
+                                           value="{{old('name_ar')}}">
+                                    @error('name_en')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -186,7 +211,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.Update Feature Model -->
+        <!-- .Update Feature Model -->
 
         @endsection
     </div>
@@ -213,13 +238,16 @@
                 let category_id = button.data('category_id')
                 let category_name = button.data('category_name')
                 let feature_id = button.data('feature_id')
-                let feature_name = button.data('feature_name')
+                let feature_name_en = button.data('feature_name_en')
+                let feature_name_ar = button.data('feature_name_ar')
                 let modal = $(this)
                 modal.find('.modal-body #category_id').val(category_id);
                 modal.find('.modal-body #category_name').val(category_name);
                 modal.find('.modal-body #feature_id').val(feature_id);
-                modal.find('.modal-body #feature_name').val(feature_name);
+                modal.find('.modal-body #feature_name_en').val(feature_name_en);
+                modal.find('.modal-body #feature_name_ar').val(feature_name_ar);
             })
         </script>
+
     @endpush
 

@@ -61,6 +61,11 @@ class PermissionTableSeeder extends Seeder
             'show-setting'=>'admin.show-setting',
             'update-setting'=>'admin.update-setting',
 
+            'FAQ-list'=>'admin.FAQ-list',
+            'FAQ-create'=>'admin.FAQ-create',
+            'FAQ-edit'=>'admin.FAQ-edit',
+            'FAQ-delete'=>'admin.FAQ-delete',
+
         ];
 
         foreach ($permissions as $permission => $route) {

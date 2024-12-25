@@ -20,12 +20,12 @@ class ContactUsService
         if($contact) {
         return [
             'success' => true,
-            'message' => 'Message sent',
+            'message' => translate_message('success_send_message'),
         ];
         }
         return [
             'success' => false,
-            'message' => 'Something went wrong',
+            'message' => translate_message('something_went_wrong'),
         ];
 
     }

@@ -10,6 +10,11 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
+
+    <div class="preloader flex-column justify-content-center align-items-center" style="display: none">
+        <img class="animation__shake" src="{{asset('dashboard/dist/img/logo.jpg')}}" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
     {{--1 include navbar--}}
     @include('dashboard.layouts.navbar')
     {{--2 include sidebar--}}

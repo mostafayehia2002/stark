@@ -15,7 +15,7 @@ class UserService
 
             return [
                 'success' => true,
-                'message' => 'User Deleted Successfully'
+                'message' => translate_message('success_deleted')
             ];
         } catch (\Exception $exception) {
             return [
@@ -33,13 +33,13 @@ class UserService
             $user->update(['status' => UserStatus::INACTIVE]);
             return [
                 'success' => true,
-                'message' => 'Successfully Blocked User'
+                'message' =>translate_message('success_blocked')
             ];
         } else {
             $user->update(['status' => UserStatus::ACTIVE]);
             return [
                 'success' => true,
-                'message' => 'Successfully Un Blocked User'
+                'message' => translate_message('success_unblocked')
             ];
         }
 

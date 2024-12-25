@@ -47,7 +47,7 @@ class SettingController extends Controller
                     $setting->save();
                 }
             }
-            toastr()->success('Settings updated successfully!');
+            toastr()->success(translate_message('success_updated'));
         } catch (\Exception $exception) {
 
             toastr()->error($exception->getMessage());

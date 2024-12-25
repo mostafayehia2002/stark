@@ -2,26 +2,28 @@
 
 namespace App\Services\Admin;
 
+use App\Http\Requests\StoreFeatureRequest;
+use App\Http\Requests\UpdateFeatureRequest;
 use App\Models\Category;
 use App\Models\Feature;
-use Illuminate\Http\Request;
-
 class FeatureService
 {
 
-    public function store(Request $request)
+    public function store(StoreFeatureRequest $request)
     {
 
         try {
             $category = Category::find($request->input('category_id'));
             $category->features()->create([
-                'name' => $request->input('feature_name'),
+                'name' => [
+                    'en' => $request->input('name_en'),
+                    'ar' => $request->input('name_ar')
+                ],
             ]);
             return [
                 'success' => true,
-                'message' => 'Feature added successfully',
+                'message' => translate_message('success_added'),
             ];
-
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -30,17 +32,17 @@ class FeatureService
         }
     }
 
-    public function update(Request $request)
+    public function update(UpdateFeatureRequest $request)
     {
         try {
             $feature = Feature::findOrFail($request->input('feature_id'));
             $feature->update([
                 'category_id' => $request->input('category_id'),
-                'name' => $request->input('feature_name'),
+                'name' => ['en' => $request->input('name_en'), 'ar' => $request->input('name_ar')],
             ]);
             return [
                 'success' => true,
-                'message' => 'Feature updated successfully',
+                'message' => translate_message('success_updated'),
             ];
         } catch (\Exception $exception) {
             return [
@@ -56,7 +58,7 @@ class FeatureService
             Feature::findOrFail($id)->delete();
             return [
                 'success' => true,
-                'message' => 'Feature deleted successfully',
+                'message' => translate_message('success_deleted'),
             ];
         } catch (\Exception $exception) {
             return [

@@ -251,7 +251,7 @@
                                     @foreach($messages as $message)
                                         <li class="item">
                                             <div class="product-img">
-                                                <img src="{{asset('dashboard/dist/img/default-150x150.png')}}"
+                                                <img src="{{asset('dashboard/dist/img/profile.jpg')}}"
                                                      alt="Product Image" class="img-size-50">
                                             </div>
                                             <div class="product-info">

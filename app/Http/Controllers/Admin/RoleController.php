@@ -41,7 +41,7 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($permissionsID);
-        toastr()->success('Role created successfully');
+        toastr()->success(translate_message('success_added'));
         return redirect()->route('admin.roles.index');
 
     }
@@ -82,7 +82,7 @@ class RoleController extends Controller
             $request->input('permission')
         );
         $role->syncPermissions($permissionsID);
-        toastr()->success('Role updated successfully');
+        toastr()->success(translate_message('success_updated'));
         return redirect()->route('admin.roles.index');
 
     }
@@ -90,7 +90,7 @@ class RoleController extends Controller
     public function destroy($id): RedirectResponse
     {
         DB::table("roles")->where('id',$id)->delete();
-       toastr()->success('Role deleted successfully');
+       toastr()->success(translate_message('success_deleted'));
         return redirect()->route('admin.roles.index');
 
     }

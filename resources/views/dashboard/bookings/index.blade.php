@@ -56,7 +56,7 @@
                                                 <a href="{{route('admin.delete-booking',$booking->id)}}"
                                                    title="{{trans('label.delete')}}"
                                                    class="btn btn-danger btn-sm"
-                                                   onclick="return confirm('Are you sure you want to it?');">
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             @endcan

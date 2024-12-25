@@ -31,11 +31,6 @@ class VerifyRequest extends FormRequest
             'type' => 'required|in:owner,renter'
         ];
     }
-    public function messages(): array{
-        return [
-            'phone.regex' => 'The phone number must be in the international format starting with + followed by the country code and phone number.',
-        ];
-    }
 
     protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {

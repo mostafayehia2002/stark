@@ -189,6 +189,40 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'full_name' => 'Full Name',
+        'username' => 'Username',
+        'email' => 'Email',
+        'password' => 'Password',
+        'phone' => 'Phone Number',
+        'type' => 'Type',
+        'business_name' => 'Business Name',
+        'business_license' => 'Business License',
+        'emailOrPhone' => 'Email or Phone',
+        'address' => 'Address',
+        'title' => 'Title',
+        'price' => 'Price',
+        'area' => 'Area',
+        'number_bedroom' => 'Number of Bedrooms',
+        'number_bathroom' => 'Number of Bathrooms',
+        'description' => 'Description',
+        'features' => 'Features',
+        'image' => 'Images',
+        'unit_id' => 'Unit Number',
+        'message' => 'Message',
+        'booking_id' => 'Booking Number',
+        'status' => 'Status',
+        'booking_date' => 'Booking Date',
+        'user_id' => 'User ID',
+        'name_en' => 'Name in English',
+        'name_ar' => 'Name in Arabic',
+
+        'question_en' => 'Question (English)',
+        'question_ar' => 'Question (Arabic)',
+        'answer_en' => 'Answer (English)',
+        'answer_ar' => 'Answer (Arabic)',
+
+    ],
+
 
 ];

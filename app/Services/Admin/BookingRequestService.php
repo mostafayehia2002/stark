@@ -15,7 +15,7 @@ class BookingRequestService
             $request->delete();
             return [
                 'success' => true,
-                'message' => 'Booking request has been deleted'
+                'message' => translate_message('success_deleted')
             ];
         } catch (\Exception $exception) {
 
@@ -54,7 +54,7 @@ class BookingRequestService
             $booking_request->update(['status' => $status]);
             return [
                 'success' => true,
-                'message' => 'Booking request has been updated'
+                'message' => translate_message('success_updated')
             ];
         } catch (\Exception $exception) {
             return [

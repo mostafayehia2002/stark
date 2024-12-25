@@ -25,7 +25,7 @@ class UnitAdminService
             $unit->update(['status' => $nextStatus]);
             return [
                 'success' => true,
-                'message' => 'Status changed to ' . $nextStatus . ' Successfully!'
+                'message' => translate_message('success_change_status').translate_enums($nextStatus)
             ];
         } catch (\Exception $e) {
             return [
@@ -50,7 +50,7 @@ class UnitAdminService
             $unit->delete();
             return [
                 'success' => true,
-                'message' => 'Unit deleted successfully',
+                'message' => translate_message('success_deleted'),
             ];
         } catch (\Exception $exception) {
             return [
@@ -90,7 +90,7 @@ class UnitAdminService
             DB::commit();
             return [
                 'success' => true,
-                'message' => 'Unit added successfully'
+                'message' => translate_message('success_added'),
             ];
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -154,7 +154,7 @@ class UnitAdminService
             DB::commit();
             return [
                 'success' => true,
-                'message' => 'Unit updated successfully',
+                'message' => translate_message('success_updated'),
             ];
         } catch (\Exception $exception) {
             // Rollback if any error occurs

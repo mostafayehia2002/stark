@@ -22,7 +22,7 @@ class CheckUserType
         if (auth()->check() && auth()->user()->type !== $type) {
             return $this->returnErrorMessage(
                 403,
-                'Unauthorized access'
+                translate_message('unauthorized_access')
             );
 
 

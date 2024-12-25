@@ -15,7 +15,7 @@ class BookingService
             $booking->delete();
             return [
                 'success' => true,
-                'message' => 'Booking has been deleted'
+                'message' => translate_message('success_deleted')
             ];
         } catch (\Exception $exception) {
             return [

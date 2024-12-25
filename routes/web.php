@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\BookingRequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
@@ -87,6 +88,15 @@ Route::group(
         Route::prefix('settings')->controller(SettingController::class)->group(function () {
             Route::get('/show-setting', 'index')->name('show-setting');
             Route::post('/update-setting', 'update')->name('update-setting');
+        });
+        Route::prefix('FAQ')->controller(FAQController::class)->group(function () {
+            Route::get('/list', 'index')->name('FAQ-list');
+            Route::get('/create', 'create')->name('FAQ-create');
+            Route::get('/edit/{id}', 'edit')->name('FAQ-edit');
+            Route::post('/store', 'store')->name('FAQ-store');
+            Route::post('/update/{id}', 'update')->name('FAQ-update');
+            Route::get('/delete/{id}', 'destroy')->name('FAQ-delete');
+
         });
     });
 });

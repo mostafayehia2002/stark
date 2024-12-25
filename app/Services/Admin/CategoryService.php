@@ -2,20 +2,22 @@
 
 namespace App\Services\Admin;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-
 class CategoryService
 {
 
-    public function store(Request $request): array
+    public function store(CategoryRequest $request): array
     {
         try {
-             Category::create($request->only('name'));
-             return [
-                    'success' => true,
-                    'message' => 'Successfully Created'
-                ];
+            Category::create(['name' => [
+                'en' => $request->input('name_en'),
+                'ar' => $request->input('name_ar')],
+            ]);
+            return [
+                'success' => true,
+                'message' => translate_message('success_added')
+            ];
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -24,16 +26,19 @@ class CategoryService
         }
     }
 
-    public function update(Request $request): array
+    public function update(CategoryRequest $request): array
     {
         try {
             $id = $request->input('id');
-            $category =Category::findOrFail($id);
-            $category->update($request->only('name'));
-                return [
-                    'success' => true,
-                    'message' => 'Successfully Updated'
-                ];
+            $category = Category::findOrFail($id);
+            $category->update(['name' =>[
+                'en' => $request->input('name_en'),
+                'ar' => $request->input('name_ar')],
+            ]);
+            return [
+                'success' => true,
+                'message' => translate_message('success_updated')
+            ];
         } catch (\Exception $exception) {
             return [
                 'success' => false,
@@ -48,7 +53,7 @@ class CategoryService
             Category::findOrFail($id)->delete();
             return [
                 'success' => true,
-                'message' => 'Successfully Deleted'
+                'message' => translate_message('success_deleted')
             ];
         } catch (\Exception $exception) {
             return [

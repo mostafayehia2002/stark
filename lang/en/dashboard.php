@@ -76,8 +76,16 @@ return [
      'role_management'=>'Role Management',
     'create_new_role'=>'Create New Role',
     'edit_role'=>'Edit Role',
+    'FAQ'=>'FAQ',
+    'add_FAQ'=>'Add FAQ',
+    'add_new_FAQ'=>'Add New FAQ',
+    'see_all_FAQ'=>'See All FAQ',
+    'edit_FAQ'=>'Edit FAQ',
+    'question'=>'Question',
+    'answer'=>'Answer',
     'copyright'=>'Copyright',
     'all_rights_reserved'=>'All rights reserved.',
+
 
 
 ];

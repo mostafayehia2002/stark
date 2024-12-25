@@ -25,7 +25,7 @@ class AdminService
             DB::commit();
             return [
                 'success' => true,
-                'message' => 'Successfully Added',
+                'message' => translate_message('success_added'),
             ];
 
         } catch (\Exception $exception) {
@@ -75,7 +75,7 @@ class AdminService
             DB::commit();
             return [
                 'success' => true,
-                'message' => 'Successfully Updated',
+                'message' => translate_message('success_updated'),
             ];
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -96,12 +96,12 @@ class AdminService
                 $user->delete();
                 return [
                     'success' => true,
-                    'message' => 'Admin Deleted Successfully'
+                    'message' => translate_message('success_deleted')
                 ];
             }
             return [
                 'success' => false,
-                'message' => 'Error while Deleting Admin'
+                'message' => translate_message('error_while_deleted')
             ];
         } catch (\Exception $exception) {
             return [
@@ -120,20 +120,20 @@ class AdminService
                     $user->update(['status' => UserStatus::INACTIVE]);
                     return [
                         'success' => true,
-                        'message' => 'Successfully Blocked Admin'
+                        'message' => translate_message('success_blocked')
                     ];
                 } else {
                     $user->update(['status' => UserStatus::ACTIVE]);
                     return [
                         'success' => true,
-                        'message' => 'Successfully Un Blocked'
+                        'message' => translate_message('success_unblocked')
                     ];
                 }
 
             }
             return [
                 'success' => false,
-                'message' => 'You Cant Block this Admin',
+                'message' => translate_message('error_while_blocked'),
             ];
         } catch (\Exception $exception) {
             return [

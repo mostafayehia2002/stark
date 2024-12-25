@@ -24,13 +24,13 @@ class UserProfileService
         if ($update) {
             return [
                 'success' => true,
-                'message' => 'Successfully Update Profile',
+                'message' => translate_message('success_updated'),
                 'data' => $user
             ];
         }
         return [
             'success' => false,
-            'message' => 'Failed Update Profile',
+            'message' =>translate_message('something_went_wrong'),
         ];
 
     }

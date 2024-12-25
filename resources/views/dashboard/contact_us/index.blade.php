@@ -12,7 +12,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-message')}}">{{trans('dashboard.messages')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.show-message')}}">{{trans('dashboard.messages')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('dashboard.support')}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -47,21 +48,23 @@
                                         <td>
                                             @if($contact->is_user==1)
                                                 <label class="badge bg-success">{{trans('label.yes')}}</label>
-                                              @else
+                                            @else
                                                 <label class="badge bg-danger">{{trans('label.no')}}</label>
-                                        @endif
+                                            @endif
                                         </td>
                                         <td>
                                             @can('message-read')
-                                            <a href="#exampleModal{{$contact->id}}" data-toggle="modal" class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
+                                                <a href="#exampleModal{{$contact->id}}" data-toggle="modal"
+                                                   class="btn btn-sm {{ $contact->is_read ? 'btn-secondary' : 'btn-primary' }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
                                                 <div class="modal fade" id="exampleModal{{$contact->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h4 class="modal-title">{{trans('dashboard.show_message')}}</h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close"
                                                                         onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
                                                                 >
                                                                     <span aria-hidden="true">&times;</span>
@@ -71,7 +74,8 @@
                                                                 <p>{{$contact->message}}</p>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                                <button type="button" class="btn btn-default"
+                                                                        data-dismiss="modal"
                                                                         onclick="location.href='{{ route('admin.read-message', $contact->id) }}'"
                                                                 >{{trans('label.save')}}</button>
                                                             </div>
@@ -86,18 +90,18 @@
                                         <td>{{$contact->created_at}}</td>
                                         <td>
                                             @can('message-delete')
-                                            <a href="{{route('admin.delete-message',$contact->id)}}"
-                                               title="{{trans('label.delete')}}"
-                                               class="btn btn-danger btn-sm"
-                                               onclick="return confirm('Are you sure you want to do it?');">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </a>
+                                                <a href="{{route('admin.delete-message',$contact->id)}}"
+                                                   title="{{trans('label.delete')}}"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
                                             @endcan
                                         </td>
                                     </tr>
 
                                 @empty
-                                    <td  colspan="6" class="text-center">{{trans('label.no_data_found')}}</td>
+                                    <td colspan="6" class="text-center">{{trans('label.no_data_found')}}</td>
                                 @endforelse
                                 </tbody>
 
@@ -121,7 +125,6 @@
         <!-- page script -->
         <script>
             $(function () {
-
                 $('#example1').DataTable({
                     "paging": false,
                     "lengthChange": false,

@@ -12,8 +12,7 @@ use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\UserRegisterController;
 use App\Http\Controllers\Api\VerifyOtpController;
 use Illuminate\Support\Facades\Route;
-
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1','middleware'=>'api_lang'], function () {
     Route::get('/setting' ,[SettingController::class,'getSetting'] );
     Route::prefix('auth')->group(function () {
         Route::post('/login', [UserLoginController::class, 'login']);
