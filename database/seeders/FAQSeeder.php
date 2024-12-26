@@ -15,24 +15,12 @@ class FAQSeeder extends Seeder
     {
        $faqs=[
             [
-                'question' => ['en' => 'What is the return policy?', 'ar' => 'ما هي سياسة الإرجاع؟'],
-                'answer' => ['en' => 'You can return items within 30 days.', 'ar' => 'يمكنك إرجاع العناصر خلال 30 يومًا.'],
+                'question' => ['en' => 'How do I schedule a property viewing?', 'ar' => 'كيف يمكنني جدولة معاينة العقار؟'],
+                'answer' => ['en' => 'You can schedule a viewing by clicking the "Book a Tour" button on any property listing', 'ar' => 'يمكنك جدولة معاينة بالنقر على زر "حجز جولة" في أي قائمة عقارية.'],
             ],
             [
-                'question' => ['en' => 'How can I track my order?', 'ar' => 'كيف يمكنني تتبع طلبي؟'],
-                'answer' => ['en' => 'Use the tracking number sent to your email.', 'ar' => 'استخدم رقم التتبع المرسل إلى بريدك الإلكتروني.'],
-            ],
-            [
-                'question' => ['en' => 'Do you offer international shipping?', 'ar' => 'هل تقدمون الشحن الدولي؟'],
-                'answer' =>['en' => 'Yes, we ship to over 50 countries worldwide.', 'ar' => 'نعم، نقوم بالشحن إلى أكثر من 50 دولة حول العالم.'],
-            ],
-            [
-                'question' => ['en' => 'How can I contact customer support?', 'ar' => 'كيف يمكنني التواصل مع دعم العملاء؟'],
-                'answer' =>['en' => 'You can reach us via email or live chat.', 'ar' => 'يمكنك التواصل معنا عبر البريد الإلكتروني أو الدردشة المباشرة.'],
-            ],
-            [
-                'question' =>['en' => 'What payment methods do you accept?', 'ar' => 'ما هي طرق الدفع التي تقبلونها؟'],
-                'answer' =>['en' => 'We accept credit cards, PayPal, and bank transfers.', 'ar' => 'نقبل بطاقات الائتمان، PayPal، والحوالات البنكية.'],
+                'question' => ['en' => 'What documents do I need for renting?', 'ar' => 'ما المستندات المطلوبة للإيجار؟'],
+                'answer' => ['en' => "Typically, you'll need valid ID, proof of income, and employment verification.", 'ar' => 'عادةً، ستحتاج إلى هوية سارية، وإثبات دخل، وتحقق من التوظيف.'],
             ],
         ];
        foreach ($faqs as $faq) {
