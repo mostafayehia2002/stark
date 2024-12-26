@@ -147,7 +147,6 @@ return [
     'uppercase' => 'يجب أن يحتوي الحقل :attribute على حروف كبيرة.',
     'url' => 'صيغة رابط حقل :attribute غير صحيحة.',
     'uuid' => 'حقل :attribute يجب أن يكون بصيغة UUID سليمة.',
-
     'attributes' => [
         'full_name' => 'الاسم كامل',
         'username' => 'اسم المستخدم',
@@ -159,6 +158,8 @@ return [
         'business_license' => 'رخصة النشاط التجاري',
         'emailOrPhone' => '',
         'address' => 'المكان',
+        'latitude' => 'خط العرض',
+        'longitude' => 'حط الطول',
         'title' => 'العنوان',
         'price' => 'السعر',
         'area' => 'المساحة',

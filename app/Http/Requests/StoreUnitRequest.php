@@ -35,6 +35,8 @@ class StoreUnitRequest extends FormRequest
             'number_bedroom' => 'nullable|numeric|min:1 |max:9',
             'number_bathroom' => 'nullable|numeric|min:1 |max:9 ',
             'address' => 'required|string|max:255',
+            'latitude'=>'required',
+            'longitude'=>'required',
             'description' => 'required|string',
             'features' => 'required|array|min:1',
             'features.*' => 'exists:features,id',

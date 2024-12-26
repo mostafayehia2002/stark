@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('currency')->default('SAR');
             $table->text('description')->nullable();
             $table->text('address')->nullable();
+            $table->decimal('latitude',10,2)->default(0);
+            $table->decimal('longitude',10,2)->default(0);
             $table->string('area')->default(0);
             $table->tinyInteger('number_bedroom')->nullable();
             $table->tinyInteger('number_bathroom')->nullable();

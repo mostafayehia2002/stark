@@ -20,6 +20,8 @@ class Unit extends Model
         'currency',
         'description',
         'address',
+        'latitude',
+        'longitude',
         'area',
         'number_bedroom',
         'number_bathroom',
@@ -32,7 +34,6 @@ class Unit extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 
     public function features()
     {

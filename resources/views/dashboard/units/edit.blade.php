@@ -95,10 +95,14 @@
                                 <div class="form-group">
                                     <label for="address">{{trans('label.address')}}:</label>
                                     <input type="text" id="address" name="address" class="form-control"
-                                           value="{{ old('address',$unit->address )}}">
+                                           value="{{ old('address',$unit->address )}}" readonly>
                                     @error('address')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
+                                    <input type="hidden" id="latitude" value="{{old('latitude',$unit->latitude)}}" name="latitude" readonly>
+                                    <input type="hidden" id="longitude" value="{{old('longitude',$unit->longitude)}}" name="longitude" readonly>
+                                    <br>
+                                    <div id="map" style="width: 100%; height: 300px;"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">{{trans('label.description')}}:</label>
@@ -205,4 +209,12 @@
             margin-bottom: 20px;
         }
     </style>
+@endpush
+@push('js')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
+        async
+        defer>
+    </script>
+    <script src="{{asset('dashboard/dist/js/googleMap.js')}}"></script>
 @endpush

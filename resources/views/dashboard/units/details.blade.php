@@ -12,7 +12,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item active">{{trans('dashboard.unit_details')}}</li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.show-unit')}}">{{trans('dashboard.units_management')}}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.show-unit')}}">{{trans('dashboard.units_management')}}</a></li>
                         </ol>
                     </div>
                 </div>
@@ -38,13 +39,15 @@
                                 <p><strong>{{trans('label.price')}}:</strong> {{ $unit->price }} {{$unit->currancy}}</p>
                                 <p><strong>{{trans('label.type')}}:</strong> {{ $unit->type }}</p>
                                 <p><strong>{{trans('label.area')}}:</strong> {{ $unit->area }}</p>
-                                <p><strong>{{trans('label.number_of_bedrooms')}}:</strong> {{ $unit->number_bedroom }}</p>
-                                <p><strong>{{trans('label.number_of_bathrooms')}}:</strong> {{ $unit->number_bathroom }}</p>
+                                <p><strong>{{trans('label.number_of_bedrooms')}}:</strong> {{ $unit->number_bedroom }}
+                                </p>
+                                <p><strong>{{trans('label.number_of_bathrooms')}}:</strong> {{ $unit->number_bathroom }}
+                                </p>
                                 <p><strong>{{trans('label.address')}}:</strong> {{ $unit->address }}</p>
                                 <p><strong>{{trans('label.description')}}:</strong> {{ $unit->description }}</p>
                                 <p><strong>{{trans('label.is_booked')}}:</strong>
                                     @if($unit->is_booked)
-                                    <span class="badge badge-success">{{trans('label.yes')}}</span>
+                                        <span class="badge badge-success">{{trans('label.yes')}}</span>
                                     @else
                                         <span class="badge badge-primary">{{trans('label.no')}}</span>
                                     @endif
@@ -77,11 +80,15 @@
                                 <p><strong>{{trans('label.username')}}:</strong> {{ $unit->owner->username }}</p>
                                 <p><strong>{{trans('label.email')}}:</strong> {{ $unit->owner->email }}</p>
                                 <p><strong>{{trans('label.phone')}}:</strong> {{ $unit->owner->phone }}</p>
-                                <p><strong>{{trans('label.business_name')}}:</strong> {{ $unit->owner->business_name }}</p>
-                                <p><strong>{{trans('label.business_license')}}:</strong> {{ $unit->owner->business_license }}</p>
+                                <p><strong>{{trans('label.business_name')}}:</strong> {{ $unit->owner->business_name }}
+                                </p>
+                                <p><strong>{{trans('label.business_license')}}
+                                        :</strong> {{ $unit->owner->business_license }}</p>
                                 <p><strong>{{trans('label.address')}}:</strong> {{ $unit->owner->address }}</p>
                             </div>
                         </div>
+                        <input type="hidden" id="latitude" value="{{$unit->latitude}}" name="latitude" readonly>
+                        <input type="hidden" id="longitude" value="{{$unit->longitude}}" name="longitude" readonly>
                         <!-- Features -->
                         <div class="card">
                             <div class="card-header bg-warning text-white">
@@ -104,8 +111,20 @@
                     </div>
                 </div>
                 <div class="row mt-10">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-black text-white">
+                                <h5><i class="fas fa-location"></i> {{trans('label.address')}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="map" style="width: 100%; height: 300px;"></div>
+                                <input type="text" id="address" class="form-control" value="{{$unit->address}}"
+                                       readonly>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Images -->
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header bg-info text-white">
                                 <h5><i class="fas fa-images"></i> {{trans('dashboard.images')}}</h5>
@@ -144,5 +163,12 @@
             }
         }
     </style>
-
+@endpush
+@push('js')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
+        async
+        defer>
+    </script>
+    <script src="{{asset('dashboard/dist/js/googleMap.js')}}"></script>
 @endpush

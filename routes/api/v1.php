@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BookingRequestController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\FAQController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\UnitController;
@@ -12,8 +13,9 @@ use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\UserRegisterController;
 use App\Http\Controllers\Api\VerifyOtpController;
 use Illuminate\Support\Facades\Route;
-Route::group(['prefix' => 'v1','middleware'=>'api_lang'], function () {
-    Route::get('/setting' ,[SettingController::class,'getSetting'] );
+
+Route::group(['prefix' => 'v1', 'middleware' => 'api_lang'], function () {
+    Route::get('/setting', [SettingController::class, 'getSetting']);
     Route::prefix('auth')->group(function () {
         Route::post('/login', [UserLoginController::class, 'login']);
         Route::post('/register', [UserRegisterController::class, 'register']);
@@ -26,6 +28,7 @@ Route::group(['prefix' => 'v1','middleware'=>'api_lang'], function () {
     });
     Route::post('/contact-us/send', [ContactUsController::class, 'sendContactUsMessage']);
     Route::get('/categories', [CategoryController::class, 'getCategoryList']);
+    Route::get('/FAQ', [FAQController::class, 'getAllFAQ']);
     Route::prefix('units')->controller(UnitController::class)->group(function () {
         Route::get('/', 'getAllUnits');
         Route::get('/type', 'getUnitType');

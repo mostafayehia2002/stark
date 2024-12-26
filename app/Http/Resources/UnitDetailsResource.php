@@ -23,6 +23,8 @@ class UnitDetailsResource extends JsonResource
             'currency' => $this->currency,
             'description' => $this->description,
             'address' => $this->address,
+            'latitude'=>$this->latitude,
+            'longitude'=>$this->longitude,
             'area' => $this->area,
             'number_bedroom' => $this->number_bedroom,
             'number_bathroom' => $this->number_bathroom,

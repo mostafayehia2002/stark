@@ -200,6 +200,8 @@ return [
         'business_license' => 'Business License',
         'emailOrPhone' => 'Email or Phone',
         'address' => 'Address',
+        'latitude'=>'Latitude',
+        'longitude'=>'Longitude',
         'title' => 'Title',
         'price' => 'Price',
         'area' => 'Area',

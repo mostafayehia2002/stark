@@ -60,11 +60,10 @@ class UnitAdminService
         }
     }
 
-    public function store(StoreUnitRequest $request)
+    public function store(StoreUnitRequest $request): array
     {
         try {
             DB::beginTransaction();
-
             $unit = Unit::create([
                 'user_id' => auth()->id(),
                 'title' => $request->input('title'),
@@ -74,6 +73,8 @@ class UnitAdminService
                 'number_bedroom' => $request->input('number_bedroom'),
                 'number_bathroom' => $request->input('number_bathroom'),
                 'address' => $request->input('address'),
+                'latitude'=>$request->input('latitude'),
+                'longitude' => $request->input('longitude'),
                 'description' => $request->input('description'),
             ]);
             $unit->features()->attach($request->input('features'));
@@ -116,6 +117,8 @@ class UnitAdminService
                 'number_bedroom' => $request->input('number_bedroom'),
                 'number_bathroom' => $request->input('number_bathroom'),
                 'address' => $request->input('address'),
+                'latitude'=>$request->input('latitude'),
+                'longitude' => $request->input('longitude'),
                 'description' => $request->input('description'),
             ]);
             if(auth()->user()->type===UserType::OWNER->value){
