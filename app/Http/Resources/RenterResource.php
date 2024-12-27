@@ -19,9 +19,9 @@ class RenterResource extends JsonResource
             "username" => $this->username,
             "phone" => $this->phone,
             "email" => $this->email,
-            "type" => $this->type,
+            "type" => translate_enums($this->type),
             "address" => $this->address,
-            "status" => $this->address,
+            "status" =>translate_enums($this->address),
             "created_at" => $this->created_at,
         ];
     }

@@ -35,5 +35,9 @@ return [
     'success_verify_otp' => 'تم التحقق من OTP بنجاح',
     'failed_verify_otp' => 'فشل في التحقق من OTP',
     'unauthorized_access' => 'دخول غير مصرح به',
+    'have_question'=>'إذا كان لديك أي أسئلة، يرجى الاتصال بنا على',
+    'view_details_on_website'=>'عرض التفاصيل الكاملة على الموقع',
+    'booking_status_updated'=> 'تم تحديث حالة حجزك إلى',
+    'hello'=>'مرحبأ',
 
 ];

@@ -36,7 +36,6 @@ class UnitAdminService
 
 
     }
-
     public function destroy($id): array
     {
         try {
@@ -59,7 +58,6 @@ class UnitAdminService
             ];
         }
     }
-
     public function store(StoreUnitRequest $request): array
     {
         try {
@@ -101,7 +99,6 @@ class UnitAdminService
             ];
         }
     }
-
     public function update(UpdateUnitRequest $request, $id)
     {
         try {

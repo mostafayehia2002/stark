@@ -21,11 +21,11 @@ class OwnerResource extends JsonResource
             'phone' => $this->phone,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
-            'type' => $this->type,
+            'type' =>translate_enums($this->type),
             'business_name' => $this->business_name,
             'business_license' => $this->business_license,
             'address' => $this->address,
-            'status' => $this->status,
+            'status' => translate_enums($this->status),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

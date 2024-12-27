@@ -18,7 +18,7 @@ class BookingRequestResource extends JsonResource
             'booking_id' => $this->booking_id,
             'booking_date' => $this->booking_date,
             'unit_title' => $this->unit->title,
-            'status' => $this->status,
+            'status' =>translate_enums($this->status),
             'created_at' => $this->created_at
         ];
     }

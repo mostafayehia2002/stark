@@ -35,4 +35,9 @@ return [
     'success_verify_otp' => 'Successfully Verify OTP',
     'failed_verify_otp' => 'Failed To Verify OTP',
     'unauthorized_access'=>'Unauthorized access',
+    'have_question'=>'If you have any questions, please contact us at',
+   'view_details_on_website'=> 'View Full Details on Website',
+   'booking_status_updated'=> 'Your booking status has been updated to',
+    'hello'=>'Hello',
+
 ];
