@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    @can('FAQ-create')
+                    @can('faq-create')
                         <a href="{{route('admin.FAQ-create')}}" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
                             {{trans('dashboard.add_FAQ')}}
@@ -48,13 +48,13 @@
                                                     {{ $faq->answer }}
                                                 </p>
                                                 <div class="d-flex justify-content-between mt-3">
-                                                    @can('FAQ-edit')
+                                                    @can('faq-edit')
                                                         <a href="{{route('admin.FAQ-edit',$faq->id)}}"
                                                            class="btn btn-sm btn-outline-primary">
                                                             <i class="fas fa-edit"></i> {{ trans('label.update') }}
                                                         </a>
                                                     @endcan
-                                                    @can('FAQ-delete')
+                                                    @can('faq-delete')
                                                         <a href="{{route('admin.FAQ-delete',$faq->id)}}"
                                                            class="btn btn-sm btn-outline-danger"
                                                            onclick="return confirm('{{translate_message('are_you_sure_delete')}}');">
