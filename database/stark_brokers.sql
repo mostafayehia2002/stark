@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 27, 2024 at 09:16 PM
+-- Generation Time: Dec 28, 2024 at 04:22 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.0
 
@@ -35,6 +35,13 @@ CREATE TABLE `bookings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `booking_request_id`, `confirmed_date`, `created_at`, `updated_at`) VALUES
+(1, '126456789321', '2024-12-28', '2024-12-28 14:14:21', '2024-12-28 14:14:21');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +59,13 @@ CREATE TABLE `booking_requests` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `booking_requests`
+--
+
+INSERT INTO `booking_requests` (`id`, `booking_id`, `unit_id`, `user_id`, `booking_date`, `status`, `created_at`, `updated_at`) VALUES
+(1, '126456789321', 1, 1, '2024-12-28 16:01:21', 'rejected', '2023-12-25 15:54:13', '2024-12-28 14:16:26');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +77,15 @@ CREATE TABLE `cache` (
   `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('dashboard_data', 'a:11:{s:10:\"ownerCount\";i:0;s:11:\"renterCount\";i:0;s:10:\"adminCount\";i:1;s:10:\"totalUsers\";i:1;s:9:\"unitCount\";i:1;s:19:\"bookingRequestCount\";i:0;s:11:\"recentUsers\";O:39:\"Illuminate\\Database\\Eloquent\\Collection\":2:{s:8:\"\0*\0items\";a:1:{i:0;O:15:\"App\\Models\\User\":33:{s:13:\"\0*\0connection\";s:5:\"mysql\";s:8:\"\0*\0table\";s:5:\"users\";s:13:\"\0*\0primaryKey\";s:2:\"id\";s:10:\"\0*\0keyType\";s:3:\"int\";s:12:\"incrementing\";b:1;s:7:\"\0*\0with\";a:0:{}s:12:\"\0*\0withCount\";a:0:{}s:19:\"preventsLazyLoading\";b:0;s:10:\"\0*\0perPage\";i:15;s:6:\"exists\";b:1;s:18:\"wasRecentlyCreated\";b:0;s:28:\"\0*\0escapeWhenCastingToString\";b:0;s:13:\"\0*\0attributes\";a:15:{s:2:\"id\";i:1;s:9:\"full_name\";s:5:\"Admin\";s:8:\"username\";s:5:\"admin\";s:5:\"phone\";s:13:\"+966539313803\";s:5:\"email\";s:15:\"admin@gmail.com\";s:17:\"email_verified_at\";N;s:8:\"password\";s:60:\"$2y$12$vMT9yiF5ZyawNGIq.OD/8OMRRwHnynn7mqLJYpahP7zAeLgBr6zX6\";s:4:\"type\";s:5:\"admin\";s:13:\"business_name\";N;s:16:\"business_license\";N;s:7:\"address\";N;s:6:\"status\";s:6:\"active\";s:14:\"remember_token\";N;s:10:\"created_at\";s:19:\"2024-12-27 21:15:36\";s:10:\"updated_at\";s:19:\"2024-12-27 21:15:36\";}s:11:\"\0*\0original\";a:15:{s:2:\"id\";i:1;s:9:\"full_name\";s:5:\"Admin\";s:8:\"username\";s:5:\"admin\";s:5:\"phone\";s:13:\"+966539313803\";s:5:\"email\";s:15:\"admin@gmail.com\";s:17:\"email_verified_at\";N;s:8:\"password\";s:60:\"$2y$12$vMT9yiF5ZyawNGIq.OD/8OMRRwHnynn7mqLJYpahP7zAeLgBr6zX6\";s:4:\"type\";s:5:\"admin\";s:13:\"business_name\";N;s:16:\"business_license\";N;s:7:\"address\";N;s:6:\"status\";s:6:\"active\";s:14:\"remember_token\";N;s:10:\"created_at\";s:19:\"2024-12-27 21:15:36\";s:10:\"updated_at\";s:19:\"2024-12-27 21:15:36\";}s:10:\"\0*\0changes\";a:0:{}s:8:\"\0*\0casts\";a:0:{}s:17:\"\0*\0classCastCache\";a:0:{}s:21:\"\0*\0attributeCastCache\";a:0:{}s:13:\"\0*\0dateFormat\";N;s:10:\"\0*\0appends\";a:0:{}s:19:\"\0*\0dispatchesEvents\";a:0:{}s:14:\"\0*\0observables\";a:0:{}s:12:\"\0*\0relations\";a:0:{}s:10:\"\0*\0touches\";a:0:{}s:10:\"timestamps\";b:1;s:13:\"usesUniqueIds\";b:0;s:9:\"\0*\0hidden\";a:2:{i:0;s:8:\"password\";i:1;s:14:\"remember_token\";}s:10:\"\0*\0visible\";a:0:{}s:11:\"\0*\0fillable\";a:10:{i:0;s:9:\"full_name\";i:1;s:8:\"username\";i:2;s:5:\"email\";i:3;s:8:\"password\";i:4;s:5:\"phone\";i:5;s:4:\"type\";i:6;s:13:\"business_name\";i:7;s:16:\"business_license\";i:8;s:7:\"address\";i:9;s:6:\"status\";}s:10:\"\0*\0guarded\";a:1:{i:0;s:1:\"*\";}s:19:\"\0*\0authPasswordName\";s:8:\"password\";s:20:\"\0*\0rememberTokenName\";s:14:\"remember_token\";s:14:\"\0*\0accessToken\";N;}}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}s:8:\"requests\";O:39:\"Illuminate\\Database\\Eloquent\\Collection\":2:{s:8:\"\0*\0items\";a:0:{}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}s:13:\"messagesCount\";i:0;s:8:\"messages\";O:39:\"Illuminate\\Database\\Eloquent\\Collection\":2:{s:8:\"\0*\0items\";a:0:{}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}s:12:\"bookingCount\";i:0;}', 1735401678),
+('settings', 'a:3:{s:7:\"general\";a:6:{i:0;a:8:{s:2:\"id\";i:1;s:3:\"key\";s:9:\"site_name\";s:5:\"value\";s:13:\"Stark Brokers\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:1;a:8:{s:2:\"id\";i:2;s:3:\"key\";s:9:\"site_logo\";s:5:\"value\";s:8:\"logo.jpg\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:4:\"file\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:2;a:8:{s:2:\"id\";i:3;s:3:\"key\";s:16:\"site_description\";s:5:\"value\";s:11:\"description\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:3;a:8:{s:2:\"id\";i:4;s:3:\"key\";s:13:\"support_phone\";s:5:\"value\";s:13:\"966539313803+\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-28T16:13:27.000000Z\";}i:4;a:8:{s:2:\"id\";i:5;s:3:\"key\";s:13:\"support_email\";s:5:\"value\";s:16:\"support@stark.sa\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:5:\"email\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-28T16:13:27.000000Z\";}i:5;a:8:{s:2:\"id\";i:6;s:3:\"key\";s:8:\"timezone\";s:5:\"value\";s:3:\"UTC\";s:4:\"type\";s:7:\"general\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}}s:12:\"social_media\";a:5:{i:0;a:8:{s:2:\"id\";i:7;s:3:\"key\";s:8:\"facebook\";s:5:\"value\";s:33:\"https://www.facebook.com/FaceBook\";s:4:\"type\";s:12:\"social_media\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:1;a:8:{s:2:\"id\";i:8;s:3:\"key\";s:9:\"instagram\";s:5:\"value\";s:34:\"https://instagram.com/starkbrokers\";s:4:\"type\";s:12:\"social_media\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:2;a:8:{s:2:\"id\";i:9;s:3:\"key\";s:8:\"whatsApp\";s:5:\"value\";s:27:\"https://wa.me/+966539313803\";s:4:\"type\";s:12:\"social_media\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:3;a:8:{s:2:\"id\";i:10;s:3:\"key\";s:7:\"twitter\";s:5:\"value\";s:25:\"https://x.com/starbrokers\";s:4:\"type\";s:12:\"social_media\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}i:4;a:8:{s:2:\"id\";i:11;s:3:\"key\";s:8:\"linkedin\";s:5:\"value\";s:46:\"https://www.linkedin.com/company/stark-brokers\";s:4:\"type\";s:12:\"social_media\";s:10:\"input_type\";s:4:\"text\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-27T21:15:35.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-27T21:15:35.000000Z\";}}s:13:\"email_setting\";a:1:{i:0;a:8:{s:2:\"id\";i:12;s:3:\"key\";s:10:\"send_email\";s:5:\"value\";s:4:\"true\";s:4:\"type\";s:13:\"email_setting\";s:10:\"input_type\";s:5:\"radio\";s:11:\"is_editable\";i:1;s:10:\"created_at\";s:27:\"2024-12-13T14:39:30.000000Z\";s:10:\"updated_at\";s:27:\"2024-12-28T16:13:38.000000Z\";}}}', 2050762418),
+('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:5:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:6:\"routes\";s:1:\"d\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:43:{i:0;a:5:{s:1:\"a\";i:1;s:1:\"b\";s:9:\"role-list\";s:1:\"c\";s:17:\"admin.roles.index\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:5:{s:1:\"a\";i:2;s:1:\"b\";s:11:\"role-create\";s:1:\"c\";s:18:\"admin.roles.create\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:5:{s:1:\"a\";i:3;s:1:\"b\";s:9:\"role-edit\";s:1:\"c\";s:16:\"admin.roles.edit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:5:{s:1:\"a\";i:4;s:1:\"b\";s:11:\"role-delete\";s:1:\"c\";s:19:\"admin.roles.destroy\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:5:{s:1:\"a\";i:5;s:1:\"b\";s:10:\"admin-list\";s:1:\"c\";s:17:\"admin.show-admins\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:5:{s:1:\"a\";i:6;s:1:\"b\";s:12:\"admin-create\";s:1:\"c\";s:18:\"admin.create-admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:5:{s:1:\"a\";i:7;s:1:\"b\";s:10:\"admin-edit\";s:1:\"c\";s:17:\"admin.admins.edit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:5:{s:1:\"a\";i:8;s:1:\"b\";s:12:\"admin-delete\";s:1:\"c\";s:18:\"admin.delete-admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:5:{s:1:\"a\";i:9;s:1:\"b\";s:11:\"admin-block\";s:1:\"c\";s:17:\"admin.block-admin\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:5:{s:1:\"a\";i:10;s:1:\"b\";s:9:\"user-list\";s:1:\"c\";s:16:\"admin.show-users\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:5:{s:1:\"a\";i:11;s:1:\"b\";s:11:\"user-delete\";s:1:\"c\";s:17:\"admin.delete-user\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:5:{s:1:\"a\";i:12;s:1:\"b\";s:11:\"user-detail\";s:1:\"c\";s:18:\"admin.details-user\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:5:{s:1:\"a\";i:13;s:1:\"b\";s:10:\"user-block\";s:1:\"c\";s:16:\"admin.block-user\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:5:{s:1:\"a\";i:14;s:1:\"b\";s:12:\"message-list\";s:1:\"c\";s:18:\"admin.show-message\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:5:{s:1:\"a\";i:15;s:1:\"b\";s:14:\"message-delete\";s:1:\"c\";s:20:\"admin.delete-message\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:5:{s:1:\"a\";i:16;s:1:\"b\";s:12:\"message-read\";s:1:\"c\";s:18:\"admin.read-message\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:5:{s:1:\"a\";i:17;s:1:\"b\";s:13:\"category-list\";s:1:\"c\";s:19:\"admin.show-category\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:5:{s:1:\"a\";i:18;s:1:\"b\";s:15:\"category-create\";s:1:\"c\";s:20:\"admin.store-category\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:5:{s:1:\"a\";i:19;s:1:\"b\";s:15:\"category-update\";s:1:\"c\";s:21:\"admin.update-category\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:5:{s:1:\"a\";i:20;s:1:\"b\";s:15:\"category-delete\";s:1:\"c\";s:21:\"admin.delete-category\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:20;a:5:{s:1:\"a\";i:21;s:1:\"b\";s:12:\"feature-list\";s:1:\"c\";s:18:\"admin.show-feature\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:21;a:5:{s:1:\"a\";i:22;s:1:\"b\";s:14:\"feature-create\";s:1:\"c\";s:19:\"admin.store-feature\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:5:{s:1:\"a\";i:23;s:1:\"b\";s:14:\"feature-update\";s:1:\"c\";s:20:\"admin.update-feature\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:5:{s:1:\"a\";i:24;s:1:\"b\";s:14:\"feature-delete\";s:1:\"c\";s:20:\"admin.delete-feature\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:5:{s:1:\"a\";i:25;s:1:\"b\";s:9:\"unit-list\";s:1:\"c\";s:15:\"admin.show-unit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:25;a:5:{s:1:\"a\";i:26;s:1:\"b\";s:11:\"unit-create\";s:1:\"c\";s:17:\"admin.create-unit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:5:{s:1:\"a\";i:27;s:1:\"b\";s:9:\"unit-edit\";s:1:\"c\";s:15:\"admin.edit-unit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:5:{s:1:\"a\";i:28;s:1:\"b\";s:11:\"unit-delete\";s:1:\"c\";s:17:\"admin.delete-unit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:5:{s:1:\"a\";i:29;s:1:\"b\";s:12:\"unit-details\";s:1:\"c\";s:18:\"admin.show-details\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:29;a:5:{s:1:\"a\";i:30;s:1:\"b\";s:18:\"unit-change-status\";s:1:\"c\";s:19:\"admin.change-status\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:5:{s:1:\"a\";i:31;s:1:\"b\";s:20:\"booking-request-list\";s:1:\"c\";s:26:\"admin.show-booking-request\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:5:{s:1:\"a\";i:32;s:1:\"b\";s:23:\"booking-request-details\";s:1:\"c\";s:29:\"admin.details-booking-request\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:5:{s:1:\"a\";i:33;s:1:\"b\";s:22:\"booking-request-delete\";s:1:\"c\";s:28:\"admin.delete-booking-request\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:33;a:5:{s:1:\"a\";i:34;s:1:\"b\";s:29:\"booking-request-change-status\";s:1:\"c\";s:27:\"admin.booking-change-status\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:5:{s:1:\"a\";i:35;s:1:\"b\";s:12:\"booking-list\";s:1:\"c\";s:18:\"admin.show-booking\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:5:{s:1:\"a\";i:36;s:1:\"b\";s:15:\"booking-details\";s:1:\"c\";s:21:\"admin.details-booking\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:5:{s:1:\"a\";i:37;s:1:\"b\";s:14:\"booking-delete\";s:1:\"c\";s:20:\"admin.delete-booking\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:37;a:5:{s:1:\"a\";i:38;s:1:\"b\";s:12:\"show-setting\";s:1:\"c\";s:18:\"admin.show-setting\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:5:{s:1:\"a\";i:39;s:1:\"b\";s:14:\"update-setting\";s:1:\"c\";s:20:\"admin.update-setting\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:39;a:5:{s:1:\"a\";i:40;s:1:\"b\";s:8:\"faq-list\";s:1:\"c\";s:14:\"admin.FAQ-list\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:40;a:5:{s:1:\"a\";i:41;s:1:\"b\";s:10:\"faq-create\";s:1:\"c\";s:16:\"admin.FAQ-create\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:41;a:5:{s:1:\"a\";i:42;s:1:\"b\";s:8:\"faq-edit\";s:1:\"c\";s:14:\"admin.FAQ-edit\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:42;a:5:{s:1:\"a\";i:43;s:1:\"b\";s:10:\"faq-delete\";s:1:\"c\";s:16:\"admin.FAQ-delete\";s:1:\"d\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"d\";s:3:\"web\";}}}', 1735478054);
 
 -- --------------------------------------------------------
 
@@ -259,6 +282,14 @@ CREATE TABLE `media` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`id`, `mediable_type`, `mediable_id`, `url`, `created_at`, `updated_at`) VALUES
+(2, 'App\\Models\\Unit', 1, 'uploads/unit_images/5gNBNBojTz3yHpBfYRSvBNroa6Gu7REUzDm5iWXL.png', '2024-12-28 11:44:22', '2024-12-28 11:44:22'),
+(3, 'App\\Models\\Unit', 1, 'uploads/unit_images/0SSilskmXQJRMrF5FunTnX1qDaoF6jfa4c197QPS.png', '2024-12-28 11:44:22', '2024-12-28 11:44:22');
 
 -- --------------------------------------------------------
 
@@ -516,6 +547,13 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('kqSy386i48bKbKVsmmJQnrr5DblOqgndQCANjcrT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoieVhFS1F4RWg5MjBsWmsydnVXVFZXemhPc1JMeGJSQ0pQRjhYeE1INyI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo2NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FyL2FkbWluL2Jvb2tpbmctcmVxdWVzdC9zaG93LWJvb2tpbmctcmVxdWVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbiI7fXM6NjoibG9jYWxlIjtzOjI6ImFyIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1735402586);
+
 -- --------------------------------------------------------
 
 --
@@ -541,14 +579,15 @@ INSERT INTO `settings` (`id`, `key`, `value`, `type`, `input_type`, `is_editable
 (1, 'site_name', 'Stark Brokers', 'general', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (2, 'site_logo', 'logo.jpg', 'general', 'file', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (3, 'site_description', 'description', 'general', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
-(4, 'support_phone', 'support_phone', 'general', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
-(5, 'support_email', 'support_email@gmail.com', 'general', 'email', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
+(4, 'support_phone', '966539313803+', 'general', 'text', 1, '2024-12-27 19:15:35', '2024-12-28 14:13:27'),
+(5, 'support_email', 'support@stark.sa', 'general', 'email', 1, '2024-12-27 19:15:35', '2024-12-28 14:13:27'),
 (6, 'timezone', 'UTC', 'general', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (7, 'facebook', 'https://www.facebook.com/FaceBook', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (8, 'instagram', 'https://instagram.com/starkbrokers', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (9, 'whatsApp', 'https://wa.me/+966539313803', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
 (10, 'twitter', 'https://x.com/starbrokers', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
-(11, 'linkedin', 'https://www.linkedin.com/company/stark-brokers', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35');
+(11, 'linkedin', 'https://www.linkedin.com/company/stark-brokers', 'social_media', 'text', 1, '2024-12-27 19:15:35', '2024-12-27 19:15:35'),
+(12, 'send_email', 'true', 'email_setting', 'radio', 1, '2024-12-13 12:39:30', '2024-12-28 14:13:38');
 
 -- --------------------------------------------------------
 
@@ -576,6 +615,13 @@ CREATE TABLE `units` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `user_id`, `title`, `type`, `price`, `currency`, `description`, `address`, `latitude`, `longitude`, `area`, `number_bedroom`, `number_bathroom`, `is_booked`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Facilis molestiae fa', 'villa', '83.00', 'SAR', 'Officiis dolor repre', 'برج الفيصلية، العليا، الرياض 12212، السعودية', '24.69', '46.68', '80', 2, 1, 1, 'accepted', '2024-12-28 11:14:54', '2024-12-28 14:14:21');
+
 -- --------------------------------------------------------
 
 --
@@ -589,6 +635,24 @@ CREATE TABLE `unit_features` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `unit_features`
+--
+
+INSERT INTO `unit_features` (`id`, `unit_id`, `feature_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, NULL, NULL),
+(2, 1, 4, NULL, NULL),
+(3, 1, 5, NULL, NULL),
+(4, 1, 6, NULL, NULL),
+(5, 1, 9, NULL, NULL),
+(6, 1, 10, NULL, NULL),
+(7, 1, 11, NULL, NULL),
+(8, 1, 13, NULL, NULL),
+(9, 1, 16, NULL, NULL),
+(10, 1, 17, NULL, NULL),
+(11, 1, 18, NULL, NULL),
+(12, 1, 21, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -812,13 +876,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `booking_requests`
 --
 ALTER TABLE `booking_requests`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -866,7 +930,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -896,19 +960,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `unit_features`
 --
 ALTER TABLE `unit_features`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

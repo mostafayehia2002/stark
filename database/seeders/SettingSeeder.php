@@ -115,6 +115,15 @@ class SettingSeeder extends Seeder
                 'created_at'=>now(),
                 'updated_at'=>now()
             ],
+            [
+                'key' =>'send_email',
+                'value'=>'false',
+                'type' =>'email_setting',
+                'is_editable'=>true,
+                'input_type'=>'radio',
+                'created_at'=>now(),
+                'updated_at'=>now()
+            ],
 
 
         ];

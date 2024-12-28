@@ -138,7 +138,7 @@
                                                 @foreach ($features as $feature)
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                               name="features[]" value="{{ $feature->id }}"
+                                                               name="features[]" value="{{$feature->id }}"
                                                                id="feature_{{ $feature->id }}" @checked($unit->features->contains($feature->id))>
                                                         <label class="form-check-label"
                                                                for="feature_{{ $feature->id }}">
@@ -212,7 +212,7 @@
 @endpush
 @push('js')
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
+        src="https://maps.googleapis.com/maps/api/js?key={{env('VITE_GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
         async
         defer>
     </script>

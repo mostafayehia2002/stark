@@ -36,9 +36,7 @@ class SettingServiceProvider extends ServiceProvider
         $this->loadSettings();
         $this->setAppNameFromSettings();
         $this->setTimezoneFromSettings();
-
-
-
+        $this->setEmailSupportFromSettings();
 
     }
     public function getValue($type, $key)
@@ -73,6 +71,15 @@ class SettingServiceProvider extends ServiceProvider
         if ($timezone) {
             env('APP_TIMEZONE',$timezone);
             Config::set('app.timezone', $timezone);
+        }
+    }
+
+    private function setEmailSupportFromSettings(): void
+    {
+        $email_setting = $this->getValue('general', 'support_email');
+        if ($email_setting) {
+            env('MAIL_FROM_ADDRESS',$email_setting);
+            Config::set('mail.from.address', $email_setting);
         }
     }
 

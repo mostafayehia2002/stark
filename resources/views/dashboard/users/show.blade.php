@@ -112,11 +112,11 @@
                                                         <td>{{$unit->translate_type()}}</td>
                                                         <td>
                                                             @if($unit->status==\App\Enums\UnitStatus::PENDING->value)
-                                                                <label class="badge bg-warning">{{$unit->translat_status()}}</label>
+                                                                <label class="badge bg-warning">{{$unit->translate_status()}}</label>
                                                             @elseif($unit->status==\App\Enums\UnitStatus::REJECTED->value)
-                                                                <label class="badge bg-danger">{{$unit->translat_status()}}</label>
+                                                                <label class="badge bg-danger">{{$unit->translate_status()}}</label>
                                                             @else
-                                                                <label class="badge bg-success">{{$unit->translat_status()}}</label>
+                                                                <label class="badge bg-success">{{$unit->translate_status()}}</label>
                                                             @endif
                                                         </td>
                                                         <td>

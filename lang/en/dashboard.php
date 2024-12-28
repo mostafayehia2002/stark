@@ -85,7 +85,8 @@ return [
     'answer'=>'Answer',
     'copyright'=>'Copyright',
     'all_rights_reserved'=>'All rights reserved.',
-
+    'email_setting'=>'Email Setting',
+'sending_email'=>'Do you want to enable the email service?',
 
 
 ];

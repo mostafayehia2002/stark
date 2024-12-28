@@ -18,6 +18,12 @@ class BookingRequestService
     protected string $userEmail;
     protected string $userName;
 
+    protected $email_setting;
+
+    public function __construct(){
+
+        $this->email_setting=app('settings')->getValue('email_setting','send_email');
+    }
     public function destroy($id): array
     {
         try {
@@ -95,14 +101,16 @@ class BookingRequestService
             $booking_request->unit()->update([
                 'is_booked' => false
             ]);
-            Mail::to($this->userEmail)->send(new BookingStateMail(
-                $this->userName,
-                BookingStatus::CANCELLED->value,
-                $this->bookingId,
-                $this->bookingDate,
-                $this->unitTitle,
-                $this->bookingLocation
-            ));
+            if($this->email_setting==='true') {
+                Mail::to($this->userEmail)->send(new BookingStateMail(
+                    $this->userName,
+                    BookingStatus::CANCELLED->value,
+                    $this->bookingId,
+                    $this->bookingDate,
+                    $this->unitTitle,
+                    $this->bookingLocation
+                ));
+            }
         }
 
 
@@ -110,26 +118,30 @@ class BookingRequestService
 
     private function handleConfirmed($booking_request): void
     {
-        Mail::to($this->userEmail)->send(new BookingStateMail(
-            $this->userName,
-            BookingStatus::CANCELLED->value,
-            $this->bookingId,
-            $this->bookingDate,
-            $this->unitTitle,
-            $this->bookingLocation
-        ));
+        if($this->email_setting==='true') {
+            Mail::to($this->userEmail)->send(new BookingStateMail(
+                $this->userName,
+                BookingStatus::CONFIRMED->value,
+                $this->bookingId,
+                $this->bookingDate,
+                $this->unitTitle,
+                $this->bookingLocation
+            ));
+        }
     }
 
     private function handleRejected($booking_request): void
     {
-        Mail::to($this->userEmail)->send(new BookingStateMail(
-            $this->userName,
-            BookingStatus::CANCELLED->value,
-            $this->bookingId,
-            $this->bookingDate,
-            $this->unitTitle,
-            $this->bookingLocation
-        ));
+        if($this->email_setting==='true') {
+            Mail::to($this->userEmail)->send(new BookingStateMail(
+                $this->userName,
+                BookingStatus::REJECTED->value,
+                $this->bookingId,
+                $this->bookingDate,
+                $this->unitTitle,
+                $this->bookingLocation
+            ));
+        }
     }
 
     private function handleAccepted($booking_request): void
@@ -141,14 +153,16 @@ class BookingRequestService
             $booking_request->unit()->update([
                 'is_booked' => true
             ]);
-            Mail::to($this->userEmail)->send(new BookingStateMail(
-                $this->userName,
-                BookingStatus::CANCELLED->value,
-                $this->bookingId,
-                $this->bookingDate,
-                $this->unitTitle,
-                $this->bookingLocation
-            ));
+            if($this->email_setting==='true') {
+                Mail::to($this->userEmail)->send(new BookingStateMail(
+                    $this->userName,
+                    BookingStatus::ACCEPTED->value,
+                    $this->bookingId,
+                    $this->bookingDate,
+                    $this->unitTitle,
+                    $this->bookingLocation
+                ));
+            }
         }
 
 

@@ -214,7 +214,7 @@
 @endpush
 @push('js')
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
+        src="https://maps.googleapis.com/maps/api/js?key={{env('VITE_GOOGLE_MAPS_API_KEY') }}&callback=initMap&language=ar"
         async
         defer>
     </script>

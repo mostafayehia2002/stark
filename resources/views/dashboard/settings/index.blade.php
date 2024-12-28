@@ -28,21 +28,33 @@
                         <!-- Tabs for Settings -->
                         <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
                             <li class="nav-item">
-                                <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" role="tab" aria-controls="general" aria-selected="true">{{trans('dashboard.general_settings')}}</button>
+                                <button class="nav-link active" id="general-tab" data-bs-toggle="tab"
+                                        data-bs-target="#general" role="tab" aria-controls="general"
+                                        aria-selected="true">{{trans('dashboard.general_settings')}}</button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="social-media-tab" data-bs-toggle="tab" data-bs-target="#social-media" role="tab" aria-controls="social-media" aria-selected="false">{{trans('dashboard.social_media')}}</button>
+                                <button class="nav-link" id="social-media-tab" data-bs-toggle="tab"
+                                        data-bs-target="#social-media" role="tab" aria-controls="social-media"
+                                        aria-selected="false">{{trans('dashboard.social_media')}}</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="email-setting-tab" data-bs-toggle="tab"
+                                        data-bs-target="#email-setting" role="tab" aria-controls="email-setting"
+                                        aria-selected="false">{{trans('dashboard.email_setting')}}</button>
                             </li>
                         </ul>
                         <div class="tab-content mt-6" id="settingsTabsContent">
                             <!-- General Settings Tab -->
-                            <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                                <form action="{{route('admin.update-setting')}}" method="POST" enctype="multipart/form-data" id="myForm">
+                            <div class="tab-pane fade show active" id="general" role="tabpanel"
+                                 aria-labelledby="general-tab">
+                                <form action="{{route('admin.update-setting')}}" method="POST"
+                                      enctype="multipart/form-data" id="myForm">
                                     @csrf
                                     <div class="row">
                                         @foreach ($settings['general'] ?? [] as $setting)
                                             <div class="col-md-6 mb-3">
-                                                <label for="{{ $setting->key }}" class="form-label">{{trans('label.'.$setting->key ) }}</label>
+                                                <label for="{{ $setting->key }}"
+                                                       class="form-label">{{trans('label.'.$setting->key ) }}</label>
                                                 <input
                                                     type="{{ $setting->input_type }}"
                                                     class="form-control"
@@ -53,26 +65,31 @@
                                                 >
                                                 @if ($setting->input_type === 'file' && $setting->value)
                                                     <div class="mt-2">
-                                                        <img src="{{ asset('storage/uploads/settings/' . $setting->value) }}" alt="{{ $setting->key }}" style="max-height: 50px;">
+                                                        <img
+                                                            src="{{ asset('storage/uploads/settings/' . $setting->value) }}"
+                                                            alt="{{ $setting->key }}" style="max-height: 50px;">
                                                     </div>
                                                 @endif
                                             </div>
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">{{trans('label.save')}}</button>
+                                        <button type="submit" class="btn btn-primary"
+                                                id="submitBtn">{{trans('label.save')}}</button>
                                     @endcan
                                 </form>
                             </div>
 
                             <!-- Social Media Settings Tab -->
-                            <div class="tab-pane fade" id="social-media" role="tabpanel" aria-labelledby="social-media-tab">
+                            <div class="tab-pane fade" id="social-media" role="tabpanel"
+                                 aria-labelledby="social-media-tab">
                                 <form action="{{route('admin.update-setting')}}" method="POST" id="myForm">
                                     @csrf
                                     <div class="row">
                                         @foreach ($settings['social_media'] ?? [] as $setting)
                                             <div class="col-md-6 mb-3">
-                                                <label for="{{ $setting->key }}" class="form-label">{{ trans('label.'.$setting->key) }}</label>
+                                                <label for="{{ $setting->key }}"
+                                                       class="form-label">{{ trans('label.'.$setting->key) }}</label>
                                                 <input
                                                     type="{{ $setting->input_type }}"
                                                     class="form-control"
@@ -84,7 +101,51 @@
                                         @endforeach
                                     </div>
                                     @can('update-setting')
-                                    <button type="submit" class="btn btn-primary" id="submitBtn">{{trans('label.save')}}</button>
+                                        <button type="submit" class="btn btn-primary"
+                                                id="submitBtn">{{trans('label.save')}}</button>
+                                    @endcan
+                                </form>
+                            </div>
+                            <!-- Email Settings Tab -->
+                            <div class="tab-pane fade" id="email-setting" role="tabpanel"
+                                 aria-labelledby="email-setting-tab">
+                                <form action="{{route('admin.update-setting')}}" method="POST" id="myForm">
+                                    @csrf
+                                    <div class="row">
+                                        @foreach ($settings['email_setting'] ?? [] as $setting)
+                                            <div class="col-md-6 mb-3">
+                                                <br>
+                                                <h6>{{trans('dashboard.sending_email')}}</h6>
+                                                <div class="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        class="form-check-input"
+                                                        id="{{ $setting->key }}_true"
+                                                        name="{{ $setting->key }}"
+                                                        value="true"
+                                                        @if($setting->value === 'true') checked @endif
+                                                    >
+                                                    <label class="form-check-label" for="{{ $setting->key }}_true">{{trans('label.yes')}}</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        class="form-check-input"
+                                                        id="{{ $setting->key }}_false"
+                                                        name="{{ $setting->key }}"
+                                                        value="false"
+                                                        @if($setting->value === 'false') checked @endif
+                                                    >
+                                                    <label class="form-check-label" for="{{ $setting->key }}_false">{{trans('label.no')}}</label>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
+                                    </div>
+                                    @can('update-setting')
+                                        <button type="submit" class="btn btn-primary"
+                                                id="submitBtn">{{trans('label.save')}}</button>
                                     @endcan
                                 </form>
                             </div>
