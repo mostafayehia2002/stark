@@ -13,11 +13,10 @@ class VerifyOtpService
     {
         $this->service = $service;
     }
-
-    public function verifyOtp(string $phoneNumber, string $otp,$type)
+    public function verifyOtp($data): array
     {
         // Call Twilio Service to verify OTP
-        $verifyResponse = $this->service->verifyCode($phoneNumber, $otp);
+        $verifyResponse = $this->service->verifyCode($data['phone'],$data['otp']);
         if (!$verifyResponse['success']) {
             return[
                 'success' => false,
@@ -25,7 +24,7 @@ class VerifyOtpService
             ];
         }
         // Find user by phone number
-        $user=User::where('phone', $phoneNumber)->where('type',$type)->first();
+        $user=User::where('phone', $data['phone'])->where('type',$data['type'])->first();
         if (!$user) {
             return [
                 'success' => false,

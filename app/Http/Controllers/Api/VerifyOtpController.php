@@ -24,7 +24,7 @@ class VerifyOtpController extends Controller
     {
         $data = $request->validated();
         try {
-            $verifyResponse = $this->verifyOtpService->verifyOtp($data['phone'], $data['otp'],$data['type']);
+            $verifyResponse = $this->verifyOtpService->verifyOtp($data);
             if ($verifyResponse['success']) {
                 return $this->returnData(
                     200,

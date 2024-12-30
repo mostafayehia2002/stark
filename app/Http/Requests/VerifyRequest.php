@@ -28,7 +28,8 @@ class VerifyRequest extends FormRequest
         return [
             'phone' => ['required', 'regex:/^\+\d{1,3}\d{6,14}$/'],
             'otp' => 'required|string',
-            'type' => 'required|in:owner,renter'
+            'type' => 'required|in:owner,renter',
+           // 'session_id' => 'required|string',
         ];
     }
 

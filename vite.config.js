@@ -18,4 +18,15 @@ export default defineConfig({
             host: 'localhost',
         },
     },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    // Example: Create a separate chunk for vendor libraries
+                    vendor: ['react', 'react-dom'],
+                },
+            },
+        },
+        chunkSizeWarningLimit: 1000, // Increase the warning limit to 1MB
+    },
 });

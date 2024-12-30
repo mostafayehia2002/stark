@@ -1,4 +1,8 @@
 {
+  "_vendor-Bm7FCeSL.js": {
+    "file": "assets/vendor-Bm7FCeSL.js",
+    "name": "vendor"
+  },
   "resources/css/app.css": {
     "file": "assets/app-CpCpW2bD.css",
     "src": "resources/css/app.css",
@@ -9,10 +13,13 @@
     "src": "resources/js/assets/pic1.jpg"
   },
   "resources/js/main.jsx": {
-    "file": "assets/main-C_u7os_i.js",
+    "file": "assets/main-kwDCzZ3M.js",
     "name": "main",
     "src": "resources/js/main.jsx",
     "isEntry": true,
+    "imports": [
+      "_vendor-Bm7FCeSL.js"
+    ],
     "css": [
       "assets/main-C2mbUP42.css"
     ],

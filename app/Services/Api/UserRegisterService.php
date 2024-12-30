@@ -38,6 +38,7 @@ class UserRegisterService
         }
         try {
             $otpResponse=$this->service->sendVerificationCode($data['phone']);
+
          if($otpResponse['success'] && $otpResponse['status']==='pending' ){
             User::create($data);
              return [
