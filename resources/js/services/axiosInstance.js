@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // Base URL configuration
-const API_URL = import.meta.env.APP_URL || 'https://www.starkbrokers.com'
+const isDevelopment = import.meta.env.MODE === 'development'
+const API_URL = isDevelopment ? '' : (import.meta.env.APP_URL || 'https://starkbrokers.com')
 
 const axiosInstance = axios.create({
   baseURL: `${API_URL}/api/v1`, // Add /api/v1 to base URL to match API endpoints
@@ -12,10 +13,17 @@ const axiosInstance = axios.create({
   timeout: 50000,
 })
 
+
 // Request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
+    const language = localStorage.getItem('language') || 'en'
+
+    // Add language headers
+    config.headers['Accept-Language'] = language
+    config.headers['lang'] = language
+    config.headers['Content-Language'] = language
 
     if (token) {
       // Add Bearer prefix to token
@@ -29,6 +37,8 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error)
   }
 )
+
+
 
 // Response interceptor
 axiosInstance.interceptors.response.use(
@@ -52,7 +62,7 @@ axiosInstance.interceptors.response.use(
       // Clear auth data
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-
+      
       // Add error metadata
       error.isAuthError = true
       error.authErrorMessage = error.response?.data?.message || 'Session expired. Please login again.'
