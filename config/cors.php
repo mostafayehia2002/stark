@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173', 'http://127.0.0.1:8000', 'https://stark.sa'],
+    'allowed_origins' => ['http://localhost:5173', 'http://127.0.0.1:8000', 'https://www.starkbrokers.com'],
 
     'allowed_origins_patterns' => [],
 
