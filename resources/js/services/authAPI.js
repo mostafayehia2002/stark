@@ -1,5 +1,6 @@
 import axiosInstance from './axiosInstance'
-import { normalizePhone, validateOTP } from '../utils/phoneUtils'
+import { normalizePhone } from '../utils/phoneUtils'
+// import { firebaseAuthService } from './firebaseAuthService' // Commented for now
 
 const authAPI = {
   // Login (POST /api/v1/auth/login)
@@ -12,6 +13,7 @@ const authAPI = {
         type: credentials.type,
       })
 
+      // Using direct API call without Firebase
       const formData = new FormData()
       formData.append('phone', formattedPhone)
       formData.append('type', credentials.type)
@@ -20,12 +22,12 @@ const authAPI = {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
+          'lang': credentials.language || 'en'
         },
       })
 
       console.log('✅ API Login - Response:', response.data)
 
-      // Check login success
       if (!response.data.success) {
         throw {
           success: false,
@@ -35,14 +37,17 @@ const authAPI = {
         }
       }
 
-      // Store phone and type for OTP verification
-      localStorage.setItem('auth_phone', formattedPhone)
-      localStorage.setItem('auth_type', credentials.type)
-      console.log('📱 Stored phone and type for OTP verification')
-
       return response.data
     } catch (error) {
       console.error('❌ API Login - Error:', error)
+      if (error.response?.data) {
+        throw {
+          success: false,
+          status: error.response.data.status || error.response.status,
+          message: error.response.data.message || 'Login failed',
+          errors: error.response.data.errors || [],
+        }
+      }
       throw {
         success: false,
         status: error.status || 500,
@@ -57,13 +62,14 @@ const authAPI = {
     try {
       const formData = new FormData();
       formData.append('phone', verificationData.phone);
-      formData.append('otp', verificationData.otp);
       formData.append('type', verificationData.type);
+      formData.append('otp', verificationData.otp);
 
       const response = await axiosInstance.post('auth/verify-otp', formData, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
+          'lang': verificationData.language || 'en'
         },
       });
 
@@ -72,30 +78,115 @@ const authAPI = {
           success: false,
           status: response.data.status || 400,
           message: response.data.message || 'Verification failed',
+          errors: response.data.errors || [],
         };
       }
 
       const token = response.data.data.token;
       const bearerToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
 
+      // Store the token and user data
+      localStorage.setItem('token', bearerToken);
+      if (response.data.data.user) {
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      }
+
       return {
         success: true,
         data: {
           token: bearerToken,
+          user: response.data.data.user
         },
       };
     } catch (error) {
+      console.error('❌ Verification Error:', error);
       if (error.response?.data) {
         throw {
           success: false,
           status: error.response.data.status || error.response.status,
           message: error.response.data.message || 'Verification failed',
+          errors: error.response.data.errors || [],
         };
       }
       throw {
         success: false,
         status: error.status || 500,
         message: error.message || 'Verification failed',
+        errors: [],
+      };
+    }
+  },
+
+  // Register (POST /api/v1/auth/register)
+  register: async (userData) => {
+    try {
+      const formData = new FormData();
+      
+      // Required fields
+      formData.append('full_name', userData.full_name);
+      formData.append('phone', userData.phone);
+      formData.append('email', userData.email);
+      formData.append('type', userData.type);
+      formData.append('address', userData.address);
+
+      // Optional fields for owner type
+      if (userData.type === 'owner') {
+        formData.append('business_name', userData.business_name);
+        formData.append('business_license', userData.business_license);
+      }
+
+      const response = await axiosInstance.post('auth/register', formData, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          'lang': userData.language || 'en'
+        },
+      });
+
+      console.log('✅ Registration Response:', response.data);
+
+      
+      if (!response.data.success) {
+        throw {
+          success: false,
+          status: response.data.status,
+          message: response.data.message,
+          errors: response.data.error || [],
+          language: userData.language
+        };
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('❌ Registration Error:', error);
+      
+      // Handle the new error format
+      if (error.response?.data?.error) {
+        throw {
+          success: false,
+          status: error.response.data.status || error.response.status,
+          message: error.response.data.message || 'Validation failed',
+          errors: error.response.data.error || [],
+          language: userData.language
+        };
+      }
+      
+      if (error.response?.data) {
+        throw {
+          success: false,
+          status: error.response.data.status || error.response.status,
+          message: error.response.data.message || 'Registration failed',
+          errors: error.response.data.errors || [],
+          language: userData.language
+        };
+      }
+      
+      throw {
+        success: false,
+        status: error.status || 500,
+        message: error.message || 'Registration failed',
+        errors: [],
+        language: userData.language
       };
     }
   },
@@ -142,49 +233,6 @@ const authAPI = {
         success: false,
         status: error.response?.status || 500,
         message: error.response?.data?.message || 'Failed to fetch profile',
-      };
-    }
-  },
-
-  // Register (POST /api/v1/auth/register)
-  register: async (userData) => {
-    try {
-      const formData = new FormData();
-      Object.keys(userData).forEach((key) => {
-        formData.append(key, userData[key]);
-      });
-
-      const response = await axiosInstance.post('auth/register', formData, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      if (!response.data.success) {
-        throw {
-          success: false,
-          status: response.data.status,
-          message: response.data.message,
-          errors: response.data.error || [],
-        };
-      }
-
-      return response.data;
-    } catch (error) {
-      if (error.response?.data) {
-        throw {
-          success: false,
-          status: error.response.data.status || error.response.status,
-          message: error.response.data.message || 'Registration failed',
-          errors: error.response.data.error || [],
-        };
-      }
-      throw {
-        success: false,
-        status: error.status || 500,
-        message: error.message || 'Registration failed',
-        errors: [],
       };
     }
   },
