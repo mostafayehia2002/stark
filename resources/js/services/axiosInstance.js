@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Base URL configuration
-const API_URL = import.meta.env.APP_URL || 'https://stark.sa'
+const API_URL = import.meta.env.APP_URL || 'https://www.starkbrokers.com'
 
 const axiosInstance = axios.create({
   baseURL: `${API_URL}/api/v1`, // Add /api/v1 to base URL to match API endpoints
