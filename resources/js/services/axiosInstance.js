@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-// Base URL configuration
-const isDevelopment = import.meta.env.MODE === 'development'
-const API_URL = isDevelopment ? '' : (import.meta.env.APP_URL || 'https://starkbrokers.com')
+const API_URL = import.meta.env.APP_URL;
 
 const axiosInstance = axios.create({
   baseURL: `${API_URL}/api/v1`, // Add /api/v1 to base URL to match API endpoints
@@ -62,7 +60,7 @@ axiosInstance.interceptors.response.use(
       // Clear auth data
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      
+
       // Add error metadata
       error.isAuthError = true
       error.authErrorMessage = error.response?.data?.message || 'Session expired. Please login again.'
