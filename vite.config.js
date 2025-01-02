@@ -18,6 +18,13 @@ export default defineConfig({
             host: 'localhost',
         },
         https:true,
+        proxy: {
+            '/api/v1': {
+                target: 'https://starkbrokers.com',
+                changeOrigin: true,
+                secure: true,
+            }
+        }
     },
     build: {
         rollupOptions: {
